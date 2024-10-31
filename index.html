@@ -113,8 +113,8 @@
         <img src="https://github.com/InvestWellCo/InvestWellCo/blob/main/logo%20inveddssssst%20well.png?raw=true" alt="Company Logo" class="logo">
         <h2 id="form-title">Real Estate Inquiry</h2>
         <form action="https://formspree.io/f/manyeqbn" method="POST">
-<input type="text" id="name" name="name" placeholder="Name" required oninput="checkFormValidity()">
-<input type="email" id="email" name="email" placeholder="Email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}" oninvalid="this.setCustomValidity('Invalid email format')" oninput="this.setCustomValidity(''); checkFormValidity()">
+            <input type="text" id="name" name="name" placeholder="Name" required>
+<input type="email" id="email" name="email" placeholder="Email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}" oninvalid="this.setCustomValidity('Invalid email format')" oninput="this.setCustomValidity('')">
 <span class="error-message" style="color: #282827; display: none;">Invalid email format</span>
             <div class="country-code">
                 <select id="country" name="country" onchange="updatePhoneCode()" required>
@@ -144,14 +144,14 @@
                 </select>
                 <input type="text" id="country-code" name="country_code" value="+20" readonly>
             </div>
-<input type="tel" id="phone" name="phone" class="phone-input" placeholder="Phone Number" required pattern="[0-9]*" oninput="validatePhone(); checkFormValidity()" onblur="validatePhone(); checkFormValidity()">
+<input type="tel" id="phone" name="phone" class="phone-input" placeholder="Phone Number" required pattern="[0-9]*" oninput="validatePhone()" onblur="validatePhone()">
 <span id="phone-error" style="color: #282827; display: none;">Invalid phone number format</span>
             <select id="contact-method" name="contact_method" required>
                 <option value="default" disabled selected>Select Contact Method</option>
                 <option value="phone">By Phone</option>
                 <option value="whatsapp">By WhatsApp</option>
             </select>
-<textarea class="inquiry-textarea" id="inquiry" name="inquiry" placeholder="Your Inquiry" rows="4" required oninput="checkFormValidity()"></textarea>
+            <textarea class="inquiry-textarea" id="inquiry" name="inquiry" placeholder="Your Inquiry" rows="4" required></textarea>
             <button type="submit" id="submit-btn">Submit</button>
         </form>
     </div>
@@ -237,24 +237,10 @@ function validatePhone() {
     // تحقق من الرقم حسب قواعد الدولة المحددة
     if (phoneRules[selectedCountry] && !phoneRules[selectedCountry].test(phoneValue)) {
         phoneError.style.display = "block";
-        phoneInput.setCustomValidity("Invalid phone number format");
+        //phoneInput.setCustomValidity("Invalid phone number format");
     } else {
         phoneError.style.display = "none";
         phoneInput.setCustomValidity("");
-    }
-}
-function checkFormValidity() {
-    const name = document.getElementById("name").value; // الحصول على قيمة حقل الاسم
-    const email = document.getElementById("email").value; // الحصول على قيمة حقل البريد الإلكتروني
-    const phone = document.getElementById("phone").value; // الحصول على قيمة حقل الهاتف
-    const inquiry = document.getElementById("inquiry").value; // الحصول على قيمة حقل الاستفسار
-    const submitButton = document.getElementById("submit-btn"); // الحصول على زر الإرسال
-
-    // تحقق مما إذا كانت جميع الحقول مملوءة
-    if (name && email && phone && inquiry) {
-        submitButton.disabled = false; // إذا كانت جميع الحقول مملوءة، تفعيل الزر
-    } else {
-        submitButton.disabled = true; // إذا لم تكن جميع الحقول مملوءة، تعطيل الزر
     }
 }
 
