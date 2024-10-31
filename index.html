@@ -158,7 +158,7 @@
                 <option value="whatsapp">By WhatsApp</option>
             </select>
             <textarea class="inquiry-textarea" id="inquiry" name="inquiry" placeholder="Your Inquiry" rows="4" required></textarea>
-            <button type="submit" id="submit-btn">Submit</button>
+<button type="submit" id="submit-btn" disabled style="background-color: #282827; color: white;">Submit</button>
         </form>
     </div>
 
@@ -249,6 +249,27 @@ function validatePhone() {
         phoneInput.setCustomValidity("");
     }
 }
+function validateForm() {
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const inquiry = document.getElementById("inquiry").value.trim();
+    const submitBtn = document.getElementById("submit-btn");
+
+    if (name && email && phone && inquiry) {
+        submitBtn.disabled = false;
+        submitBtn.style.backgroundColor = "#005d9e"; // اللون الأصلي
+    } else {
+        submitBtn.disabled = true;
+        submitBtn.style.backgroundColor = "#282827"; // اللون الرمادي
+    }
+}
+
+// أضف مستمعي الأحداث للحقول للتحقق في الوقت الحقيقي
+document.getElementById("name").addEventListener("input", validateForm);
+document.getElementById("email").addEventListener("input", validateForm);
+document.getElementById("phone").addEventListener("input", validateForm);
+document.getElementById("inquiry").addEventListener("input", validateForm);
 
     </script>
 </body>
