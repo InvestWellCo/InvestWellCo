@@ -69,14 +69,15 @@
             justify-content: space-between; /* توزيع العناصر بالتساوي */
         }
         .country-code select {
-            width: 30%; /* تخصيص عرض لكود البلد */
+            width: 30%; /* تخصيص عرض لحقل البلد */
             border-radius: 5px; /* زوايا دائرية */
             margin-right: 10px; /* مسافة بين كود البلد ورقم الهاتف */
         }
         .country-code input {
             width: 30%; /* تخصيص المساحة لكود البلد */
             margin: 0; /* إلغاء الهوامش */
-            display: none; /* إخفاء حقل كود البلد افتراضيًا */
+            display: inline; /* جعل حقل كود البلد مرئيًا */
+            text-align: center; /* محاذاة النص في الوسط */
         }
         .phone-input {
             width: 38%; /* تخصيص المساحة لرقم الهاتف */
@@ -84,6 +85,28 @@
         }
         .inquiry-textarea {
             resize: none; /* منع تغيير حجم خانة الاستفسار */
+        }
+
+        /* إظهار الأعلام فقط في الهواتف */
+        @media (max-width: 768px) {
+            .country-code select option {
+                display: none; /* إخفاء النصوص في الخيارات */
+            }
+            .country-code select option[data-code]:before {
+                content: attr(data-code); /* عرض الأعلام فقط */
+                display: inline; /* عرض الأعلام */
+            }
+            .country-code select option[data-code]:before {
+                display: inline-block; /* عرض الأعلام */
+                width: 20px; /* تحديد عرض الأعلام */
+            }
+        }
+
+        /* إظهار الأسماء فقط في المتصفح */
+        @media (min-width: 769px) {
+            .country-code select option[data-code] {
+                display: block; /* عرض النصوص في الخيارات */
+            }
         }
     </style>
 </head>
@@ -96,28 +119,28 @@
             <input type="email" name="email" placeholder="البريد الإلكتروني" required>
             <div class="country-code">
                 <select id="country" name="country" onchange="updatePhoneCode()" required>
-                    <option value="EG" data-code="+20" selected>مصر 🇪🇬</option>
-                    <option value="SA" data-code="+966">السعودية 🇸🇦</option>
-                    <option value="AE" data-code="+971">الإمارات 🇦🇪</option>
-                    <option value="KW" data-code="+965">الكويت 🇰🇼</option>
-                    <option value="US" data-code="+1">الولايات المتحدة 🇺🇸</option>
-                    <option value="FR" data-code="+33">فرنسا 🇫🇷</option>
-                    <option value="DE" data-code="+49">ألمانيا 🇩🇪</option>
-                    <option value="IT" data-code="+39">إيطاليا 🇮🇹</option>
-                    <option value="GB" data-code="+44">المملكة المتحدة 🇬🇧</option>
-                    <option value="IN" data-code="+91">الهند 🇮🇳</option>
-                    <option value="BR" data-code="+55">البرازيل 🇧🇷</option>
-                    <option value="CA" data-code="+1">كندا 🇨🇦</option>
-                    <option value="AU" data-code="+61">أستراليا 🇦🇺</option>
-                    <option value="JP" data-code="+81">اليابان 🇯🇵</option>
-                    <option value="KR" data-code="+82">كوريا الجنوبية 🇰🇷</option>
-                    <option value="ZA" data-code="+27">جنوب أفريقيا 🇿🇦</option>
-                    <option value="MX" data-code="+52">المكسيك 🇲🇽</option>
-                    <option value="RU" data-code="+7">روسيا 🇷🇺</option>
-                    <option value="SG" data-code="+65">سنغافورة 🇸🇬</option>
-                    <option value="NL" data-code="+31">هولندا 🇳🇱</option>
-                    <option value="NO" data-code="+47">النرويج 🇳🇴</option>
-                    <option value="SE" data-code="+46">السويد 🇸🇪</option>
+                    <option value="EG" data-code="🇪🇬" selected>مصر</option>
+                    <option value="SA" data-code="🇸🇦">السعودية</option>
+                    <option value="AE" data-code="🇦🇪">الإمارات</option>
+                    <option value="KW" data-code="🇰🇼">الكويت</option>
+                    <option value="US" data-code="🇺🇸">الولايات المتحدة</option>
+                    <option value="FR" data-code="🇫🇷">فرنسا</option>
+                    <option value="DE" data-code="🇩🇪">ألمانيا</option>
+                    <option value="IT" data-code="🇮🇹">إيطاليا</option>
+                    <option value="GB" data-code="🇬🇧">المملكة المتحدة</option>
+                    <option value="IN" data-code="🇮🇳">الهند</option>
+                    <option value="BR" data-code="🇧🇷">البرازيل</option>
+                    <option value="CA" data-code="🇨🇦">كندا</option>
+                    <option value="AU" data-code="🇦🇺">أستراليا</option>
+                    <option value="JP" data-code="🇯🇵">اليابان</option>
+                    <option value="KR" data-code="🇰🇷">كوريا الجنوبية</option>
+                    <option value="ZA" data-code="🇿🇦">جنوب أفريقيا</option>
+                    <option value="MX" data-code="🇲🇽">المكسيك</option>
+                    <option value="RU" data-code="🇷🇺">روسيا</option>
+                    <option value="SG" data-code="🇸🇬">سنغافورة</option>
+                    <option value="NL" data-code="🇳🇱">هولندا</option>
+                    <option value="NO" data-code="🇳🇴">النرويج</option>
+                    <option value="SE" data-code="🇸🇪">السويد</option>
                     <option value="OTHER" data-code="">بلد آخر</option>
                 </select>
                 <input type="text" id="country-code" name="country_code" value="+20" readonly style="text-align: center;"> <!-- حقل كود البلد غير قابل للتعديل -->
