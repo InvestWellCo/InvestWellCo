@@ -48,18 +48,16 @@
         .form-container button {
             width: 100%;
             padding: 12px;
-            background-color: #282827;
+            background-color: #005d9e;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             font-size: 18px;
             transition: background-color 0.3s;
-            pointer-events: none;
         }
-        .form-container button.active {
-            background-color: #005d9e;
-            pointer-events: auto;
+        .form-container button:hover {
+            background-color: #004b7a;
         }
         .logo {
             max-width: 150px;
@@ -72,19 +70,19 @@
             justify-content: space-between;
         }
         .country-code select {
-            width: 70%;
+            width: 70%; /* Increased width for select */
             border-radius: 5px;
             margin-right: 10px;
         }
         .country-code input[type="text"] {
-            width: 30%;
+            width: 30%; /* Adjusted width for country code */
             margin: 0;
             display: inline-block;
             text-align: center;
         }
         .phone-input {
-            width: 100%;
-            margin-top: 10px;
+            width: 100%; /* Full width for phone input */
+            margin-top: 10px; /* Added margin for spacing */
         }
         .inquiry-textarea {
             resize: none;
@@ -107,26 +105,45 @@
 </head>
 <body>
     <div class="language-toggle" onclick="toggleLanguage()">
-        <img id="flag" src="https://flagcdn.com/w320/eg.png" alt="EG Flag">
-        <span id="language-label">عربي</span>
+        <img id="flag" src="https://flagcdn.com/w320/eg.png" alt="EG Flag"> <!-- Default flag for Arabic -->
+        <span id="language-label">عربي</span> <!-- Default label for Arabic -->
     </div>
 
     <div class="form-container">
         <img src="https://github.com/InvestWellCo/InvestWellCo/blob/main/logo%20inveddssssst%20well.png?raw=true" alt="Company Logo" class="logo">
         <h2 id="form-title">Real Estate Inquiry</h2>
-        <form id="inquiryForm" action="https://formspree.io/f/manyeqbn" method="POST">
+        <form action="https://formspree.io/f/manyeqbn" method="POST">
             <input type="text" id="name" name="name" placeholder="Name" required>
             <input type="email" id="email" name="email" placeholder="Email" required>
             <div class="country-code">
                 <select id="country" name="country" onchange="updatePhoneCode()" required>
-                    <option value="EG" data-code="+20" data-pattern="^01[0-2,5]{1}[0-9]{8}$">🇪🇬</option>
-                    <option value="SA" data-code="+966" data-pattern="^5[0-9]{8}$">🇸🇦</option>
-                    <option value="AE" data-code="+971" data-pattern="^5[024568]{1}[0-9]{7}$">🇦🇪</option>
-                    <option value="OTHER" data-code="" data-pattern="">🌍 Other</option>
+                    <option value="EG" data-code="+20">🇪🇬</option>
+                    <option value="SA" data-code="+966">🇸🇦</option>
+                    <option value="AE" data-code="+971">🇦🇪</option>
+                    <option value="KW" data-code="+965">🇰🇼</option>
+                    <option value="QA" data-code="+974">🇶🇦</option>
+                    <option value="OM" data-code="+968">🇴🇲</option>
+                    <option value="BH" data-code="+973">🇧🇭</option>
+                    <option value="JO" data-code="+962">🇯🇴</option>
+                    <option value="LY" data-code="+218">🇱🇾</option>
+                    <option value="DZ" data-code="+213">🇩🇿</option>
+                    <option value="MA" data-code="+212">🇲🇦</option>
+                    <option value="TN" data-code="+216">🇹🇳</option>
+                    <option value="SY" data-code="+963">🇸🇾</option>
+                    <option value="LB" data-code="+961">🇱🇧</option>
+                    <option value="US" data-code="+1">🇺🇸</option>
+                    <option value="GB" data-code="+44">🇬🇧</option>
+                    <option value="DE" data-code="+49">🇩🇪</option>
+                    <option value="FR" data-code="+33">🇫🇷</option>
+                    <option value="IT" data-code="+39">🇮🇹</option>
+                    <option value="ES" data-code="+34">🇪🇸</option>
+                    <option value="CA" data-code="+1">🇨🇦</option>
+                    <option value="AU" data-code="+61">🇦🇺</option>
+                    <option value="OTHER" data-code="">🌍 بلد آخر</option> <!-- Fixed translation -->
                 </select>
                 <input type="text" id="country-code" name="country_code" value="+20" readonly>
             </div>
-            <input type="tel" id="phone" name="phone" class="phone-input" placeholder="Phone Number" required>
+            <input type="tel" id="phone" name="phone" class="phone-input" placeholder="Phone Number" required> <!-- Moved phone input down -->
             <select id="contact-method" name="contact_method" required>
                 <option value="default" disabled selected>Select Contact Method</option>
                 <option value="phone">By Phone</option>
@@ -138,7 +155,7 @@
     </div>
 
     <script>
-        let isEnglish = false;
+        let isEnglish = false; // Set default to false for Arabic
 
         function toggleLanguage() {
             isEnglish = !isEnglish;
@@ -163,13 +180,15 @@
                 : "https://flagcdn.com/w320/us.png";
             document.getElementById("language-label").innerText = isEnglish ? "عربي" : "English";
 
+            // Update contact method options
             const contactMethod = document.getElementById("contact-method");
             contactMethod.options[0].text = isEnglish ? "Select Contact Method" : "اختر طريقة التواصل";
             contactMethod.options[1].text = isEnglish ? "By Phone" : "بالهاتف";
             contactMethod.options[2].text = isEnglish ? "By WhatsApp" : "واتساب";
 
+            // Update country select options
             const countrySelect = document.getElementById("country");
-            countrySelect.options[countrySelect.options.length - 1].text = isEnglish ? "🌍 Other" : "🌍 بلد آخر";
+            countrySelect.options[countrySelect.options.length - 1].text = isEnglish ? "🌍 Other" : "🌍 بلد آخر"; // Fixed translation
         }
 
         function updatePhoneCode() {
@@ -177,25 +196,14 @@
             const countryCodeInput = document.getElementById('country-code');
             const selectedCode = countrySelect.options[countrySelect.selectedIndex].dataset.code;
             countryCodeInput.value = selectedCode;
-            document.getElementById("phone").pattern = countrySelect.options[countrySelect.selectedIndex].dataset.pattern || ".*";
+
+            countryCodeInput.style.display = countrySelect.value === "OTHER" ? "none" : "inline-block";
         }
 
-        function validateForm() {
-            const fields = ["name", "email", "phone", "contact-method", "inquiry"];
-            let isValid = fields.every(id => document.getElementById(id).value.trim() !== "");
-            document.getElementById("submit-btn").classList.toggle("active", isValid);
-            document.getElementById("submit-btn").disabled = !isValid;
-        }
-
-        document.querySelectorAll("#inquiryForm input, #inquiryForm select, #inquiryForm textarea").forEach(input => {
-            input.addEventListener("input", validateForm);
-        });
-
-        document.addEventListener("DOMContentLoaded", function() {
+        window.onload = function() {
             updatePhoneCode();
-            toggleLanguage();
-            validateForm();
-        });
+            toggleLanguage(); // Call to set the correct language on load
+        };
     </script>
 </body>
 </html>
