@@ -69,17 +69,18 @@
             justify-content: space-between; /* توزيع العناصر بالتساوي */
         }
         .country-code select {
-            width: 30%; /* تخصيص عرض لكود البلد */
+            width: 30%; /* تخصيص عرض لقائمة البلد */
             border-radius: 5px; /* زوايا دائرية */
-            margin-right: 10px; /* مسافة بين كود البلد ورقم الهاتف */
+            margin-right: 10px; /* مسافة بين قائمة البلد وحقل كود البلد */
         }
-        .country-code input {
-            width: 30%; /* تخصيص المساحة لكود البلد */
+        .country-code input[type="text"] {
+            width: 20%; /* تخصيص المساحة لكود البلد */
             margin: 0; /* إلغاء الهوامش */
-            display: none; /* إخفاء حقل كود البلد افتراضيًا */
+            display: inline-block; /* عرض الحقل بجوار حقل الهاتف */
+            text-align: center; /* محاذاة النص في الوسط */
         }
         .phone-input {
-            width: 38%; /* تخصيص المساحة لرقم الهاتف */
+            width: 48%; /* تخصيص المساحة لرقم الهاتف */
             margin-left: 10px; /* مسافة بين كود البلد ورقم الهاتف */
         }
         .inquiry-textarea {
@@ -120,7 +121,7 @@
                     <option value="SE" data-code="+46">السويد 🇸🇪</option>
                     <option value="OTHER" data-code="">بلد آخر</option>
                 </select>
-                <input type="text" id="country-code" name="country_code" value="+20" readonly style="text-align: center;"> <!-- حقل كود البلد غير قابل للتعديل -->
+                <input type="text" id="country-code" name="country_code" value="+20" readonly> <!-- حقل كود البلد غير قابل للتعديل -->
                 <input type="tel" id="phone" name="phone" class="phone-input" placeholder="رقم الهاتف" required> <!-- خانة الهاتف قابلة للتعديل -->
             </div>
             <select name="contact_method" required>
@@ -136,7 +137,6 @@
     <script>
         function updatePhoneCode() {
             const countrySelect = document.getElementById('country');
-            const phoneInput = document.getElementById('phone');
             const countryCodeInput = document.getElementById('country-code');
             const selectedCode = countrySelect.options[countrySelect.selectedIndex].dataset.code;
 
@@ -149,10 +149,6 @@
             } else {
                 countryCodeInput.style.display = "inline"; // إظهار الحقل
             }
-
-            // إضافة كود البلد إلى حقل الهاتف
-            const currentPhone = phoneInput.value.replace(/^\+\d+\s*/, ''); // إزالة أي كود بلد سابق
-            phoneInput.value = currentPhone; // الحفاظ على الرقم الحالي فقط
         }
 
         // تعيين كود البلد الافتراضي عند تحميل الصفحة
