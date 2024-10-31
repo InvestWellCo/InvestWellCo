@@ -103,6 +103,11 @@
             height: 25px;
             margin-right: 5px;
         }
+        .error-message {
+            color: red;
+            font-size: 14px;
+            display: none; /* Hide by default */
+        }
     </style>
 </head>
 <body>
@@ -117,16 +122,40 @@
         <form id="inquiryForm" action="https://formspree.io/f/manyeqbn" method="POST">
             <input type="text" id="name" name="name" placeholder="الاسم" required>
             <input type="email" id="email" name="email" placeholder="البريد الإلكتروني" required>
+            <div class="error-message" id="email-error">البريد الإلكتروني غير صالح</div>
             <div class="country-code">
                 <select id="country" name="country" onchange="updatePhoneCode()" required>
-                    <option value="EG" data-code="+20" data-pattern="^01[0-2,5]{1}[0-9]{8}$">🇪🇬</option>
-                    <option value="SA" data-code="+966" data-pattern="^5[0-9]{8}$">🇸🇦</option>
-                    <option value="AE" data-code="+971" data-pattern="^5[024568]{1}[0-9]{7}$">🇦🇪</option>
-                    <option value="OTHER" data-code="" data-pattern=".*">🌍 أخرى</option>
+                    <option value="EG" data-code="+20" data-pattern="^01[0-2,5]{1}[0-9]{8}$">🇪🇬 مصر</option>
+                    <option value="SA" data-code="+966" data-pattern="^5[0-9]{8}$">🇸🇦 السعودية</option>
+                    <option value="AE" data-code="+971" data-pattern="^5[024568]{1}[0-9]{7}$">🇦🇪 الإمارات</option>
+                    <option value="KW" data-code="+965" data-pattern="^5[0-9]{7}$">🇰🇼 الكويت</option>
+                    <option value="QA" data-code="+974" data-pattern="^5[0-9]{7}$">🇶🇦 قطر</option>
+                    <option value="BH" data-code="+973" data-pattern="^3[0-9]{7}$">🇧🇭 البحرين</option>
+                    <option value="OM" data-code="+968" data-pattern="^9[0-9]{7}$">🇴🇲 عمان</option>
+                    <option value="JO" data-code="+962" data-pattern="^07[7-9][0-9]{7}$">🇯🇴 الأردن</option>
+                    <option value="LY" data-code="+218" data-pattern="^0[9][0-9]{7}$">🇱🇾 ليبيا</option>
+                    <option value="SY" data-code="+963" data-pattern="^0[9][0-9]{7}$">🇸🇾 سوريا</option>
+                    <option value="LB" data-code="+961" data-pattern="^0[3][0-9]{7}$">🇱🇧 لبنان</option>
+                    <option value="DZ" data-code="+213" data-pattern="^0[5-7][0-9]{8}$">🇩🇿 الجزائر</option>
+                    <option value="MA" data-code="+212" data-pattern="^0[6-7][0-9]{8}$">🇲🇦 المغرب</option>
+                    <option value="TN" data-code="+216" data-pattern="^2[0-9]{7}$">🇹🇳 تونس</option>
+                    <option value="YE" data-code="+967" data-pattern="^7[0-9]{8}$">🇾🇪 اليمن</option>
+                    <option value="SD" data-code="+249" data-pattern="^0[1-9][0-9]{8}$">🇸🇩 السودان</option>
+                    <option value="IQ" data-code="+964" data-pattern="^07[0-9]{8}$">🇮🇶 العراق</option>
+                    <option value="PS" data-code="+970" data-pattern="^5[0-9]{7}$">🇵🇸 فلسطين</option>
+                    <option value="US" data-code="+1" data-pattern="^\d{10}$">🇺🇸 الولايات المتحدة</option>
+                    <option value="CA" data-code="+1" data-pattern="^\d{10}$">🇨🇦 كندا</option>
+                    <option value="GB" data-code="+44" data-pattern="^7[0-9]{9}$">🇬🇧 المملكة المتحدة</option>
+                    <option value="DE" data-code="+49" data-pattern="^\d{10}$">🇩🇪 ألمانيا</option>
+                    <option value="FR" data-code="+33" data-pattern="^\d{9}$">🇫🇷 فرنسا</option>
+                    <option value="IT" data-code="+39" data-pattern="^3[0-9]{9}$">🇮🇹 إيطاليا</option>
+                    <option value="ES" data-code="+34" data-pattern="^6[0-9]{8}$">🇪🇸 إسبانيا</option>
+                    <option value="AU" data-code="+61" data-pattern="^4[0-9]{8}$">🇦🇺 أستراليا</option>
                 </select>
                 <input type="text" id="country-code" name="country_code" value="+20" readonly>
             </div>
             <input type="tel" id="phone" name="phone" class="phone-input" placeholder="رقم الهاتف" required>
+            <div class="error-message" id="phone-error">رقم الهاتف غير صالح</div>
             <select id="contact-method" name="contact_method" required>
                 <option value="default" disabled selected>اختر طريقة التواصل</option>
                 <option value="phone">بالهاتف</option>
@@ -198,6 +227,17 @@
             const submitBtn = document.getElementById("submit-btn");
             submitBtn.classList.toggle("active", isFormValid);
             submitBtn.disabled = !isFormValid;
+
+            // Show email error message if the email format is invalid
+            document.getElementById("email-error").style.display = emailPattern.test(email) ? "none" : "block";
+
+            // Show phone error message if the phone format is invalid
+            const phoneError = document.getElementById("phone-error");
+            if (!phonePattern.test(phone) && phone) {
+                phoneError.style.display = "block";
+            } else {
+                phoneError.style.display = "none";
+            }
         }
 
         document.querySelectorAll("#inquiryForm input, #inquiryForm select, #inquiryForm textarea").forEach(input => {
