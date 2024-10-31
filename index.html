@@ -149,7 +149,7 @@
     <option value="IN" data-code="+91" data-pattern="^7[0-9]{9}$">🇮🇳 الهند</option>
     <option value="CN" data-code="+86" data-pattern="^\d{11}$">🇨🇳 الصين</option>
     <option value="JP" data-code="+81" data-pattern="^\d{10}$">🇯🇵 اليابان</option>
-    <option value="OTHER" data-code="" data-pattern=".*">🌍 أخرى</option>
+    <option value="OTHER" data-code="" data-pattern=".*">🌍 Other</option>
 
                 <input type="text" id="country-code" name="country_code" value="+20" readonly>
             </div>
@@ -167,36 +167,41 @@
     <script>
         let isEnglish = false;
 
-        function toggleLanguage() {
-            isEnglish = !isEnglish;
-            const langElements = {
-                "form-title": ["Real Estate Inquiry", "استفسار عقاري"],
-                "name": ["Name", "الاسم"],
-                "email": ["Email", "البريد الإلكتروني"],
-                "phone": ["Phone Number", "رقم الهاتف"],
-                "contact-method": ["Select Contact Method", "اختر طريقة التواصل"],
-                "inquiry": ["Your Inquiry", "استفسارك"],
-                "submit-btn": ["Submit", "إرسال"]
-            };
+      function toggleLanguage() {
+    isEnglish = !isEnglish;
+    const langElements = {
+        "form-title": ["Real Estate Inquiry", "استفسار عقاري"],
+        "name": ["Name", "الاسم"],
+        "email": ["Email", "البريد الإلكتروني"],
+        "inquiry": ["Your Inquiry", "استفسارك"],
+        "submit-btn": ["Submit", "إرسال"]
+    };
 
-            for (let key in langElements) {
-                const element = document.getElementById(key);
-                if (element.tagName === "INPUT" || element.tagName === "TEXTAREA") {
-                    element.placeholder = isEnglish ? langElements[key][0] : langElements[key][1];
-                } else if (element.tagName === "SELECT") {
-                    element.options[0].text = isEnglish ? langElements[key][0] : langElements[key][1];
-                    element.options[1].text = isEnglish ? "By Phone" : "بالهاتف";
-                    element.options[2].text = isEnglish ? "By WhatsApp" : "واتساب";
-                } else {
-                    element.textContent = isEnglish ? langElements[key][0] : langElements[key][1];
-                }
-            }
-
-            document.getElementById("flag").src = isEnglish
-                ? "https://flagcdn.com/w320/us.png"
-                : "https://flagcdn.com/w320/eg.png";
-            document.getElementById("language-label").innerText = isEnglish ? "عربي" : "English";
+    for (let key in langElements) {
+        if (key === "inquiry") {
+            document.getElementById(key).placeholder = isEnglish ? langElements[key][0] : langElements[key][1];
+        } else {
+            document.getElementById(key).textContent = isEnglish ? langElements[key][0] : langElements[key][1];
         }
+    }
+
+    // تغيير العلم والنص لزر تغيير اللغة
+    document.getElementById("flag").src = isEnglish
+        ? "https://flagcdn.com/w320/eg.png" // علم مصر عند اختيار اللغة العربية
+        : "https://flagcdn.com/w320/us.png"; // علم الولايات المتحدة عند اختيار اللغة الإنجليزية
+    document.getElementById("language-label").innerText = isEnglish ? "عربي" : "English";
+
+    // Update contact method options
+    const contactMethod = document.getElementById("contact-method");
+    contactMethod.options[0].text = isEnglish ? "Select Contact Method" : "اختر طريقة التواصل";
+    contactMethod.options[1].text = isEnglish ? "By Phone" : "بالهاتف";
+    contactMethod.options[2].text = isEnglish ? "By WhatsApp" : "واتساب";
+
+    // Update country select options
+    const countrySelect = document.getElementById("country");
+    countrySelect.options[countrySelect.options.length - 1].text = isEnglish ? "🌍 Other" : "🌍 بلد آخر"; // Fixed translation
+}
+
 
         function updatePhoneCode() {
             const countrySelect = document.getElementById('country');
