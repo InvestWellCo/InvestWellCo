@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real Estate Inquiry</title>
+    <title>استفسار عقاري</title>
     <link rel="icon" href="https://github.com/InvestWellCo/InvestWellCo/blob/main/logo%20inveddssssst%20well.png?raw=true" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -113,27 +113,40 @@
 
     <div class="form-container">
         <img src="https://github.com/InvestWellCo/InvestWellCo/blob/main/logo%20inveddssssst%20well.png?raw=true" alt="Company Logo" class="logo">
-        <h2 id="form-title">Real Estate Inquiry</h2>
+        <h2 id="form-title">استفسار عقاري</h2>
         <form id="inquiryForm" action="https://formspree.io/f/manyeqbn" method="POST">
-            <input type="text" id="name" name="name" placeholder="Name" required>
-            <input type="email" id="email" name="email" placeholder="Email" required>
+            <input type="text" id="name" name="name" placeholder="الاسم" required>
+            <input type="email" id="email" name="email" placeholder="البريد الإلكتروني" required>
             <div class="country-code">
-                <select id="country" name="country" onchange="updatePhoneCode()" required>
-                    <option value="EG" data-code="+20" data-pattern="^01[0-2,5]{1}[0-9]{8}$">🇪🇬</option>
-                    <option value="SA" data-code="+966" data-pattern="^5[0-9]{8}$">🇸🇦</option>
-                    <option value="AE" data-code="+971" data-pattern="^5[024568]{1}[0-9]{7}$">🇦🇪</option>
-                    <option value="OTHER" data-code="" data-pattern="">🌍 Other</option>
-                </select>
+<select id="country" name="country" onchange="updatePhoneCode()" required>
+    <option value="EG" data-code="+20" data-pattern="^01[0-2,5]{1}[0-9]{8}$">🇪🇬 مصر</option>
+    <option value="SA" data-code="+966" data-pattern="^5[0-9]{8}$">🇸🇦 السعودية</option>
+    <option value="AE" data-code="+971" data-pattern="^5[024568]{1}[0-9]{7}$">🇦🇪 الإمارات</option>
+    <option value="KW" data-code="+965" data-pattern="^5[0-9]{7}$">🇰🇼 الكويت</option>
+    <option value="QA" data-code="+974" data-pattern="^5[0-9]{7}$">🇶🇦 قطر</option>
+    <option value="BH" data-code="+973" data-pattern="^3[0-9]{7}$">🇧🇭 البحرين</option>
+    <option value="OM" data-code="+968" data-pattern="^9[0-9]{7}$">🇴🇲 عمان</option>
+    <option value="JO" data-code="+962" data-pattern="^07[7-9][0-9]{7}$">🇯🇴 الأردن</option>
+    <option value="DZ" data-code="+213" data-pattern="^0[5-7][0-9]{8}$">🇩🇿 الجزائر</option>
+    <option value="MA" data-code="+212" data-pattern="^0[6-7][0-9]{8}$">🇲🇦 المغرب</option>
+    <option value="TN" data-code="+216" data-pattern="^2[0-9]{7}$">🇹🇳 تونس</option>
+    <option value="LY" data-code="+218" data-pattern="^0[9][0-9]{7}$">🇱🇾 ليبيا</option>
+    <option value="SY" data-code="+963" data-pattern="^0[9][0-9]{7}$">🇸🇾 سوريا</option>
+    <option value="LB" data-code="+961" data-pattern="^0[3][0-9]{7}$">🇱🇧 لبنان</option>
+    <option value="EG" data-code="+20" data-pattern="^01[0-2,5]{1}[0-9]{8}$">🇪🇬 مصر</option>
+    <option value="OTHER" data-code="" data-pattern=".*">🌍 أخرى</option>
+</select>
+
                 <input type="text" id="country-code" name="country_code" value="+20" readonly>
             </div>
-            <input type="tel" id="phone" name="phone" class="phone-input" placeholder="Phone Number" required>
+            <input type="tel" id="phone" name="phone" class="phone-input" placeholder="رقم الهاتف" required>
             <select id="contact-method" name="contact_method" required>
-                <option value="default" disabled selected>Select Contact Method</option>
-                <option value="phone">By Phone</option>
-                <option value="whatsapp">By WhatsApp</option>
+                <option value="default" disabled selected>اختر طريقة التواصل</option>
+                <option value="phone">بالهاتف</option>
+                <option value="whatsapp">واتساب</option>
             </select>
-            <textarea class="inquiry-textarea" id="inquiry" name="inquiry" placeholder="Your Inquiry" rows="4" required></textarea>
-            <button type="submit" id="submit-btn">Submit</button>
+            <textarea class="inquiry-textarea" id="inquiry" name="inquiry" placeholder="استفسارك" rows="4" required></textarea>
+            <button type="submit" id="submit-btn">إرسال</button>
         </form>
     </div>
 
@@ -146,45 +159,58 @@
                 "form-title": ["Real Estate Inquiry", "استفسار عقاري"],
                 "name": ["Name", "الاسم"],
                 "email": ["Email", "البريد الإلكتروني"],
+                "phone": ["Phone Number", "رقم الهاتف"],
+                "contact-method": ["Select Contact Method", "اختر طريقة التواصل"],
                 "inquiry": ["Your Inquiry", "استفسارك"],
                 "submit-btn": ["Submit", "إرسال"]
             };
 
             for (let key in langElements) {
-                if (key === "inquiry") {
-                    document.getElementById(key).placeholder = isEnglish ? langElements[key][0] : langElements[key][1];
+                const element = document.getElementById(key);
+                if (element.tagName === "INPUT" || element.tagName === "TEXTAREA") {
+                    element.placeholder = isEnglish ? langElements[key][0] : langElements[key][1];
+                } else if (element.tagName === "SELECT") {
+                    element.options[0].text = isEnglish ? langElements[key][0] : langElements[key][1];
+                    element.options[1].text = isEnglish ? "By Phone" : "بالهاتف";
+                    element.options[2].text = isEnglish ? "By WhatsApp" : "واتساب";
                 } else {
-                    document.getElementById(key).textContent = isEnglish ? langElements[key][0] : langElements[key][1];
+                    element.textContent = isEnglish ? langElements[key][0] : langElements[key][1];
                 }
             }
 
             document.getElementById("flag").src = isEnglish
-                ? "https://flagcdn.com/w320/eg.png"
-                : "https://flagcdn.com/w320/us.png";
+                ? "https://flagcdn.com/w320/us.png"
+                : "https://flagcdn.com/w320/eg.png";
             document.getElementById("language-label").innerText = isEnglish ? "عربي" : "English";
-
-            const contactMethod = document.getElementById("contact-method");
-            contactMethod.options[0].text = isEnglish ? "Select Contact Method" : "اختر طريقة التواصل";
-            contactMethod.options[1].text = isEnglish ? "By Phone" : "بالهاتف";
-            contactMethod.options[2].text = isEnglish ? "By WhatsApp" : "واتساب";
-
-            const countrySelect = document.getElementById("country");
-            countrySelect.options[countrySelect.options.length - 1].text = isEnglish ? "🌍 Other" : "🌍 بلد آخر";
         }
 
         function updatePhoneCode() {
             const countrySelect = document.getElementById('country');
             const countryCodeInput = document.getElementById('country-code');
             const selectedCode = countrySelect.options[countrySelect.selectedIndex].dataset.code;
+            const phoneInput = document.getElementById("phone");
+
             countryCodeInput.value = selectedCode;
-            document.getElementById("phone").pattern = countrySelect.options[countrySelect.selectedIndex].dataset.pattern || ".*";
+            phoneInput.pattern = countrySelect.options[countrySelect.selectedIndex].dataset.pattern || ".*";
+            phoneInput.value = ""; // Clear phone input on country change
+            validateForm();
         }
 
         function validateForm() {
-            const fields = ["name", "email", "phone", "contact-method", "inquiry"];
-            let isValid = fields.every(id => document.getElementById(id).value.trim() !== "");
-            document.getElementById("submit-btn").classList.toggle("active", isValid);
-            document.getElementById("submit-btn").disabled = !isValid;
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+            const contactMethod = document.getElementById("contact-method").value;
+            const inquiry = document.getElementById("inquiry").value.trim();
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const phonePattern = new RegExp(document.getElementById("phone").pattern);
+
+            const isFormValid = name && emailPattern.test(email) && phonePattern.test(phone) &&
+                                contactMethod !== "default" && inquiry;
+
+            const submitBtn = document.getElementById("submit-btn");
+            submitBtn.classList.toggle("active", isFormValid);
+            submitBtn.disabled = !isFormValid;
         }
 
         document.querySelectorAll("#inquiryForm input, #inquiryForm select, #inquiryForm textarea").forEach(input => {
@@ -193,8 +219,12 @@
 
         document.addEventListener("DOMContentLoaded", function() {
             updatePhoneCode();
-            toggleLanguage();
             validateForm();
+        });
+
+        // Allow only numbers in phone input
+        document.getElementById("phone").addEventListener("input", function (e) {
+            this.value = this.value.replace(/[^0-9]/g, '');
         });
     </script>
 </body>
