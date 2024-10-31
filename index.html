@@ -119,13 +119,33 @@
                 <select id="country" name="country" onchange="updatePhoneCode()" required>
                     <option value="EG" data-code="+20">🇪🇬</option>
                     <option value="SA" data-code="+966">🇸🇦</option>
+                    <option value="AE" data-code="+971">🇦🇪</option>
+                    <option value="KW" data-code="+965">🇰🇼</option>
+                    <option value="QA" data-code="+974">🇶🇦</option>
+                    <option value="OM" data-code="+968">🇴🇲</option>
+                    <option value="BH" data-code="+973">🇧🇭</option>
+                    <option value="JO" data-code="+962">🇯🇴</option>
+                    <option value="LY" data-code="+218">🇱🇾</option>
+                    <option value="DZ" data-code="+213">🇩🇿</option>
+                    <option value="MA" data-code="+212">🇲🇦</option>
+                    <option value="TN" data-code="+216">🇹🇳</option>
+                    <option value="SY" data-code="+963">🇸🇾</option>
+                    <option value="LB" data-code="+961">🇱🇧</option>
+                    <option value="US" data-code="+1">🇺🇸</option>
+                    <option value="GB" data-code="+44">🇬🇧</option>
+                    <option value="DE" data-code="+49">🇩🇪</option>
+                    <option value="FR" data-code="+33">🇫🇷</option>
+                    <option value="IT" data-code="+39">🇮🇹</option>
+                    <option value="ES" data-code="+34">🇪🇸</option>
+                    <option value="CA" data-code="+1">🇨🇦</option>
+                    <option value="AU" data-code="+61">🇦🇺</option>
                     <option value="OTHER" data-code="">🌍</option>
                 </select>
                 <input type="text" id="country-code" name="country_code" value="+20" readonly>
                 <input type="tel" id="phone" name="phone" class="phone-input" placeholder="Phone Number" required>
             </div>
             <select id="contact-method" name="contact_method" required>
-                <option value="default" disabled selected>Select Contact Method</option>
+                <option value="">Select Contact Method</option>
                 <option value="phone">By Phone</option>
                 <option value="whatsapp">By WhatsApp</option>
             </select>
@@ -143,13 +163,20 @@
                 "form-title": ["Real Estate Inquiry", "استفسار عقاري"],
                 "name": ["Name", "الاسم"],
                 "email": ["Email", "البريد الإلكتروني"],
-                "inquiry": ["Your Inquiry", "استفسارك"],
-                "submit-btn": ["Submit", "إرسال"]
+                "phone": ["Phone Number", "رقم الهاتف"],
+                "contact-method": ["Select Contact Method", "اختر طريقة التواصل"],
+                "submit-btn": ["Submit", "إرسال"],
+                "inquiry": ["Your Inquiry", "استفسارك"]
             };
 
             for (let key in langElements) {
                 if (key === "inquiry") {
                     document.getElementById(key).placeholder = isEnglish ? langElements[key][0] : langElements[key][1];
+                } else if (key === "contact-method") {
+                    const options = document.getElementById(key).options;
+                    options[0].text = isEnglish ? langElements[key][0] : langElements[key][1];
+                    options[1].text = isEnglish ? "By Phone" : "عن طريق الهاتف";
+                    options[2].text = isEnglish ? "By WhatsApp" : "عن طريق واتساب";
                 } else {
                     document.getElementById(key).textContent = isEnglish ? langElements[key][0] : langElements[key][1];
                 }
@@ -159,16 +186,6 @@
                 ? "https://flagcdn.com/w320/eg.png"
                 : "https://flagcdn.com/w320/us.png";
             document.getElementById("language-label").innerText = isEnglish ? "عربي" : "English";
-
-            // Update contact method options
-            const contactMethod = document.getElementById("contact-method");
-            contactMethod.options[0].text = isEnglish ? "Select Contact Method" : "اختر طريقة التواصل";
-            contactMethod.options[1].text = isEnglish ? "By Phone" : "بالهاتف";
-            contactMethod.options[2].text = isEnglish ? "By WhatsApp" : "واتساب";
-
-            // Update country select options
-            const countrySelect = document.getElementById("country");
-            countrySelect.options[2].text = isEnglish ? "🌍 Other" : "🌍 بلد آخر";
         }
 
         function updatePhoneCode() {
@@ -177,6 +194,7 @@
             const selectedCode = countrySelect.options[countrySelect.selectedIndex].dataset.code;
             countryCodeInput.value = selectedCode;
 
+            // Hide the country code field if "Other" is selected
             countryCodeInput.style.display = countrySelect.value === "OTHER" ? "none" : "inline-block";
         }
 
