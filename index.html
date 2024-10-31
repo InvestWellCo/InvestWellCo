@@ -272,6 +272,10 @@ for (let key in langElements) {
                 submitBtn.style.backgroundColor = "#282827"; // اللون عند التعطيل
             }
         }
+
+        document.getElementById("name").addEventListener("input", validateSubmitButton);
+        document.getElementById("email").addEventListener("input", validateSubmitButton);
+        document.getElementById("phone").addEventListener("input", validateSubmitButton);
 // إضافة حدث لتغيير اللون عند الوقوف على الزر
 submitBtn.addEventListener("mouseenter", function() {
     if (!submitBtn.disabled) {
@@ -283,9 +287,6 @@ submitBtn.addEventListener("mouseleave", function() {
     if (!submitBtn.disabled) {
         submitBtn.style.backgroundColor = "#005d9e"; // العودة للون الطبيعي
     }
-        document.getElementById("name").addEventListener("input", validateSubmitButton);
-        document.getElementById("email").addEventListener("input", validateSubmitButton);
-        document.getElementById("phone").addEventListener("input", validateSubmitButton);
     </script>
 </body>
 </html>
