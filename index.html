@@ -188,10 +188,10 @@ function toggleLanguage() {
         }
     }
 
-    // Update flag and label for language toggle
+    // تغيير العلم والنص لزر تغيير اللغة
     document.getElementById("flag").src = isEnglish
-        ? "https://flagcdn.com/w320/us.png" // تغيير العلم إلى علم الولايات المتحدة عند اللغة الإنجليزية
-        : "https://flagcdn.com/w320/eg.png"; // تغيير العلم إلى علم مصر عند اللغة العربية
+        ? "https://flagcdn.com/w320/eg.png" // علم مصر عند اختيار اللغة العربية
+        : "https://flagcdn.com/w320/us.png"; // علم الولايات المتحدة عند اختيار اللغة الإنجليزية
     document.getElementById("language-label").innerText = isEnglish ? "عربي" : "English";
 
     // Update contact method options
@@ -204,6 +204,7 @@ function toggleLanguage() {
     const countrySelect = document.getElementById("country");
     countrySelect.options[countrySelect.options.length - 1].text = isEnglish ? "🌍 Other" : "🌍 بلد آخر"; // Fixed translation
 }
+
 
 
         function updatePhoneCode() {
