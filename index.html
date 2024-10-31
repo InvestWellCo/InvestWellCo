@@ -103,13 +103,6 @@
             height: 25px;
             margin-right: 5px;
         }
-        .error-message {
-            color: #282827;
-            display: none; /* Hidden by default */
-            font-size: 14px;
-            margin-top: -10px;
-            margin-bottom: 10px;
-        }
     </style>
 </head>
 <body>
@@ -123,127 +116,130 @@
         <h2 id="form-title">استفسار عقاري</h2>
         <form id="inquiryForm" action="https://formspree.io/f/manyeqbn" method="POST">
             <input type="text" id="name" name="name" placeholder="الاسم" required>
-            <div class="error-message" id="name-error"></div>
             <input type="email" id="email" name="email" placeholder="البريد الإلكتروني" required>
-            <div class="error-message" id="email-error"></div>
             <div class="country-code">
-                <select id="country" name="country" onchange="updatePhoneCode()" required>
-                    <option value="EG" data-code="+20" data-pattern="^01[0-2,5]{1}[0-9]{8}$">🇪🇬 مصر</option>
-                    <option value="SA" data-code="+966" data-pattern="^5[0-9]{8}$">🇸🇦 السعودية</option>
-                    <option value="AE" data-code="+971" data-pattern="^5[024568]{1}[0-9]{7}$">🇦🇪 الإمارات</option>
-                    <option value="KW" data-code="+965" data-pattern="^5[0-9]{7}$">🇰🇼 الكويت</option>
-                    <option value="QA" data-code="+974" data-pattern="^5[0-9]{7}$">🇶🇦 قطر</option>
-                    <option value="BH" data-code="+973" data-pattern="^3[0-9]{7}$">🇧🇭 البحرين</option>
-                    <option value="OM" data-code="+968" data-pattern="^9[0-9]{7}$">🇴🇲 عمان</option>
-                    <option value="JO" data-code="+962" data-pattern="^07[7-9][0-9]{7}$">🇯🇴 الأردن</option>
-                    <option value="LY" data-code="+218" data-pattern="^0[9][0-9]{7}$">🇱🇾 ليبيا</option>
-                    <option value="SY" data-code="+963" data-pattern="^0[9][0-9]{7}$">🇸🇾 سوريا</option>
-                    <option value="LB" data-code="+961" data-pattern="^0[3][0-9]{7}$">🇱🇧 لبنان</option>
-                    <option value="DZ" data-code="+213" data-pattern="^0[5-7][0-9]{8}$">🇩🇿 الجزائر</option>
-                    <option value="MA" data-code="+212" data-pattern="^0[6-7][0-9]{8}$">🇲🇦 المغرب</option>
-                    <option value="TN" data-code="+216" data-pattern="^2[0-9]{7}$">🇹🇳 تونس</option>
-                    <option value="YE" data-code="+967" data-pattern="^7[0-9]{8}$">🇾🇪 اليمن</option>
-                    <option value="SD" data-code="+249" data-pattern="^0[1-9][0-9]{8}$">🇸🇩 السودان</option>
-                    <option value="IQ" data-code="+964" data-pattern="^07[0-9]{8}$">🇮🇶 العراق</option>
-                    <option value="PS" data-code="+970" data-pattern="^5[0-9]{7}$">🇵🇸 فلسطين</option>
-                    <option value="US" data-code="+1" data-pattern="^\d{10}$">🇺🇸 الولايات المتحدة</option>
-                    <option value="CA" data-code="+1" data-pattern="^\d{10}$">🇨🇦 كندا</option>
-                    <option value="GB" data-code="+44" data-pattern="^7[0-9]{9}$">🇬🇧 المملكة المتحدة</option>
-                    <option value="DE" data-code="+49" data-pattern="^\d{10}$">🇩🇪 ألمانيا</option>
-                    <option value="FR" data-code="+33" data-pattern="^\d{9}$">🇫🇷 فرنسا</option>
-                    <option value="IT" data-code="+39" data-pattern="^3[0-9]{9}$">🇮🇹 إيطاليا</option>
-                    <option value="ES" data-code="+34" data-pattern="^6[0-9]{8}$">🇪🇸 إسبانيا</option>
-                    <option value="AU" data-code="+61" data-pattern="^4[0-9]{8}$">🇦🇺 أستراليا</option>
-                    <option value="BR" data-code="+55" data-pattern="^\d{10}$">🇧🇷 البرازيل</option>
-                    <option value="IN" data-code="+91" data-pattern="^\d{10}$">🇮🇳 الهند</option>
-                    <option value="CN" data-code="+86" data-pattern="^\d{11}$">🇨🇳 الصين</option>
-                </select>
-                <input type="text" id="phone" name="phone" placeholder="رقم الهاتف" class="phone-input" required>
-                <div class="error-message" id="phone-error"></div>
+  <select id="country" name="country" onchange="updatePhoneCode()" required>
+    <option value="EG" data-code="+20" data-pattern="^01[0-2,5]{1}[0-9]{8}$">🇪🇬 مصر</option>
+    <option value="SA" data-code="+966" data-pattern="^5[0-9]{8}$">🇸🇦 السعودية</option>
+    <option value="AE" data-code="+971" data-pattern="^5[024568]{1}[0-9]{7}$">🇦🇪 الإمارات</option>
+    <option value="KW" data-code="+965" data-pattern="^5[0-9]{7}$">🇰🇼 الكويت</option>
+    <option value="QA" data-code="+974" data-pattern="^5[0-9]{7}$">🇶🇦 قطر</option>
+    <option value="BH" data-code="+973" data-pattern="^3[0-9]{7}$">🇧🇭 البحرين</option>
+    <option value="OM" data-code="+968" data-pattern="^9[0-9]{7}$">🇴🇲 عمان</option>
+    <option value="JO" data-code="+962" data-pattern="^07[7-9][0-9]{7}$">🇯🇴 الأردن</option>
+    <option value="LY" data-code="+218" data-pattern="^0[9][0-9]{7}$">🇱🇾 ليبيا</option>
+    <option value="SY" data-code="+963" data-pattern="^0[9][0-9]{7}$">🇸🇾 سوريا</option>
+    <option value="LB" data-code="+961" data-pattern="^0[3][0-9]{7}$">🇱🇧 لبنان</option>
+    <option value="DZ" data-code="+213" data-pattern="^0[5-7][0-9]{8}$">🇩🇿 الجزائر</option>
+    <option value="MA" data-code="+212" data-pattern="^0[6-7][0-9]{8}$">🇲🇦 المغرب</option>
+    <option value="TN" data-code="+216" data-pattern="^2[0-9]{7}$">🇹🇳 تونس</option>
+    <option value="YE" data-code="+967" data-pattern="^7[0-9]{8}$">🇾🇪 اليمن</option>
+    <option value="SD" data-code="+249" data-pattern="^0[1-9][0-9]{8}$">🇸🇩 السودان</option>
+    <option value="IQ" data-code="+964" data-pattern="^07[0-9]{8}$">🇮🇶 العراق</option>
+    <option value="PS" data-code="+970" data-pattern="^5[0-9]{7}$">🇵🇸 فلسطين</option>
+    <option value="US" data-code="+1" data-pattern="^\d{10}$">🇺🇸 الولايات المتحدة</option>
+    <option value="CA" data-code="+1" data-pattern="^\d{10}$">🇨🇦 كندا</option>
+    <option value="GB" data-code="+44" data-pattern="^7[0-9]{9}$">🇬🇧 المملكة المتحدة</option>
+    <option value="DE" data-code="+49" data-pattern="^\d{10}$">🇩🇪 ألمانيا</option>
+    <option value="FR" data-code="+33" data-pattern="^\d{9}$">🇫🇷 فرنسا</option>
+    <option value="IT" data-code="+39" data-pattern="^3[0-9]{9}$">🇮🇹 إيطاليا</option>
+    <option value="ES" data-code="+34" data-pattern="^6[0-9]{8}$">🇪🇸 إسبانيا</option>
+    <option value="AU" data-code="+61" data-pattern="^4[0-9]{8}$">🇦🇺 أستراليا</option>
+    <option value="BR" data-code="+55" data-pattern="^\d{10}$">🇧🇷 البرازيل</option>
+    <option value="IN" data-code="+91" data-pattern="^7[0-9]{9}$">🇮🇳 الهند</option>
+    <option value="CN" data-code="+86" data-pattern="^\d{11}$">🇨🇳 الصين</option>
+    <option value="JP" data-code="+81" data-pattern="^\d{10}$">🇯🇵 اليابان</option>
+    <option value="OTHER" data-code="" data-pattern=".*">🌍 أخرى</option>
+
+                <input type="text" id="country-code" name="country_code" value="+20" readonly>
             </div>
-            <textarea id="inquiry" name="inquiry" rows="4" class="inquiry-textarea" placeholder="اكتب استفسارك هنا..." required></textarea>
-            <div class="error-message" id="inquiry-error"></div>
-            <button type="submit" class="active" id="submit-button">إرسال</button>
+            <input type="tel" id="phone" name="phone" class="phone-input" placeholder="رقم الهاتف" required>
+            <select id="contact-method" name="contact_method" required>
+                <option value="default" disabled selected>اختر طريقة التواصل</option>
+                <option value="phone">بالهاتف</option>
+                <option value="whatsapp">واتساب</option>
+            </select>
+            <textarea class="inquiry-textarea" id="inquiry" name="inquiry" placeholder="استفسارك" rows="4" required></textarea>
+            <button type="submit" id="submit-btn">إرسال</button>
         </form>
     </div>
+
     <script>
+        let isEnglish = false;
+
         function toggleLanguage() {
-            const currentLanguage = document.getElementById("language-label").innerText;
-            if (currentLanguage === "عربي") {
-                document.getElementById("form-title").innerText = "Property Inquiry";
-                document.getElementById("name").placeholder = "Name";
-                document.getElementById("email").placeholder = "Email";
-                document.getElementById("phone").placeholder = "Phone Number";
-                document.getElementById("inquiry").placeholder = "Write your inquiry here...";
-                document.getElementById("submit-button").innerText = "Submit";
-                document.getElementById("language-label").innerText = "English";
-                document.getElementById("flag").src = "https://flagcdn.com/w320/us.png";
-            } else {
-                document.getElementById("form-title").innerText = "استفسار عقاري";
-                document.getElementById("name").placeholder = "الاسم";
-                document.getElementById("email").placeholder = "البريد الإلكتروني";
-                document.getElementById("phone").placeholder = "رقم الهاتف";
-                document.getElementById("inquiry").placeholder = "اكتب استفسارك هنا...";
-                document.getElementById("submit-button").innerText = "إرسال";
-                document.getElementById("language-label").innerText = "عربي";
-                document.getElementById("flag").src = "https://flagcdn.com/w320/eg.png";
+            isEnglish = !isEnglish;
+            const langElements = {
+                "form-title": ["Real Estate Inquiry", "استفسار عقاري"],
+                "name": ["Name", "الاسم"],
+                "email": ["Email", "البريد الإلكتروني"],
+                "phone": ["Phone Number", "رقم الهاتف"],
+                "contact-method": ["Select Contact Method", "اختر طريقة التواصل"],
+                "inquiry": ["Your Inquiry", "استفسارك"],
+                "submit-btn": ["Submit", "إرسال"]
+            };
+
+            for (let key in langElements) {
+                const element = document.getElementById(key);
+                if (element.tagName === "INPUT" || element.tagName === "TEXTAREA") {
+                    element.placeholder = isEnglish ? langElements[key][0] : langElements[key][1];
+                } else if (element.tagName === "SELECT") {
+                    element.options[0].text = isEnglish ? langElements[key][0] : langElements[key][1];
+                    element.options[1].text = isEnglish ? "By Phone" : "بالهاتف";
+                    element.options[2].text = isEnglish ? "By WhatsApp" : "واتساب";
+                } else {
+                    element.textContent = isEnglish ? langElements[key][0] : langElements[key][1];
+                }
             }
+
+            document.getElementById("flag").src = isEnglish
+                ? "https://flagcdn.com/w320/us.png"
+                : "https://flagcdn.com/w320/eg.png";
+            document.getElementById("language-label").innerText = isEnglish ? "عربي" : "English";
         }
 
         function updatePhoneCode() {
-            const countrySelect = document.getElementById("country");
-            const selectedOption = countrySelect.options[countrySelect.selectedIndex];
-            const countryCode = selectedOption.getAttribute("data-code");
+            const countrySelect = document.getElementById('country');
+            const countryCodeInput = document.getElementById('country-code');
+            const selectedCode = countrySelect.options[countrySelect.selectedIndex].dataset.code;
             const phoneInput = document.getElementById("phone");
-            phoneInput.setAttribute("placeholder", countryCode + " " + phoneInput.getAttribute("placeholder"));
+
+            countryCodeInput.value = selectedCode;
+            phoneInput.pattern = countrySelect.options[countrySelect.selectedIndex].dataset.pattern || ".*";
+            phoneInput.value = ""; // Clear phone input on country change
+            validateForm();
         }
 
-        document.getElementById("inquiryForm").onsubmit = function(event) {
-            event.preventDefault();
-            let hasErrors = false;
-
-            // Reset error messages
-            document.querySelectorAll(".error-message").forEach(el => {
-                el.style.display = 'none';
-            });
-
-            // Name validation
+        function validateForm() {
             const name = document.getElementById("name").value.trim();
-            if (name === "") {
-                document.getElementById("name-error").innerText = "Please enter your name.";
-                document.getElementById("name-error").style.display = 'block';
-                hasErrors = true;
-            }
-
-            // Email validation
             const email = document.getElementById("email").value.trim();
-            if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(email)) {
-                document.getElementById("email-error").innerText = "Please enter a valid email address.";
-                document.getElementById("email-error").style.display = 'block';
-                hasErrors = true;
-            }
-
-            // Phone validation
             const phone = document.getElementById("phone").value.trim();
-            const phonePattern = countrySelect.options[countrySelect.selectedIndex].getAttribute("data-pattern");
-            if (!new RegExp(phonePattern).test(phone)) {
-                document.getElementById("phone-error").innerText = "Please enter a valid phone number.";
-                document.getElementById("phone-error").style.display = 'block';
-                hasErrors = true;
-            }
-
-            // Inquiry validation
+            const contactMethod = document.getElementById("contact-method").value;
             const inquiry = document.getElementById("inquiry").value.trim();
-            if (inquiry === "") {
-                document.getElementById("inquiry-error").innerText = "Please enter your inquiry.";
-                document.getElementById("inquiry-error").style.display = 'block';
-                hasErrors = true;
-            }
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const phonePattern = new RegExp(document.getElementById("phone").pattern);
 
-            if (!hasErrors) {
-                document.getElementById("inquiryForm").submit();
-            }
-        };
+            const isFormValid = name && emailPattern.test(email) && phonePattern.test(phone) &&
+                                contactMethod !== "default" && inquiry;
+
+            const submitBtn = document.getElementById("submit-btn");
+            submitBtn.classList.toggle("active", isFormValid);
+            submitBtn.disabled = !isFormValid;
+        }
+
+        document.querySelectorAll("#inquiryForm input, #inquiryForm select, #inquiryForm textarea").forEach(input => {
+            input.addEventListener("input", validateForm);
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            updatePhoneCode();
+            validateForm();
+        });
+
+        // Allow only numbers in phone input
+        document.getElementById("phone").addEventListener("input", function (e) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
     </script>
 </body>
 </html>
