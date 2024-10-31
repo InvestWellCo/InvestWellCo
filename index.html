@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>استفسار عقاري</title>
-    <link rel="icon" href="https://github.com/InvestWellCo/InvestWellCo/blob/main/logo%20inveddssssst%20well.png?raw=true" type="image/png"> <!-- أيقونة التبويب -->
+    <link rel="https://github.com/InvestWellCo/InvestWellCo/blob/main/logo%20inveddssssst%20well.png?raw=true" type="image/png"> <!-- أيقونة التبويب -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet"> <!-- خط جميل من Google Fonts -->
     <style>
         body {
@@ -66,7 +66,6 @@
         .country-code {
             display: flex;
             align-items: center;
-            justify-content: space-between; /* توزيع المسافات */
         }
         .country-code select {
             margin-right: 10px; /* مسافة بين كود البلد ورقم الهاتف */
@@ -84,7 +83,7 @@
 </head>
 <body>
     <div class="form-container">
-        <img src="https://github.com/InvestWellCo/InvestWellCo/blob/main/logo%20inveddssssst%20well.jpg?raw=true" alt="شعار الشركة" class="logo"> <!-- استبدل بمسار اللوجو -->
+        <img src="https://github.com/InvestWellCo/InvestWellCo/blob/main/logo%20inveddssssst%20well.png?raw=true" alt="شعار الشركة" class="logo"> <!-- استبدل بمسار اللوجو -->
         <h2>للتواصل</h2>
         <form action="https://formspree.io/f/manyeqbn" method="POST">
             <input type="text" name="name" placeholder="الاسم" required>
@@ -116,6 +115,7 @@
                     <option value="OTHER" data-code="">بلد آخر</option>
                 </select>
                 <input type="tel" id="phone" name="phone" placeholder="رقم الهاتف" required> <!-- خانة الهاتف قابلة للتعديل -->
+                <input type="text" id="country-code" name="country_code" value="+20" readonly style="width: 70px; margin-left: 10px; text-align: center;"> <!-- حقل كود البلد غير قابل للتعديل -->
             </div>
             <select name="contact_method" required>
                 <option value="">اختر طريقة التواصل</option>
@@ -131,13 +131,15 @@
         function updatePhoneCode() {
             const countrySelect = document.getElementById('country');
             const phoneInput = document.getElementById('phone');
+            const countryCodeInput = document.getElementById('country-code');
             const selectedCode = countrySelect.options[countrySelect.selectedIndex].dataset.code;
 
+            // تحديث كود البلد في الحقل المخصص
+            countryCodeInput.value = selectedCode; 
+
             // إضافة كود البلد إلى حقل الهاتف
-            if (selectedCode) {
-                const currentPhone = phoneInput.value.replace(/^\+\d+\s*/, ''); // إزالة أي كود بلد سابق
-                phoneInput.value = selectedCode + ' ' + currentPhone; // إضافة كود البلد الحالي
-            }
+            const currentPhone = phoneInput.value.replace(/^\+\d+\s*/, ''); // إزالة أي كود بلد سابق
+            phoneInput.value = currentPhone; // الحفاظ على الرقم الحالي فقط
         }
 
         // تعيين كود البلد الافتراضي عند تحميل الصفحة
