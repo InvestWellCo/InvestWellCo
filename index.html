@@ -127,15 +127,32 @@
     <option value="BH" data-code="+973" data-pattern="^3[0-9]{7}$">🇧🇭 البحرين</option>
     <option value="OM" data-code="+968" data-pattern="^9[0-9]{7}$">🇴🇲 عمان</option>
     <option value="JO" data-code="+962" data-pattern="^07[7-9][0-9]{7}$">🇯🇴 الأردن</option>
-    <option value="DZ" data-code="+213" data-pattern="^0[5-7][0-9]{8}$">🇩🇿 الجزائر</option>
-    <option value="MA" data-code="+212" data-pattern="^0[6-7][0-9]{8}$">🇲🇦 المغرب</option>
-    <option value="TN" data-code="+216" data-pattern="^2[0-9]{7}$">🇹🇳 تونس</option>
     <option value="LY" data-code="+218" data-pattern="^0[9][0-9]{7}$">🇱🇾 ليبيا</option>
     <option value="SY" data-code="+963" data-pattern="^0[9][0-9]{7}$">🇸🇾 سوريا</option>
     <option value="LB" data-code="+961" data-pattern="^0[3][0-9]{7}$">🇱🇧 لبنان</option>
-    <option value="EG" data-code="+20" data-pattern="^01[0-2,5]{1}[0-9]{8}$">🇪🇬 مصر</option>
+    <option value="DZ" data-code="+213" data-pattern="^0[5-7][0-9]{8}$">🇩🇿 الجزائر</option>
+    <option value="MA" data-code="+212" data-pattern="^0[6-7][0-9]{8}$">🇲🇦 المغرب</option>
+    <option value="TN" data-code="+216" data-pattern="^2[0-9]{7}$">🇹🇳 تونس</option>
+    <option value="YE" data-code="+967" data-pattern="^7[0-9]{8}$">🇾🇪 اليمن</option>
+    <option value="SD" data-code="+249" data-pattern="^0[1-9][0-9]{8}$">🇸🇩 السودان</option>
+    <option value="IQ" data-code="+964" data-pattern="^07[0-9]{8}$">🇮🇶 العراق</option>
+    <option value="PS" data-code="+970" data-pattern="^5[0-9]{7}$">🇵🇸 فلسطين</option>
+    <option value="US" data-code="+1" data-pattern="^\d{10}$">🇺🇸 الولايات المتحدة</option>
+    <option value="CA" data-code="+1" data-pattern="^\d{10}$">🇨🇦 كندا</option>
+    <option value="GB" data-code="+44" data-pattern="^7[0-9]{9}$">🇬🇧 المملكة المتحدة (إنجلترا)</option>
+    <option value="DE" data-code="+49" data-pattern="^\d{10}$">🇩🇪 ألمانيا</option>
+    <option value="FR" data-code="+33" data-pattern="^\d{9}$">🇫🇷 فرنسا</option>
+    <option value="IT" data-code="+39" data-pattern="^3[0-9]{9}$">🇮🇹 إيطاليا</option>
+    <option value="ES" data-code="+34" data-pattern="^6[0-9]{8}$">🇪🇸 إسبانيا</option>
+    <option value="AU" data-code="+61" data-pattern="^4[0-9]{8}$">🇦🇺 أستراليا</option>
+    <option value="BR" data-code="+55" data-pattern="^\d{10}$">🇧🇷 البرازيل</option>
+    <option value="IN" data-code="+91" data-pattern="^7[0-9]{9}$">🇮🇳 الهند</option>
+    <option value="CN" data-code="+86" data-pattern="^\d{11}$">🇨🇳 الصين</option>
+    <option value="JP" data-code="+81" data-pattern="^\d{10}$">🇯🇵 اليابان</option>
     <option value="OTHER" data-code="" data-pattern=".*">🌍 أخرى</option>
+
 </select>
+
 
                 <input type="text" id="country-code" name="country_code" value="+20" readonly>
             </div>
@@ -153,36 +170,41 @@
     <script>
         let isEnglish = false;
 
-        function toggleLanguage() {
-            isEnglish = !isEnglish;
-            const langElements = {
-                "form-title": ["Real Estate Inquiry", "استفسار عقاري"],
-                "name": ["Name", "الاسم"],
-                "email": ["Email", "البريد الإلكتروني"],
-                "phone": ["Phone Number", "رقم الهاتف"],
-                "contact-method": ["Select Contact Method", "اختر طريقة التواصل"],
-                "inquiry": ["Your Inquiry", "استفسارك"],
-                "submit-btn": ["Submit", "إرسال"]
-            };
+function toggleLanguage() {
+    isEnglish = !isEnglish;
+    const langElements = {
+        "form-title": ["Real Estate Inquiry", "استفسار عقاري"],
+        "name": ["Name", "الاسم"],
+        "email": ["Email", "البريد الإلكتروني"],
+        "inquiry": ["Your Inquiry", "استفسارك"],
+        "submit-btn": ["Submit", "إرسال"]
+    };
 
-            for (let key in langElements) {
-                const element = document.getElementById(key);
-                if (element.tagName === "INPUT" || element.tagName === "TEXTAREA") {
-                    element.placeholder = isEnglish ? langElements[key][0] : langElements[key][1];
-                } else if (element.tagName === "SELECT") {
-                    element.options[0].text = isEnglish ? langElements[key][0] : langElements[key][1];
-                    element.options[1].text = isEnglish ? "By Phone" : "بالهاتف";
-                    element.options[2].text = isEnglish ? "By WhatsApp" : "واتساب";
-                } else {
-                    element.textContent = isEnglish ? langElements[key][0] : langElements[key][1];
-                }
-            }
-
-            document.getElementById("flag").src = isEnglish
-                ? "https://flagcdn.com/w320/us.png"
-                : "https://flagcdn.com/w320/eg.png";
-            document.getElementById("language-label").innerText = isEnglish ? "عربي" : "English";
+    for (let key in langElements) {
+        if (key === "inquiry") {
+            document.getElementById(key).placeholder = isEnglish ? langElements[key][0] : langElements[key][1];
+        } else {
+            document.getElementById(key).textContent = isEnglish ? langElements[key][0] : langElements[key][1];
         }
+    }
+
+    // Update flag and label for language toggle
+    document.getElementById("flag").src = isEnglish
+        ? "https://flagcdn.com/w320/us.png" // تغيير العلم إلى علم الولايات المتحدة عند اللغة الإنجليزية
+        : "https://flagcdn.com/w320/eg.png"; // تغيير العلم إلى علم مصر عند اللغة العربية
+    document.getElementById("language-label").innerText = isEnglish ? "عربي" : "English";
+
+    // Update contact method options
+    const contactMethod = document.getElementById("contact-method");
+    contactMethod.options[0].text = isEnglish ? "Select Contact Method" : "اختر طريقة التواصل";
+    contactMethod.options[1].text = isEnglish ? "By Phone" : "بالهاتف";
+    contactMethod.options[2].text = isEnglish ? "By WhatsApp" : "واتساب";
+
+    // Update country select options
+    const countrySelect = document.getElementById("country");
+    countrySelect.options[countrySelect.options.length - 1].text = isEnglish ? "🌍 Other" : "🌍 بلد آخر"; // Fixed translation
+}
+
 
         function updatePhoneCode() {
             const countrySelect = document.getElementById('country');
