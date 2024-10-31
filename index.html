@@ -237,7 +237,7 @@ function validatePhone() {
     // تحقق من الرقم حسب قواعد الدولة المحددة
     if (phoneRules[selectedCountry] && !phoneRules[selectedCountry].test(phoneValue)) {
       phoneError.style.display = "block";
-    //    //phoneInput.setCustomValidity("Invalid phone number format");
+    phoneInput.setCustomValidity("Invalid phone number format");
  ///   } else {
    //     phoneError.style.display = "none";
    //     phoneInput.setCustomValidity("");
