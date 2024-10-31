@@ -243,6 +243,20 @@ function validatePhone() {
         phoneInput.setCustomValidity("");
     }
 }
+function checkFormValidity() {
+    const name = document.getElementById("name").value; // الحصول على قيمة حقل الاسم
+    const email = document.getElementById("email").value; // الحصول على قيمة حقل البريد الإلكتروني
+    const phone = document.getElementById("phone").value; // الحصول على قيمة حقل الهاتف
+    const inquiry = document.getElementById("inquiry").value; // الحصول على قيمة حقل الاستفسار
+    const submitButton = document.getElementById("submit-btn"); // الحصول على زر الإرسال
+
+    // تحقق مما إذا كانت جميع الحقول مملوءة
+    if (name && email && phone && inquiry) {
+        submitButton.disabled = false; // إذا كانت جميع الحقول مملوءة، تفعيل الزر
+    } else {
+        submitButton.disabled = true; // إذا لم تكن جميع الحقول مملوءة، تعطيل الزر
+    }
+}
 
     </script>
 </body>
