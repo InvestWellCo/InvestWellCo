@@ -7,6 +7,7 @@
     <link rel="icon" href="https://github.com/InvestWellCo/InvestWellCo/blob/main/logo%20inveddssssst%20well.png?raw=true" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        /* تنسيقات الصفحة */
         body {
             font-family: 'Montserrat', sans-serif;
             background-image: url('https://github.com/InvestWellCo/InvestWellCo/blob/main/observation-urban-building-business-steel.jpg?raw=true');
@@ -48,18 +49,16 @@
         .form-container button {
             width: 100%;
             padding: 12px;
-            background-color: #282827;
+            background-color: #005d9e;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             font-size: 18px;
             transition: background-color 0.3s;
-            pointer-events: none;
         }
-        .form-container button.active {
-            background-color: #005d9e;
-            pointer-events: auto;
+        .form-container button:hover {
+            background-color: #004b7a;
         }
         .logo {
             max-width: 150px;
@@ -114,15 +113,34 @@
     <div class="form-container">
         <img src="https://github.com/InvestWellCo/InvestWellCo/blob/main/logo%20inveddssssst%20well.png?raw=true" alt="Company Logo" class="logo">
         <h2 id="form-title">Real Estate Inquiry</h2>
-        <form id="inquiryForm" action="https://formspree.io/f/manyeqbn" method="POST">
+        <form action="https://formspree.io/f/manyeqbn" method="POST">
             <input type="text" id="name" name="name" placeholder="Name" required>
             <input type="email" id="email" name="email" placeholder="Email" required>
             <div class="country-code">
                 <select id="country" name="country" onchange="updatePhoneCode()" required>
-                    <option value="EG" data-code="+20" data-pattern="^01[0-2,5]{1}[0-9]{8}$">🇪🇬</option>
-                    <option value="SA" data-code="+966" data-pattern="^5[0-9]{8}$">🇸🇦</option>
-                    <option value="AE" data-code="+971" data-pattern="^5[024568]{1}[0-9]{7}$">🇦🇪</option>
-                    <option value="OTHER" data-code="" data-pattern="">🌍 Other</option>
+                    <option value="EG" data-code="+20">🇪🇬</option>
+                    <option value="SA" data-code="+966">🇸🇦</option>
+                    <option value="AE" data-code="+971">🇦🇪</option>
+                    <option value="KW" data-code="+965">🇰🇼</option>
+                    <option value="QA" data-code="+974">🇶🇦</option>
+                    <option value="OM" data-code="+968">🇴🇲</option>
+                    <option value="BH" data-code="+973">🇧🇭</option>
+                    <option value="JO" data-code="+962">🇯🇴</option>
+                    <option value="LY" data-code="+218">🇱🇾</option>
+                    <option value="DZ" data-code="+213">🇩🇿</option>
+                    <option value="MA" data-code="+212">🇲🇦</option>
+                    <option value="TN" data-code="+216">🇹🇳</option>
+                    <option value="SY" data-code="+963">🇸🇾</option>
+                    <option value="LB" data-code="+961">🇱🇧</option>
+                    <option value="US" data-code="+1">🇺🇸</option>
+                    <option value="GB" data-code="+44">🇬🇧</option>
+                    <option value="DE" data-code="+49">🇩🇪</option>
+                    <option value="FR" data-code="+33">🇫🇷</option>
+                    <option value="IT" data-code="+39">🇮🇹</option>
+                    <option value="ES" data-code="+34">🇪🇸</option>
+                    <option value="CA" data-code="+1">🇨🇦</option>
+                    <option value="AU" data-code="+61">🇦🇺</option>
+                    <option value="OTHER" data-code="">🌍 بلد آخر</option>
                 </select>
                 <input type="text" id="country-code" name="country_code" value="+20" readonly>
             </div>
@@ -159,8 +177,8 @@
             }
 
             document.getElementById("flag").src = isEnglish
-                ? "https://flagcdn.com/w320/eg.png"
-                : "https://flagcdn.com/w320/us.png";
+                ? "https://flagcdn.com/w320/us.png"
+                : "https://flagcdn.com/w320/eg.png";
             document.getElementById("language-label").innerText = isEnglish ? "عربي" : "English";
 
             const contactMethod = document.getElementById("contact-method");
@@ -177,25 +195,14 @@
             const countryCodeInput = document.getElementById('country-code');
             const selectedCode = countrySelect.options[countrySelect.selectedIndex].dataset.code;
             countryCodeInput.value = selectedCode;
-            document.getElementById("phone").pattern = countrySelect.options[countrySelect.selectedIndex].dataset.pattern || ".*";
+
+            countryCodeInput.style.display = countrySelect.value === "OTHER" ? "none" : "inline-block";
         }
 
-        function validateForm() {
-            const fields = ["name", "email", "phone", "contact-method", "inquiry"];
-            let isValid = fields.every(id => document.getElementById(id).value.trim() !== "");
-            document.getElementById("submit-btn").classList.toggle("active", isValid);
-            document.getElementById("submit-btn").disabled = !isValid;
-        }
-
-        document.querySelectorAll("#inquiryForm input, #inquiryForm select, #inquiryForm textarea").forEach(input => {
-            input.addEventListener("input", validateForm);
-        });
-
-        document.addEventListener("DOMContentLoaded", function() {
+        window.onload = function() {
             updatePhoneCode();
             toggleLanguage();
-            validateForm();
-        });
+        };
     </script>
 </body>
 </html>
