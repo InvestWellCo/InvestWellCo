@@ -117,9 +117,9 @@
             <input type="email" id="email" name="email" placeholder="Email" required>
             <div class="country-code">
                 <select id="country" name="country" onchange="updatePhoneCode()" required>
-                    <option value="EG" data-code="+20" selected>Egypt 🇪🇬</option>
-                    <option value="SA" data-code="+966">Saudi Arabia 🇸🇦</option>
-                    <option value="OTHER" data-code="">Other</option>
+                    <option value="EG" data-code="+20">🇪🇬</option>
+                    <option value="SA" data-code="+966">🇸🇦</option>
+                    <option value="OTHER" data-code="">🌍</option>
                 </select>
                 <input type="text" id="country-code" name="country_code" value="+20" readonly>
                 <input type="tel" id="phone" name="phone" class="phone-input" placeholder="Phone Number" required>
@@ -165,6 +165,10 @@
             contactMethod.options[0].text = isEnglish ? "Select Contact Method" : "اختر طريقة التواصل";
             contactMethod.options[1].text = isEnglish ? "By Phone" : "بالهاتف";
             contactMethod.options[2].text = isEnglish ? "By WhatsApp" : "واتساب";
+
+            // Update country select options
+            const countrySelect = document.getElementById("country");
+            countrySelect.options[2].text = isEnglish ? "🌍 Other" : "🌍 بلد آخر";
         }
 
         function updatePhoneCode() {
