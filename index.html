@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>للتواصل</title>
+    <title>استفسار عقاري</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -45,24 +45,33 @@
             max-width: 150px; /* حجم اللوجو */
             margin-bottom: 20px;
         }
+        .country-code {
+            display: flex;
+            align-items: center;
+        }
+        .country-code input {
+            margin-left: 10px;
+            width: calc(100% - 40px); /* تخصيص المساحة لبقية حقل الهاتف */
+        }
     </style>
 </head>
 <body>
     <div class="form-container">
-        <img src="path/to/your/logo.png" alt="شعار الشركة" class="logo"> <!-- استبدل "path/to/your/logo.png" بمسار اللوجو -->
-        <h2>استفسار عقاري</h2>
+        <img src="https://github.com/InvestWellCo/InvestWellCo/blob/main/logo%20inveddssssst%20well.jpg?raw=true" alt="شعار الشركة" class="logo"> <!-- استبدل "path/to/your/logo.png" بمسار اللوجو -->
+        <h2>للتواصل</h2>
         <form action="https://formspree.io/f/manyeqbn" method="POST">
             <input type="text" name="name" placeholder="الاسم" required>
             <input type="email" name="email" placeholder="البريد الإلكتروني" required>
-            <input type="tel" name="phone" placeholder="رقم الهاتف" required>
-            <select name="country" required>
-                <option value="">اختر بلدك</option>
-                <option value="EG">مصر</option>
-                <option value="SA">السعودية</option>
-                <option value="AE">الإمارات</option>
-                <option value="KW">الكويت</option>
-                <!-- يمكنك إضافة المزيد من الخيارات هنا -->
-            </select>
+            <div class="country-code">
+                <select id="country" name="country" onchange="updatePhoneCode()" required>
+                    <option value="EG" data-code="+20" selected>مصر 🇪🇬</option>
+                    <option value="SA" data-code="+966">السعودية 🇸🇦</option>
+                    <option value="AE" data-code="+971">الإمارات 🇦🇪</option>
+                    <option value="KW" data-code="+965">الكويت 🇰🇼</option>
+                    <!-- يمكنك إضافة المزيد من الخيارات هنا -->
+                </select>
+                <input type="tel" id="phone" name="phone" placeholder="رقم الهاتف" required>
+            </div>
             <select name="contact_method" required>
                 <option value="">اختر طريقة التواصل</option>
                 <option value="phone">هاتفياً</option>
@@ -72,5 +81,21 @@
             <button type="submit">إرسال</button>
         </form>
     </div>
+
+    <script>
+        function updatePhoneCode() {
+            const countrySelect = document.getElementById('country');
+            const phoneInput = document.getElementById('phone');
+            const selectedCode = countrySelect.options[countrySelect.selectedIndex].dataset.code;
+
+            // إضافة كود البلد إلى حقل الهاتف
+            phoneInput.value = selectedCode; // تعيين كود البلد كقيمة أولية في حقل الهاتف
+        }
+
+        // تعيين كود البلد الافتراضي عند تحميل الصفحة
+        window.onload = function() {
+            updatePhoneCode();
+        };
+    </script>
 </body>
 </html>
