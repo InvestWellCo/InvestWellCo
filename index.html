@@ -144,7 +144,8 @@
                 </select>
                 <input type="text" id="country-code" name="country_code" value="+20" readonly>
             </div>
-<input type="tel" id="phone" name="phone" class="phone-input" placeholder="Phone Number" required pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+<input type="tel" id="phone" name="phone" class="phone-input" placeholder="Phone Number" required pattern="[0-9]*" oninput="validatePhone()" onblur="validatePhone()">
+<span id="phone-error" style="color: #282827; display: none;">Invalid phone number format</span>
             <select id="contact-method" name="contact_method" required>
                 <option value="default" disabled selected>Select Contact Method</option>
                 <option value="phone">By Phone</option>
@@ -205,6 +206,44 @@
             updatePhoneCode();
             toggleLanguage(); // Call to set the correct language on load
         };
+function validatePhone() {
+    const phoneInput = document.getElementById("phone");
+    const phoneError = document.getElementById("phone-error");
+    const countrySelect = document.getElementById("country");
+    const selectedCountry = countrySelect.value;
+    const phoneValue = phoneInput.value;
+
+    // قواعد التحقق لكل دولة
+    const phoneRules = {
+        "EG": /^01[0-9]{9}$/,  // مصر - يبدأ بـ 01 ويتكون من 11 رقم
+        "SA": /^05[0-9]{8}$/,  // السعودية - يبدأ بـ 05 ويتكون من 10 أرقام
+        "AE": /^05[0-9]{8}$/,  // الإمارات - يبدأ بـ 05 ويتكون من 10 أرقام
+        "KW": /^5[0-9]{7}$/,   // الكويت - يبدأ بـ 5 ويتكون من 8 أرقام
+        "QA": /^3[0-9]{7}$/,   // قطر - يبدأ بـ 3 ويتكون من 8 أرقام
+        "OM": /^9[0-9]{7}$/,   // عمان - يبدأ بـ 9 ويتكون من 8 أرقام
+        "BH": /^3[0-9]{7}$/,   // البحرين - يبدأ بـ 3 ويتكون من 8 أرقام
+        "JO": /^07[0-9]{8}$/,  // الأردن - يبدأ بـ 07 ويتكون من 10 أرقام
+        "LY": /^09[1-9][0-9]{7}$/,  // ليبيا - يبدأ بـ 09 ويتكون من 10 أرقام
+        "DZ": /^0[56][0-9]{8}$/,  // الجزائر - يبدأ بـ 05 أو 06 ويتكون من 10 أرقام
+        "MA": /^06[0-9]{8}$/,  // المغرب - يبدأ بـ 06 ويتكون من 10 أرقام
+        "TN": /^2[0-9]{7}$/,   // تونس - يتكون من 8 أرقام
+        "SY": /^09[1-9][0-9]{7}$/,  // سوريا - يبدأ بـ 09 ويتكون من 9 أرقام
+        "LB": /^03|71[0-9]{6}$/,  // لبنان - يبدأ بـ 03 أو 71 ويتكون من 8 أرقام
+        "US": /^[2-9][0-9]{9}$/,  // الولايات المتحدة - 10 أرقام بدون بادئة معينة
+        "GB": /^07[0-9]{9}$/,  // المملكة المتحدة - يبدأ بـ 07 ويتكون من 11 رقم
+        // إضافة المزيد من الدول حسب الحاجة
+    };
+
+    // تحقق من الرقم حسب قواعد الدولة المحددة
+    if (phoneRules[selectedCountry] && !phoneRules[selectedCountry].test(phoneValue)) {
+        phoneError.style.display = "block";
+        phoneInput.setCustomValidity("Invalid phone number format");
+    } else {
+        phoneError.style.display = "none";
+        phoneInput.setCustomValidity("");
+    }
+}
+
     </script>
 </body>
 </html>
