@@ -7,16 +7,9 @@
     <link rel="icon" href="https://github.com/InvestWellCo/InvestWellCo/blob/main/logo%20inveddssssst%20well.jpg?raw=true" type="image/png"> <!-- أيقونة التبويب -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"> <!-- إضافة خط Google Fonts -->
     <style>
-    .form-container h2 {
-        text-align: center;
-        margin-bottom: 20px;
-        color: #005d9e; /* لون العنوان */
-        font-size: 28px; /* حجم الخط */
-        font-weight: bold; /* جعل الخط عريض */
-    }
         body {
             font-family: 'Roboto', sans-serif;
-            background-image: url('https://github.com/InvestWellCo/InvestWellCo/blob/main/observation-urban-building-business-steel.jpg?raw=true'); /* رابط صورة الخلفية */
+            background-image: url('https://your-background-image-url.com'); /* رابط صورة الخلفية */
             background-size: cover;
             background-repeat: no-repeat;
             color: #282827; /* لون النص */
@@ -39,7 +32,8 @@
             text-align: center;
             margin-bottom: 20px;
             color: #005d9e; /* لون العنوان */
-            font-size: 24px; /* حجم الخط */
+            font-size: 28px; /* حجم الخط */
+            font-weight: bold; /* جعل الخط عريض */
         }
         .form-container input, .form-container select, .form-container textarea {
             width: 100%;
@@ -72,21 +66,16 @@
         .country-code {
             display: flex;
             align-items: center;
-            justify-content: space-between; /* توسيط العناصر */
+            justify-content: flex-start; /* محاذاة العناصر إلى اليسار */
         }
         .country-code select {
-            margin: 0;
-            width: 30%; /* تخصيص المساحة لكود البلد */
-            border-radius: 5px 0 0 5px; /* زوايا دائرية */
-            border: 2px solid #005d9e; /* لون الحدود */
+            margin-right: 10px; /* مسافة بين كود البلد ورقم الهاتف */
+            width: auto; /* عرض تلقائي */
+            border-radius: 5px; /* زوايا دائرية */
         }
         .country-code input {
-            margin: 0;
-            width: 70%; /* تخصيص المساحة لرقم الهاتف */
-            border-radius: 0 5px 5px 0; /* زوايا دائرية */
-        }
-        .country-code input[readonly] {
-            background-color: #e9ecef; /* لون الخلفية عندما يكون غير قابل للتعديل */
+            width: 100%; /* تخصيص المساحة لرقم الهاتف */
+            margin: 0; /* إلغاء الهوامش */
         }
         .inquiry-textarea {
             resize: none; /* منع تغيير حجم خانة الاستفسار */
@@ -126,7 +115,7 @@
                     <option value="SE" data-code="+46">السويد 🇸🇪</option>
                     <option value="OTHER" data-code="">بلد آخر</option>
                 </select>
-                <input type="tel" id="phone" name="phone" placeholder="رقم الهاتف" required readonly> <!-- جعل الحقل غير قابل للتعديل -->
+                <input type="tel" id="phone" name="phone" placeholder="رقم الهاتف" required> <!-- خانة الهاتف قابلة للتعديل -->
             </div>
             <select name="contact_method" required>
                 <option value="">اختر طريقة التواصل</option>
@@ -146,9 +135,8 @@
 
             // إضافة كود البلد إلى حقل الهاتف
             if (selectedCode) {
-                phoneInput.value = selectedCode; // تعيين كود البلد كقيمة أولية في حقل الهاتف
-            } else {
-                phoneInput.value = ''; // إذا كان الخيار "بلد آخر" يتم مسح القيمة
+                phoneInput.value = phoneInput.value.replace(/^\+\d+\s*/, ''); // إزالة أي كود بلد سابق
+                phoneInput.value = selectedCode + ' ' + phoneInput.value; // إضافة كود البلد الحالي
             }
         }
 
