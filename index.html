@@ -145,7 +145,8 @@
                 </select>
                 <input type="text" id="country-code" name="country_code" value="+20" readonly>
             </div>
-<input type="tel" id="phone" name="phone" class="phone-input" placeholder="Phone Number" required pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+<input type="tel" id="phone" name="phone" class="phone-input" placeholder="Phone Number" required oninvalid="this.setCustomValidity('Invalid phone number')" oninput="this.setCustomValidity('')" pattern="^[0-9]{10,15}$">
+<span class="error-message" style="color: #282827; display: none;">Invalid phone number format</span>
             <select id="contact-method" name="contact_method" required>
                 <option value="default" disabled selected>Select Contact Method</option>
                 <option value="phone">By Phone</option>
@@ -182,6 +183,15 @@
                 : "https://flagcdn.com/w320/us.png";
             document.getElementById("language-label").innerText = isEnglish ? "عربي" : "English";
 //////////
+document.getElementById("phone").addEventListener("invalid", function () {
+    document.querySelector(".error-message").style.display = "block";
+});
+
+document.getElementById("phone").addEventListener("input", function () {
+    document.querySelector(".error-message").style.display = "none";
+});
+
+////
 document.getElementById("email").addEventListener("invalid", function () {
     document.querySelector(".error-message").style.display = "block";
 });
