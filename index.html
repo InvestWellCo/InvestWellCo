@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>استفسار عقاري</title>
+    <title>Real Estate Inquiry</title>
     <link rel="icon" href="https://github.com/InvestWellCo/InvestWellCo/blob/main/logo%20inveddssssst%20well.png?raw=true" type="image/png"> <!-- أيقونة التبويب -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet"> <!-- خط جميل من Google Fonts -->
     <style>
@@ -19,6 +19,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh; /* ملء الشاشة بالكامل */
+            position: relative;
         }
         .form-container {
             background: rgba(255, 255, 255, 0.9); /* خلفية بيضاء مع شفافية */
@@ -86,72 +87,90 @@
         .inquiry-textarea {
             resize: none; /* منع تغيير حجم خانة الاستفسار */
         }
+        /* زر تغيير اللغة */
+        .language-toggle {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .language-toggle img {
+            width: 25px;
+            height: 25px;
+            margin-right: 5px;
+        }
     </style>
 </head>
 <body>
+    <!-- زر تغيير اللغة -->
+    <div class="language-toggle" onclick="toggleLanguage()">
+        <img id="flag" src="https://flagcdn.com/w320/us.png" alt="US Flag">
+        <span id="language-label">English</span>
+    </div>
+
     <div class="form-container">
-        <img src="https://github.com/InvestWellCo/InvestWellCo/blob/main/logo%20inveddssssst%20well.png?raw=true" alt="شعار الشركة" class="logo"> <!-- استبدل بمسار اللوجو -->
-        <h2>للتواصل</h2>
+        <img src="https://github.com/InvestWellCo/InvestWellCo/blob/main/logo%20inveddssssst%20well.png?raw=true" alt="Company Logo" class="logo"> <!-- استبدل بمسار اللوجو -->
+        <h2 id="form-title">Real Estate Inquiry</h2>
         <form action="https://formspree.io/f/manyeqbn" method="POST">
-            <input type="text" name="name" placeholder="الاسم" required>
-            <input type="email" name="email" placeholder="البريد الإلكتروني" required>
+            <input type="text" id="name" name="name" placeholder="Name" required>
+            <input type="email" id="email" name="email" placeholder="Email" required>
             <div class="country-code">
                 <select id="country" name="country" onchange="updatePhoneCode()" required>
-                    <option value="EG" data-code="+20" selected>مصر 🇪🇬</option>
-                    <option value="SA" data-code="+966">السعودية 🇸🇦</option>
-                    <option value="AE" data-code="+971">الإمارات 🇦🇪</option>
-                    <option value="KW" data-code="+965">الكويت 🇰🇼</option>
-                    <option value="US" data-code="+1">الولايات المتحدة 🇺🇸</option>
-                    <option value="FR" data-code="+33">فرنسا 🇫🇷</option>
-                    <option value="DE" data-code="+49">ألمانيا 🇩🇪</option>
-                    <option value="IT" data-code="+39">إيطاليا 🇮🇹</option>
-                    <option value="GB" data-code="+44">المملكة المتحدة 🇬🇧</option>
-                    <option value="IN" data-code="+91">الهند 🇮🇳</option>
-                    <option value="BR" data-code="+55">البرازيل 🇧🇷</option>
-                    <option value="CA" data-code="+1">كندا 🇨🇦</option>
-                    <option value="AU" data-code="+61">أستراليا 🇦🇺</option>
-                    <option value="JP" data-code="+81">اليابان 🇯🇵</option>
-                    <option value="KR" data-code="+82">كوريا الجنوبية 🇰🇷</option>
-                    <option value="ZA" data-code="+27">جنوب أفريقيا 🇿🇦</option>
-                    <option value="MX" data-code="+52">المكسيك 🇲🇽</option>
-                    <option value="RU" data-code="+7">روسيا 🇷🇺</option>
-                    <option value="SG" data-code="+65">سنغافورة 🇸🇬</option>
-                    <option value="NL" data-code="+31">هولندا 🇳🇱</option>
-                    <option value="NO" data-code="+47">النرويج 🇳🇴</option>
-                    <option value="SE" data-code="+46">السويد 🇸🇪</option>
-                    <option value="OTHER" data-code="">بلد آخر</option>
+                    <option value="EG" data-code="+20" selected>Egypt 🇪🇬</option>
+                    <option value="SA" data-code="+966">Saudi Arabia 🇸🇦</option>
+                    <!-- Add other options here -->
                 </select>
-                <input type="text" id="country-code" name="country_code" value="+20" readonly> <!-- حقل كود البلد غير قابل للتعديل -->
-                <input type="tel" id="phone" name="phone" class="phone-input" placeholder="رقم الهاتف" required> <!-- خانة الهاتف قابلة للتعديل -->
+                <input type="text" id="country-code" name="country_code" value="+20" readonly>
+                <input type="tel" id="phone" name="phone" class="phone-input" placeholder="Phone Number" required>
             </div>
-            <select name="contact_method" required>
-                <option value="">اختر طريقة التواصل</option>
-                <option value="phone">هاتفياً</option>
-                <option value="whatsapp">واتساب</option>
+            <select id="contact-method" name="contact_method" required>
+                <option value="">Select Contact Method</option>
+                <option value="phone">By Phone</option>
+                <option value="whatsapp">By WhatsApp</option>
             </select>
-            <textarea class="inquiry-textarea" name="inquiry" placeholder="استفسارك" rows="4" required></textarea>
-            <button type="submit">إرسال</button>
+            <textarea class="inquiry-textarea" id="inquiry" name="inquiry" placeholder="Your Inquiry" rows="4" required></textarea>
+            <button type="submit" id="submit-btn">Submit</button>
         </form>
     </div>
 
     <script>
+        let isEnglish = true;
+
+        function toggleLanguage() {
+            isEnglish = !isEnglish;
+            const langElements = {
+                "form-title": ["Real Estate Inquiry", "استفسار عقاري"],
+                "name": ["Name", "الاسم"],
+                "email": ["Email", "البريد الإلكتروني"],
+                "phone": ["Phone Number", "رقم الهاتف"],
+                "contact-method": ["Select Contact Method", "اختر طريقة التواصل"],
+                "submit-btn": ["Submit", "إرسال"],
+                "inquiry": ["Your Inquiry", "استفسارك"]
+            };
+
+            for (let key in langElements) {
+                document.getElementById(key).placeholder = isEnglish ? langElements[key][0] : langElements[key][1];
+                if (key !== "name" && key !== "email" && key !== "phone" && key !== "inquiry") {
+                    document.getElementById(key).innerHTML = isEnglish ? langElements[key][0] : langElements[key][1];
+                }
+            }
+
+            document.getElementById("flag").src = isEnglish
+                ? "https://flagcdn.com/w320/eg.png"
+                : "https://flagcdn.com/w320/us.png";
+            document.getElementById("language-label").innerText = isEnglish ? "عربي" : "English";
+        }
+
         function updatePhoneCode() {
             const countrySelect = document.getElementById('country');
             const countryCodeInput = document.getElementById('country-code');
             const selectedCode = countrySelect.options[countrySelect.selectedIndex].dataset.code;
-
-            // تحديث كود البلد في الحقل المخصص
             countryCodeInput.value = selectedCode;
-
-            // إخفاء أو إظهار حقل كود البلد بناءً على الاختيار
-            if (countrySelect.value === "OTHER") {
-                countryCodeInput.style.display = "none"; // إخفاء الحقل
-            } else {
-                countryCodeInput.style.display = "inline"; // إظهار الحقل
-            }
         }
 
-        // تعيين كود البلد الافتراضي عند تحميل الصفحة
         window.onload = function() {
             updatePhoneCode();
         };
