@@ -242,14 +242,13 @@ function validatePhone() {
 
   // تحقق من الرقم حسب قواعد الدولة المحددة
     if (phoneRules[selectedCountry] && !phoneRules[selectedCountry].test(phoneValue)) {
-      phoneError.style.display = "block";
-    phoneInput.setCustomValidity("Invalid phone number format");
+        // لا تظهر الرسالة، لكن يمكنك استخدام setCustomValidity إذا كنت بحاجة لذلك
+        phoneInput.setCustomValidity("Invalid phone number format");
     } else {
-        phoneError.style.display = "none";
+        phoneError.style.display = "none"; // تأكد من إخفاء الرسالة
         phoneInput.setCustomValidity("");
     }
 }
-
     </script>
 </body>
 </html>
