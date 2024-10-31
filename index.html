@@ -184,82 +184,92 @@
                 : "https://flagcdn.com/w320/us.png";
             document.getElementById("language-label").innerText = isEnglish ? "عربي" : "English";
 //////////
-function updatePhoneCode() {
+function validatePhone() {
     const countrySelect = document.getElementById('country');
     const phoneInput = document.getElementById('phone');
     const selectedCountry = countrySelect.value;
+    const phoneValue = phoneInput.value;
 
+    let pattern;
     switch (selectedCountry) {
         case "EG": // مصر
-            phoneInput.pattern = "^01[0-9]{9}$"; // يبدأ بـ 01 ويتبعه 9 أرقام
+            pattern = /^01[0-9]{9}$/; // يبدأ بـ 01 ويتبعه 9 أرقام
             break;
         case "SA": // السعودية
-            phoneInput.pattern = "^05[0-9]{8}$"; // يبدأ بـ 05 ويتبعه 8 أرقام
+            pattern = /^05[0-9]{8}$/; // يبدأ بـ 05 ويتبعه 8 أرقام
             break;
         case "AE": // الإمارات
-            phoneInput.pattern = "^05[0-9]{7}$"; // يبدأ بـ 05 ويتبعه 7 أرقام
+            pattern = /^05[0-9]{7}$/; // يبدأ بـ 05 ويتبعه 7 أرقام
             break;
         case "KW": // الكويت
-            phoneInput.pattern = "^09[0-9]{7}$"; // يبدأ بـ 09 ويتبعه 7 أرقام
+            pattern = /^09[0-9]{7}$/; // يبدأ بـ 09 ويتبعه 7 أرقام
             break;
         case "QA": // قطر
-            phoneInput.pattern = "^03[0-9]{7}$"; // يبدأ بـ 03 ويتبعه 7 أرقام
+            pattern = /^03[0-9]{7}$/; // يبدأ بـ 03 ويتبعه 7 أرقام
             break;
         case "OM": // عمان
-            phoneInput.pattern = "^09[0-9]{7}$"; // يبدأ بـ 09 ويتبعه 7 أرقام
+            pattern = /^09[0-9]{7}$/; // يبدأ بـ 09 ويتبعه 7 أرقام
             break;
         case "BH": // البحرين
-            phoneInput.pattern = "^3[0-9]{7}$"; // يبدأ بـ 3 ويتبعه 7 أرقام
+            pattern = /^3[0-9]{7}$/; // يبدأ بـ 3 ويتبعه 7 أرقام
             break;
         case "JO": // الأردن
-            phoneInput.pattern = "^07[0-9]{8}$"; // يبدأ بـ 07 ويتبعه 8 أرقام
+            pattern = /^07[0-9]{8}$/; // يبدأ بـ 07 ويتبعه 8 أرقام
             break;
         case "LY": // ليبيا
-            phoneInput.pattern = "^09[0-9]{8}$"; // يبدأ بـ 09 ويتبعه 8 أرقام
+            pattern = /^09[0-9]{8}$/; // يبدأ بـ 09 ويتبعه 8 أرقام
             break;
         case "DZ": // الجزائر
-            phoneInput.pattern = "^0[5-6][0-9]{8}$"; // يبدأ بـ 05 أو 06 ويتبعه 8 أرقام
+            pattern = /^0[5-6][0-9]{8}$/; // يبدأ بـ 05 أو 06 ويتبعه 8 أرقام
             break;
         case "MA": // المغرب
-            phoneInput.pattern = "^0[6-7][0-9]{8}$"; // يبدأ بـ 06 أو 07 ويتبعه 8 أرقام
+            pattern = /^0[6-7][0-9]{8}$/; // يبدأ بـ 06 أو 07 ويتبعه 8 أرقام
             break;
         case "TN": // تونس
-            phoneInput.pattern = "^0[2-5][0-9]{7}$"; // يبدأ بـ 02 أو 03 أو 04 أو 05 ويتبعه 7 أرقام
+            pattern = /^0[2-5][0-9]{7}$/; // يبدأ بـ 02 أو 03 أو 04 أو 05 ويتبعه 7 أرقام
             break;
         case "SY": // سوريا
-            phoneInput.pattern = "^09[0-9]{8}$"; // يبدأ بـ 09 ويتبعه 8 أرقام
+            pattern = /^09[0-9]{8}$/; // يبدأ بـ 09 ويتبعه 8 أرقام
             break;
         case "LB": // لبنان
-            phoneInput.pattern = "^70[0-9]{7}$"; // يبدأ بـ 70 ويتبعه 7 أرقام
+            pattern = /^70[0-9]{7}$/; // يبدأ بـ 70 ويتبعه 7 أرقام
             break;
         case "US": // الولايات المتحدة
-            phoneInput.pattern = "^(\\+1|1)?[2-9]\\d{2}[2-9]\\d{6}$"; // نمط أمريكا
+            pattern = /^(\\+1|1)?[2-9]\\d{2}[2-9]\\d{6}$/; // نمط أمريكا
             break;
         case "GB": // المملكة المتحدة
-            phoneInput.pattern = "^07[0-9]{9}$"; // يبدأ بـ 07 ويتبعه 9 أرقام
+            pattern = /^07[0-9]{9}$/; // يبدأ بـ 07 ويتبعه 9 أرقام
             break;
         case "DE": // ألمانيا
-            phoneInput.pattern = "^01[5-7][0-9]{8}$"; // يبدأ بـ 015 أو 016 أو 017 ويتبعه 8 أرقام
+            pattern = /^01[5-7][0-9]{8}$/; // يبدأ بـ 015 أو 016 أو 017 ويتبعه 8 أرقام
             break;
         case "FR": // فرنسا
-            phoneInput.pattern = "^0[6-7][0-9]{8}$"; // يبدأ بـ 06 أو 07 ويتبعه 8 أرقام
+            pattern = /^0[6-7][0-9]{8}$/; // يبدأ بـ 06 أو 07 ويتبعه 8 أرقام
             break;
         case "IT": // إيطاليا
-            phoneInput.pattern = "^3[0-9]{9}$"; // يبدأ بـ 3 ويتبعه 9 أرقام
+            pattern = /^3[0-9]{9}$/; // يبدأ بـ 3 ويتبعه 9 أرقام
             break;
         case "ES": // إسبانيا
-            phoneInput.pattern = "^6[0-9]{8}$"; // يبدأ بـ 6 ويتبعه 8 أرقام
+            pattern = /^6[0-9]{8}$/; // يبدأ بـ 6 ويتبعه 8 أرقام
             break;
         case "CA": // كندا
-            phoneInput.pattern = "^(\\+1|1)?[2-9]\\d{2}[2-9]\\d{6}$"; // نمط كندا
+            pattern = /^(\\+1|1)?[2-9]\\d{2}[2-9]\\d{6}$/; // نمط كندا
             break;
         case "AU": // أستراليا
-            phoneInput.pattern = "^04[0-9]{8}$"; // يبدأ بـ 04 ويتبعه 8 أرقام
+            pattern = /^04[0-9]{8}$/; // يبدأ بـ 04 ويتبعه 8 أرقام
             break;
         default: // للدول الأخرى
-            phoneInput.pattern = "^[0-9]{7,15}$"; // نمط افتراضي
+            pattern = /^[0-9]{7,15}$/; // نمط افتراضي
     }
+
+    if (!pattern.test(phoneValue)) {
+        alert("رقم الهاتف غير صحيح.");
+        phoneInput.focus();
+        return false;
+    }
+    return true;
 }
+
 
 
 ////
