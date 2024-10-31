@@ -45,17 +45,19 @@
             font-size: 18px;
             box-sizing: border-box;
         }
-        .form-container button {
-            width: 100%;
-            padding: 12px;
-            background-color: #005d9e;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 18px;
-            transition: background-color 0.3s;
-        }
+  .form-container button {
+    width: 100%;
+    padding: 12px;
+    background-color: #282828; /* تغيير اللون هنا */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s;
+}
+
+
         .form-container button:hover {
             background-color: #004b7a;
         }
@@ -178,7 +180,19 @@
             document.getElementById("flag").src = isEnglish
                 ? "https://flagcdn.com/w320/eg.png"
                 : "https://flagcdn.com/w320/us.png";
-            document.getElementById("language-label").innerText = isEnglish ? "عربي" : "English";
+           
+ document.getElementById("language-label").innerText = isEnglish ? "عربي" : "English";
+document.getElementById("form-container").addEventListener("submit", function(event) {
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const phone = document.getElementById("phone").value;
+    const inquiry = document.getElementById("inquiry").value;
+
+    if (!name || !email || !phone || !inquiry) {
+        event.preventDefault(); // منع الإرسال إذا كانت هناك خانات فارغة
+        alert("Please fill in all fields."); // رسالة تنبيه للمستخدم
+    }
+});
 
             // Update contact method options
             const contactMethod = document.getElementById("contact-method");
