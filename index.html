@@ -114,9 +114,8 @@
         <h2 id="form-title">Real Estate Inquiry</h2>
         <form action="https://formspree.io/f/manyeqbn" method="POST">
             <input type="text" id="name" name="name" placeholder="Name" required>
-            <input type="email" id="email" name="email" placeholder="Email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}" oninvalid="this.setCustomValidity('Invalid email format')" oninput="this.setCustomValidity('')">
+<input type="email" id="email" name="email" placeholder="Email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}" oninvalid="this.setCustomValidity('Invalid email format')" oninput="this.setCustomValidity('')">
 <span class="error-message" style="color: #282827; display: none;">Invalid email format</span>
-
             <div class="country-code">
                 <select id="country" name="country" onchange="updatePhoneCode()" required>
                     <option value="EG" data-code="+20">🇪🇬</option>
@@ -143,11 +142,9 @@
                     <option value="AU" data-code="+61">🇦🇺</option>
                     <option value="OTHER" data-code="">🌍 بلد آخر</option> <!-- Fixed translation -->
                 </select>
-
                 <input type="text" id="country-code" name="country_code" value="+20" readonly>
             </div>
-<input type="tel" id="phone" name="phone" class="phone-input" placeholder="Phone Number" required onkeypress="return isNumber(event)">
-<span class="error-message" style="color: #282827; display: none;">Invalid phone number format</span>
+<input type="tel" id="phone" name="phone" class="phone-input" placeholder="Phone Number" required pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
             <select id="contact-method" name="contact_method" required>
                 <option value="default" disabled selected>Select Contact Method</option>
                 <option value="phone">By Phone</option>
@@ -183,114 +180,6 @@
                 ? "https://flagcdn.com/w320/eg.png"
                 : "https://flagcdn.com/w320/us.png";
             document.getElementById("language-label").innerText = isEnglish ? "عربي" : "English";
-//////////
-function validatePhone() {
-    const countrySelect = document.getElementById('country');
-    const phoneInput = document.getElementById('phone');
-    const selectedCountry = countrySelect.value;
-    const phoneValue = phoneInput.value;
-
-    let pattern;
-    switch (selectedCountry) {
-        case "EG": // مصر
-            pattern = /^01[0-9]{9}$/; // يبدأ بـ 01 ويتبعه 9 أرقام
-            break;
-        case "SA": // السعودية
-            pattern = /^05[0-9]{8}$/; // يبدأ بـ 05 ويتبعه 8 أرقام
-            break;
-        case "AE": // الإمارات
-            pattern = /^05[0-9]{7}$/; // يبدأ بـ 05 ويتبعه 7 أرقام
-            break;
-        case "KW": // الكويت
-            pattern = /^09[0-9]{7}$/; // يبدأ بـ 09 ويتبعه 7 أرقام
-            break;
-        case "QA": // قطر
-            pattern = /^03[0-9]{7}$/; // يبدأ بـ 03 ويتبعه 7 أرقام
-            break;
-        case "OM": // عمان
-            pattern = /^09[0-9]{7}$/; // يبدأ بـ 09 ويتبعه 7 أرقام
-            break;
-        case "BH": // البحرين
-            pattern = /^3[0-9]{7}$/; // يبدأ بـ 3 ويتبعه 7 أرقام
-            break;
-        case "JO": // الأردن
-            pattern = /^07[0-9]{8}$/; // يبدأ بـ 07 ويتبعه 8 أرقام
-            break;
-        case "LY": // ليبيا
-            pattern = /^09[0-9]{8}$/; // يبدأ بـ 09 ويتبعه 8 أرقام
-            break;
-        case "DZ": // الجزائر
-            pattern = /^0[5-6][0-9]{8}$/; // يبدأ بـ 05 أو 06 ويتبعه 8 أرقام
-            break;
-        case "MA": // المغرب
-            pattern = /^0[6-7][0-9]{8}$/; // يبدأ بـ 06 أو 07 ويتبعه 8 أرقام
-            break;
-        case "TN": // تونس
-            pattern = /^0[2-5][0-9]{7}$/; // يبدأ بـ 02 أو 03 أو 04 أو 05 ويتبعه 7 أرقام
-            break;
-        case "SY": // سوريا
-            pattern = /^09[0-9]{8}$/; // يبدأ بـ 09 ويتبعه 8 أرقام
-            break;
-        case "LB": // لبنان
-            pattern = /^70[0-9]{7}$/; // يبدأ بـ 70 ويتبعه 7 أرقام
-            break;
-        case "US": // الولايات المتحدة
-            pattern = /^(\\+1|1)?[2-9]\\d{2}[2-9]\\d{6}$/; // نمط أمريكا
-            break;
-        case "GB": // المملكة المتحدة
-            pattern = /^07[0-9]{9}$/; // يبدأ بـ 07 ويتبعه 9 أرقام
-            break;
-        case "DE": // ألمانيا
-            pattern = /^01[5-7][0-9]{8}$/; // يبدأ بـ 015 أو 016 أو 017 ويتبعه 8 أرقام
-            break;
-        case "FR": // فرنسا
-            pattern = /^0[6-7][0-9]{8}$/; // يبدأ بـ 06 أو 07 ويتبعه 8 أرقام
-            break;
-        case "IT": // إيطاليا
-            pattern = /^3[0-9]{9}$/; // يبدأ بـ 3 ويتبعه 9 أرقام
-            break;
-        case "ES": // إسبانيا
-            pattern = /^6[0-9]{8}$/; // يبدأ بـ 6 ويتبعه 8 أرقام
-            break;
-        case "CA": // كندا
-            pattern = /^(\\+1|1)?[2-9]\\d{2}[2-9]\\d{6}$/; // نمط كندا
-            break;
-        case "AU": // أستراليا
-            pattern = /^04[0-9]{8}$/; // يبدأ بـ 04 ويتبعه 8 أرقام
-            break;
-        default: // للدول الأخرى
-            pattern = /^[0-9]{7,15}$/; // نمط افتراضي
-    }
-
-    if (!pattern.test(phoneValue)) {
-        alert("رقم الهاتف غير صحيح.");
-        phoneInput.focus();
-        return false;
-    }
-    return true;
-}
-
-
-
-////
-function isNumber(event) {
-    const char = String.fromCharCode(event.which);
-    // السماح فقط بالأرقام (0-9) والرجوع للخلف (Backspace)
-    if (!char.match(/[0-9]/) && event.which !== 8) {
-        event.preventDefault();
-        return false;
-    }
-    return true;
-}
-
-////////
-document.getElementById("email").addEventListener("invalid", function () {
-    document.querySelector(".error-message").style.display = "block";
-});
-
-document.getElementById("email").addEventListener("input", function () {
-    document.querySelector(".error-message").style.display = "none";
-});
 
             // Update contact method options
             const contactMethod = document.getElementById("contact-method");
