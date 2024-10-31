@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>استفسار عقاري</title>
+    <title>للتواصل</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: #e9ecef; /* لون خلفية مناسب */
             margin: 0;
             padding: 20px;
         }
@@ -41,15 +41,28 @@
         .form-container button:hover {
             background-color: #4cae4c;
         }
+        .logo {
+            max-width: 150px; /* حجم اللوجو */
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
     <div class="form-container">
+        <img src="path/to/your/logo.png" alt="شعار الشركة" class="logo"> <!-- استبدل "path/to/your/logo.png" بمسار اللوجو -->
         <h2>استفسار عقاري</h2>
         <form action="https://formspree.io/f/manyeqbn" method="POST">
             <input type="text" name="name" placeholder="الاسم" required>
             <input type="email" name="email" placeholder="البريد الإلكتروني" required>
             <input type="tel" name="phone" placeholder="رقم الهاتف" required>
+            <select name="country" required>
+                <option value="">اختر بلدك</option>
+                <option value="EG">مصر</option>
+                <option value="SA">السعودية</option>
+                <option value="AE">الإمارات</option>
+                <option value="KW">الكويت</option>
+                <!-- يمكنك إضافة المزيد من الخيارات هنا -->
+            </select>
             <select name="contact_method" required>
                 <option value="">اختر طريقة التواصل</option>
                 <option value="phone">هاتفياً</option>
