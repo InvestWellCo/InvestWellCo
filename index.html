@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>استفسار عقاري</title>
-    <link rel="icon" href="https://github.com/InvestWellCo/InvestWellCo/blob/main/logo%20inveddssssst%20well.jpg?raw=true" type="image/png"> <!-- أيقونة التبويب -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"> <!-- إضافة خط Google Fonts -->
+    <link rel="icon" href="https://github.com/InvestWellCo/InvestWellCo/blob/main/logo%20inveddssssst%20well.png?raw=true" type="image/png"> <!-- أيقونة التبويب -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet"> <!-- خط جميل من Google Fonts -->
     <style>
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             background-image: url('https://github.com/InvestWellCo/InvestWellCo/blob/main/observation-urban-building-business-steel.jpg?raw=true'); /* رابط صورة الخلفية */
             background-size: cover;
             background-repeat: no-repeat;
@@ -32,7 +32,7 @@
             text-align: center;
             margin-bottom: 20px;
             color: #005d9e; /* لون العنوان */
-            font-size: 38px; /* حجم الخط */
+            font-size: 28px; /* حجم الخط */
             font-weight: bold; /* جعل الخط عريض */
         }
         .form-container input, .form-container select, .form-container textarea {
@@ -66,15 +66,15 @@
         .country-code {
             display: flex;
             align-items: center;
-            justify-content: flex-start; /* محاذاة العناصر إلى اليسار */
+            justify-content: space-between; /* توزيع المسافات */
         }
         .country-code select {
             margin-right: 10px; /* مسافة بين كود البلد ورقم الهاتف */
-            width: auto; /* عرض تلقائي */
+            width: 30%; /* تخصيص عرض لكود البلد */
             border-radius: 5px; /* زوايا دائرية */
         }
         .country-code input {
-            width: 100%; /* تخصيص المساحة لرقم الهاتف */
+            width: 68%; /* تخصيص المساحة لرقم الهاتف */
             margin: 0; /* إلغاء الهوامش */
         }
         .inquiry-textarea {
@@ -135,8 +135,8 @@
 
             // إضافة كود البلد إلى حقل الهاتف
             if (selectedCode) {
-                phoneInput.value = phoneInput.value.replace(/^\+\d+\s*/, ''); // إزالة أي كود بلد سابق
-                phoneInput.value = selectedCode + ' ' + phoneInput.value; // إضافة كود البلد الحالي
+                const currentPhone = phoneInput.value.replace(/^\+\d+\s*/, ''); // إزالة أي كود بلد سابق
+                phoneInput.value = selectedCode + ' ' + currentPhone; // إضافة كود البلد الحالي
             }
         }
 
