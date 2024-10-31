@@ -158,7 +158,7 @@
                 <option value="whatsapp">By WhatsApp</option>
             </select>
             <textarea class="inquiry-textarea" id="inquiry" name="inquiry" placeholder="Your Inquiry" rows="4" required></textarea>
-            <button type="submit" id="submit-btn">Submit</button>
+<button type="submit" id="submit-btn" disabled>Submit</button>
         </form>
     </div>
 
@@ -212,6 +212,37 @@
             updatePhoneCode();
             toggleLanguage(); // Call to set the correct language on load
         };
+function toggleSubmitButton() {
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const phone = document.getElementById("phone").value;
+    const inquiry = document.getElementById("inquiry").value;
+    const contactMethod = document.getElementById("contact-method").value;
+
+    const submitButton = document.getElementById("submit-btn");
+    
+    // تحقق إذا كانت جميع الحقول ممتلئة
+    if (name && email && phone && inquiry && contactMethod !== "default") {
+        submitButton.disabled = false; // تمكين الزر
+    } else {
+        submitButton.disabled = true; // تعطيل الزر
+    }
+}
+
+// أضف حدث input لجميع الحقول
+document.getElementById("name").addEventListener("input", toggleSubmitButton);
+document.getElementById("email").addEventListener("input", toggleSubmitButton);
+document.getElementById("phone").addEventListener("input", toggleSubmitButton);
+document.getElementById("inquiry").addEventListener("input", toggleSubmitButton);
+document.getElementById("contact-method").addEventListener("change", toggleSubmitButton);
+
+// في البداية، تأكد من تعطيل الزر
+window.onload = function() {
+    updatePhoneCode();
+    toggleLanguage(); // Call to set the correct language on load
+    toggleSubmitButton(); // تأكد من حالة الزر عند التحميل
+};
+
 function validatePhone() {
     const phoneInput = document.getElementById("phone");
     const phoneError = document.getElementById("phone-error");
