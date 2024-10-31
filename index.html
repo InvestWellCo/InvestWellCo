@@ -1,34 +1,209 @@
-function toggleLanguage() {
-    isEnglish = !isEnglish;
-    const langElements = {
-        "form-title": ["Real Estate Inquiry", "استفسار عقاري"],
-        "name": ["Name", "الاسم"],
-        "email": ["Email", "البريد الإلكتروني"],
-        "inquiry": ["Your Inquiry", "استفسارك"],
-        "submit-btn": ["Submit", "إرسال"]
-    };
-
-    for (let key in langElements) {
-        if (key === "inquiry") {
-            document.getElementById(key).placeholder = isEnglish ? langElements[key][0] : langElements[key][1];
-        } else {
-            document.getElementById(key).textContent = isEnglish ? langElements[key][0] : langElements[key][1];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Estate Inquiry</title>
+    <link rel="icon" href="https://github.com/InvestWellCo/InvestWellCo/blob/main/logo%20inveddssssst%20well.png?raw=true" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-image: url('https://github.com/InvestWellCo/InvestWellCo/blob/main/observation-urban-building-business-steel.jpg?raw=true');
+            background-size: cover;
+            background-repeat: no-repeat;
+            color: #282827;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
         }
-    }
+        .form-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            max-width: 450px;
+            width: 100%;
+        }
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #005d9e;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .form-container input, .form-container select, .form-container textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #005d9e;
+            border-radius: 5px;
+            font-size: 18px;
+            box-sizing: border-box;
+        }
+        .form-container button {
+            width: 100%;
+            padding: 12px;
+            background-color: #005d9e;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+        .form-container button:hover {
+            background-color: #004b7a;
+        }
+        .logo {
+            max-width: 150px;
+            margin: 0 auto 20px auto;
+            display: block;
+        }
+        .country-code {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .country-code select {
+            width: 70%; /* Increased width for select */
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .country-code input[type="text"] {
+            width: 30%; /* Adjusted width for country code */
+            margin: 0;
+            display: inline-block;
+            text-align: center;
+        }
+        .phone-input {
+            width: 100%; /* Full width for phone input */
+            margin-top: 10px; /* Added margin for spacing */
+        }
+        .inquiry-textarea {
+            resize: none;
+        }
+        .language-toggle {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .language-toggle img {
+            width: 25px;
+            height: 25px;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="language-toggle" onclick="toggleLanguage()">
+        <img id="flag" src="https://flagcdn.com/w320/eg.png" alt="EG Flag"> <!-- Default flag for Arabic -->
+        <span id="language-label">عربي</span> <!-- Default label for Arabic -->
+    </div>
 
-    // تغيير العلم والنص لزر تغيير اللغة
-    document.getElementById("flag").src = isEnglish
-        ? "https://flagcdn.com/w320/eg.png" // علم مصر عند اختيار اللغة العربية
-        : "https://flagcdn.com/w320/us.png"; // علم الولايات المتحدة عند اختيار اللغة الإنجليزية
-    document.getElementById("language-label").innerText = isEnglish ? "عربي" : "English";
+    <div class="form-container">
+        <img src="https://github.com/InvestWellCo/InvestWellCo/blob/main/logo%20inveddssssst%20well.png?raw=true" alt="Company Logo" class="logo">
+        <h2 id="form-title">Real Estate Inquiry</h2>
+        <form action="https://formspree.io/f/manyeqbn" method="POST">
+            <input type="text" id="name" name="name" placeholder="Name" required>
+            <input type="email" id="email" name="email" placeholder="Email" required>
+            <div class="country-code">
+                <select id="country" name="country" onchange="updatePhoneCode()" required>
+                    <option value="EG" data-code="+20">🇪🇬</option>
+                    <option value="SA" data-code="+966">🇸🇦</option>
+                    <option value="AE" data-code="+971">🇦🇪</option>
+                    <option value="KW" data-code="+965">🇰🇼</option>
+                    <option value="QA" data-code="+974">🇶🇦</option>
+                    <option value="OM" data-code="+968">🇴🇲</option>
+                    <option value="BH" data-code="+973">🇧🇭</option>
+                    <option value="JO" data-code="+962">🇯🇴</option>
+                    <option value="LY" data-code="+218">🇱🇾</option>
+                    <option value="DZ" data-code="+213">🇩🇿</option>
+                    <option value="MA" data-code="+212">🇲🇦</option>
+                    <option value="TN" data-code="+216">🇹🇳</option>
+                    <option value="SY" data-code="+963">🇸🇾</option>
+                    <option value="LB" data-code="+961">🇱🇧</option>
+                    <option value="US" data-code="+1">🇺🇸</option>
+                    <option value="GB" data-code="+44">🇬🇧</option>
+                    <option value="DE" data-code="+49">🇩🇪</option>
+                    <option value="FR" data-code="+33">🇫🇷</option>
+                    <option value="IT" data-code="+39">🇮🇹</option>
+                    <option value="ES" data-code="+34">🇪🇸</option>
+                    <option value="CA" data-code="+1">🇨🇦</option>
+                    <option value="AU" data-code="+61">🇦🇺</option>
+                    <option value="OTHER" data-code="">🌍 بلد آخر</option> <!-- Fixed translation -->
+                </select>
+                <input type="text" id="country-code" name="country_code" value="+20" readonly>
+            </div>
+            <input type="tel" id="phone" name="phone" class="phone-input" placeholder="Phone Number" required> <!-- Moved phone input down -->
+            <select id="contact-method" name="contact_method" required>
+                <option value="default" disabled selected>Select Contact Method</option>
+                <option value="phone">By Phone</option>
+                <option value="whatsapp">By WhatsApp</option>
+            </select>
+            <textarea class="inquiry-textarea" id="inquiry" name="inquiry" placeholder="Your Inquiry" rows="4" required></textarea>
+            <button type="submit" id="submit-btn">Submit</button>
+        </form>
+    </div>
 
-    // Update contact method options
-    const contactMethod = document.getElementById("contact-method");
-    contactMethod.options[0].text = isEnglish ? "Select Contact Method" : "اختر طريقة التواصل";
-    contactMethod.options[1].text = isEnglish ? "By Phone" : "بالهاتف";
-    contactMethod.options[2].text = isEnglish ? "By WhatsApp" : "واتساب";
+    <script>
+        let isEnglish = false; // Set default to false for Arabic
 
-    // Update country select options
-    const countrySelect = document.getElementById("country");
-    countrySelect.options[countrySelect.options.length - 1].text = isEnglish ? "🌍 Other" : "🌍 بلد آخر"; // Fixed translation
-}
+        function toggleLanguage() {
+            isEnglish = !isEnglish;
+            const langElements = {
+                "form-title": ["Real Estate Inquiry", "استفسار عقاري"],
+                "name": ["Name", "الاسم"],
+                "email": ["Email", "البريد الإلكتروني"],
+                "inquiry": ["Your Inquiry", "استفسارك"],
+                "submit-btn": ["Submit", "إرسال"]
+            };
+
+            for (let key in langElements) {
+                if (key === "inquiry") {
+                    document.getElementById(key).placeholder = isEnglish ? langElements[key][0] : langElements[key][1];
+                } else {
+                    document.getElementById(key).textContent = isEnglish ? langElements[key][0] : langElements[key][1];
+                }
+            }
+
+            document.getElementById("flag").src = isEnglish
+                ? "https://flagcdn.com/w320/eg.png"
+                : "https://flagcdn.com/w320/us.png";
+            document.getElementById("language-label").innerText = isEnglish ? "عربي" : "English";
+
+            // Update contact method options
+            const contactMethod = document.getElementById("contact-method");
+            contactMethod.options[0].text = isEnglish ? "Select Contact Method" : "اختر طريقة التواصل";
+            contactMethod.options[1].text = isEnglish ? "By Phone" : "بالهاتف";
+            contactMethod.options[2].text = isEnglish ? "By WhatsApp" : "واتساب";
+
+            // Update country select options
+            const countrySelect = document.getElementById("country");
+            countrySelect.options[countrySelect.options.length - 1].text = isEnglish ? "🌍 Other" : "🌍 بلد آخر"; // Fixed translation
+        }
+
+        function updatePhoneCode() {
+            const countrySelect = document.getElementById('country');
+            const countryCodeInput = document.getElementById('country-code');
+            const selectedCode = countrySelect.options[countrySelect.selectedIndex].dataset.code;
+            countryCodeInput.value = selectedCode;
+
+            countryCodeInput.style.display = countrySelect.value === "OTHER" ? "none" : "inline-block";
+        }
+
+        window.onload = function() {
+            updatePhoneCode();
+            toggleLanguage(); // Call to set the correct language on load
+        };
+    </script>
+</body>
+</html>
