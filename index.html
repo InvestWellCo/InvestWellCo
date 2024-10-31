@@ -220,14 +220,17 @@ function toggleSubmitButton() {
     const contactMethod = document.getElementById("contact-method").value;
 
     const submitButton = document.getElementById("submit-btn");
-    
+
     // تحقق إذا كانت جميع الحقول ممتلئة
     if (name && email && phone && inquiry && contactMethod !== "default") {
         submitButton.disabled = false; // تمكين الزر
+        submitButton.style.cursor = 'pointer'; // تغيير المؤشر
     } else {
         submitButton.disabled = true; // تعطيل الزر
+        submitButton.style.cursor = 'not-allowed'; // تغيير المؤشر
     }
 }
+
 
 // أضف حدث input لجميع الحقول
 document.getElementById("name").addEventListener("input", toggleSubmitButton);
@@ -236,19 +239,33 @@ document.getElementById("phone").addEventListener("input", toggleSubmitButton);
 document.getElementById("inquiry").addEventListener("input", toggleSubmitButton);
 document.getElementById("contact-method").addEventListener("change", toggleSubmitButton);
 
-// في البداية، تأكد من تعطيل الزر
-window.onload = function() {
-    updatePhoneCode();
-    toggleLanguage(); // Call to set the correct language on load
-    toggleSubmitButton(); // تأكد من حالة الزر عند التحميل
-};
+function toggleSubmitButton() {
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const phone = document.getElementById("phone").value;
+    const inquiry = document.getElementById("inquiry").value;
+    const contactMethod = document.getElementById("contact-method").value;
 
-function validatePhone() {
-    const phoneInput = document.getElementById("phone");
-    const phoneError = document.getElementById("phone-error");
-    const countrySelect = document.getElementById("country");
-    const selectedCountry = countrySelect.value;
-    const phoneValue = phoneInput.value;
+    const submitButton = document.getElementById("submit-btn");
+
+    if (name && email && phone && inquiry && contactMethod !== "default") {
+        submitButton.disabled = false; // تمكين الزر
+        submitButton.style.backgroundColor = '#005d9e'; // اللون الطبيعي
+        submitButton.style.cursor = 'pointer'; // تغيير المؤشر
+    } else {
+        submitButton.disabled = true; // تعطيل الزر
+        submitButton.style.backgroundColor = '#282827'; // اللون غير النشط
+        submitButton.style.cursor = 'not-allowed'; // تغيير المؤشر
+    }
+}
+
+// إضافة أحداث input لجميع الحقول
+document.getElementById("name").addEventListener("input", toggleSubmitButton);
+document.getElementById("email").addEventListener("input", toggleSubmitButton);
+document.getElementById("phone").addEventListener("input", toggleSubmitButton);
+document.getElementById("inquiry").addEventListener("input", toggleSubmitButton);
+document.getElementById("contact-method").addEventListener("change", toggleSubmitButton);
+
 
     // قواعد التحقق لكل دولة
     const phoneRules = {
