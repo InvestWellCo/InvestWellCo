@@ -89,12 +89,6 @@
         .inquiry-textarea {
             resize: none;
         }
-        .error-message {
-            color: #282827;
-            display: none;
-            margin-top: 5px;
-            font-size: 14px;
-        }
         .language-toggle {
             position: absolute;
             top: 10px;
@@ -108,6 +102,13 @@
             width: 25px;
             height: 25px;
             margin-right: 5px;
+        }
+        .error-message {
+            color: #282827;
+            display: none; /* Hidden by default */
+            font-size: 14px;
+            margin-top: -10px;
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -153,125 +154,96 @@
                     <option value="IT" data-code="+39" data-pattern="^3[0-9]{9}$">🇮🇹 إيطاليا</option>
                     <option value="ES" data-code="+34" data-pattern="^6[0-9]{8}$">🇪🇸 إسبانيا</option>
                     <option value="AU" data-code="+61" data-pattern="^4[0-9]{8}$">🇦🇺 أستراليا</option>
-                    <option value="BR" data-code="+55" data-pattern="^\\d{11}$">🇧🇷 البرازيل</option>
+                    <option value="BR" data-code="+55" data-pattern="^\d{10}$">🇧🇷 البرازيل</option>
+                    <option value="IN" data-code="+91" data-pattern="^\d{10}$">🇮🇳 الهند</option>
+                    <option value="CN" data-code="+86" data-pattern="^\d{11}$">🇨🇳 الصين</option>
                 </select>
-                <input type="text" id="phone" name="phone" placeholder="رقم الهاتف" required class="phone-input">
+                <input type="text" id="phone" name="phone" placeholder="رقم الهاتف" class="phone-input" required>
                 <div class="error-message" id="phone-error"></div>
             </div>
-            <textarea id="inquiry" name="inquiry" rows="4" placeholder="استفسارك" class="inquiry-textarea" required></textarea>
+            <textarea id="inquiry" name="inquiry" rows="4" class="inquiry-textarea" placeholder="اكتب استفسارك هنا..." required></textarea>
             <div class="error-message" id="inquiry-error"></div>
-            <button type="submit" class="active">إرسال</button>
+            <button type="submit" class="active" id="submit-button">إرسال</button>
         </form>
     </div>
-
     <script>
-        let currentLanguage = 'ar';
-
         function toggleLanguage() {
-            currentLanguage = currentLanguage === 'ar' ? 'en' : 'ar';
-            updateLanguage();
-        }
-
-        function updateLanguage() {
-            const title = document.getElementById('form-title');
-            const languageLabel = document.getElementById('language-label');
-            const flag = document.getElementById('flag');
-
-            if (currentLanguage === 'en') {
-                title.innerText = 'Real Estate Inquiry';
-                languageLabel.innerText = 'English';
-                flag.src = 'https://flagcdn.com/w320/us.png';
-                updatePlaceholders('en');
+            const currentLanguage = document.getElementById("language-label").innerText;
+            if (currentLanguage === "عربي") {
+                document.getElementById("form-title").innerText = "Property Inquiry";
+                document.getElementById("name").placeholder = "Name";
+                document.getElementById("email").placeholder = "Email";
+                document.getElementById("phone").placeholder = "Phone Number";
+                document.getElementById("inquiry").placeholder = "Write your inquiry here...";
+                document.getElementById("submit-button").innerText = "Submit";
+                document.getElementById("language-label").innerText = "English";
+                document.getElementById("flag").src = "https://flagcdn.com/w320/us.png";
             } else {
-                title.innerText = 'استفسار عقاري';
-                languageLabel.innerText = 'عربي';
-                flag.src = 'https://flagcdn.com/w320/eg.png';
-                updatePlaceholders('ar');
+                document.getElementById("form-title").innerText = "استفسار عقاري";
+                document.getElementById("name").placeholder = "الاسم";
+                document.getElementById("email").placeholder = "البريد الإلكتروني";
+                document.getElementById("phone").placeholder = "رقم الهاتف";
+                document.getElementById("inquiry").placeholder = "اكتب استفسارك هنا...";
+                document.getElementById("submit-button").innerText = "إرسال";
+                document.getElementById("language-label").innerText = "عربي";
+                document.getElementById("flag").src = "https://flagcdn.com/w320/eg.png";
             }
-        }
-
-        function updatePlaceholders(lang) {
-            document.getElementById('name').placeholder = lang === 'en' ? 'Name' : 'الاسم';
-            document.getElementById('email').placeholder = lang === 'en' ? 'Email' : 'البريد الإلكتروني';
-            document.getElementById('phone').placeholder = lang === 'en' ? 'Phone Number' : 'رقم الهاتف';
-            document.getElementById('inquiry').placeholder = lang === 'en' ? 'Your Inquiry' : 'استفسارك';
         }
 
         function updatePhoneCode() {
-            const countrySelect = document.getElementById('country');
+            const countrySelect = document.getElementById("country");
             const selectedOption = countrySelect.options[countrySelect.selectedIndex];
-            const phoneInput = document.getElementById('phone');
-            const countryCode = selectedOption.getAttribute('data-code');
-
-            // Here you can set the phone input value to start with the country code
-            phoneInput.value = countryCode + ' ';
+            const countryCode = selectedOption.getAttribute("data-code");
+            const phoneInput = document.getElementById("phone");
+            phoneInput.setAttribute("placeholder", countryCode + " " + phoneInput.getAttribute("placeholder"));
         }
 
-        const form = document.getElementById('inquiryForm');
-
-        form.addEventListener('submit', function (event) {
+        document.getElementById("inquiryForm").onsubmit = function(event) {
             event.preventDefault();
-            validateForm();
-        });
-
-        function validateForm() {
-            const email = document.getElementById('email');
-            const phone = document.getElementById('phone');
-            const name = document.getElementById('name');
-            const inquiry = document.getElementById('inquiry');
-            const emailError = document.getElementById('email-error');
-            const phoneError = document.getElementById('phone-error');
-            const nameError = document.getElementById('name-error');
-            const inquiryError = document.getElementById('inquiry-error');
+            let hasErrors = false;
 
             // Reset error messages
-            emailError.style.display = 'none';
-            phoneError.style.display = 'none';
-            nameError.style.display = 'none';
-            inquiryError.style.display = 'none';
+            document.querySelectorAll(".error-message").forEach(el => {
+                el.style.display = 'none';
+            });
 
-            let isValid = true;
-
-            // Validate email
-            if (!validateEmail(email.value)) {
-                emailError.innerText = currentLanguage === 'en' ? 'Invalid email' : 'البريد الإلكتروني غير صالح';
-                emailError.style.display = 'block';
-                isValid = false;
+            // Name validation
+            const name = document.getElementById("name").value.trim();
+            if (name === "") {
+                document.getElementById("name-error").innerText = "Please enter your name.";
+                document.getElementById("name-error").style.display = 'block';
+                hasErrors = true;
             }
 
-            // Validate phone
-            const selectedOption = document.getElementById('country').selectedOptions[0];
-            const phonePattern = new RegExp(selectedOption.getAttribute('data-pattern'));
-            if (!phonePattern.test(phone.value.trim())) {
-                phoneError.innerText = currentLanguage === 'en' ? 'Invalid phone number' : 'رقم الهاتف غير صالح';
-                phoneError.style.display = 'block';
-                isValid = false;
+            // Email validation
+            const email = document.getElementById("email").value.trim();
+            if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(email)) {
+                document.getElementById("email-error").innerText = "Please enter a valid email address.";
+                document.getElementById("email-error").style.display = 'block';
+                hasErrors = true;
             }
 
-            // Validate name
-            if (name.value.trim() === '') {
-                nameError.innerText = currentLanguage === 'en' ? 'Name cannot be empty' : 'الاسم لا يمكن أن يكون فارغًا';
-                nameError.style.display = 'block';
-                isValid = false;
+            // Phone validation
+            const phone = document.getElementById("phone").value.trim();
+            const phonePattern = countrySelect.options[countrySelect.selectedIndex].getAttribute("data-pattern");
+            if (!new RegExp(phonePattern).test(phone)) {
+                document.getElementById("phone-error").innerText = "Please enter a valid phone number.";
+                document.getElementById("phone-error").style.display = 'block';
+                hasErrors = true;
             }
 
-            // Validate inquiry
-            if (inquiry.value.trim() === '') {
-                inquiryError.innerText = currentLanguage === 'en' ? 'Inquiry cannot be empty' : 'استفسارك لا يمكن أن يكون فارغًا';
-                inquiryError.style.display = 'block';
-                isValid = false;
+            // Inquiry validation
+            const inquiry = document.getElementById("inquiry").value.trim();
+            if (inquiry === "") {
+                document.getElementById("inquiry-error").innerText = "Please enter your inquiry.";
+                document.getElementById("inquiry-error").style.display = 'block';
+                hasErrors = true;
             }
 
-            if (isValid) {
-                // Submit the form if everything is valid
-                form.submit();
+            if (!hasErrors) {
+                document.getElementById("inquiryForm").submit();
             }
-        }
-
-        function validateEmail(email) {
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return re.test(String(email).toLowerCase());
-        }
+        };
     </script>
 </body>
 </html>
