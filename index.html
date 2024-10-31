@@ -4,166 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Real Estate Inquiry</title>
-    <link rel="icon" href="https://github.com/InvestWellCo/InvestWellCo/blob/main/logo%20inveddssssst%20well.png?raw=true" type="image/png">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-image: url('https://github.com/InvestWellCo/InvestWellCo/blob/main/observation-urban-building-business-steel.jpg?raw=true');
-            background-size: cover;
-            background-repeat: no-repeat;
-            color: #282827;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            position: relative;
-        }
-        .form-container {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-            max-width: 450px;
-            width: 100%;
-        }
-        .form-container h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #005d9e;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        .form-container input, .form-container select, .form-container textarea {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: 2px solid #005d9e;
-            border-radius: 5px;
-            font-size: 18px;
-            box-sizing: border-box;
-        }
-        .form-container button {
-            width: 100%;
-            padding: 12px;
-            background-color: #005d9e;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 18px;
-            transition: background-color 0.3s;
-        }
-        .form-container button:disabled {
-            background-color: #282827; /* اللون عند تعطيل الزر */
-            cursor: not-allowed;
-        }
-        .form-container button:hover:not(:disabled) {
-            background-color: #004b7a;
-        }
-        .logo {
-            max-width: 150px;
-            margin: 0 auto 20px auto;
-            display: block;
-        }
-        .country-code {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .country-code select {
-            width: 70%;
-            border-radius: 5px;
-            margin-right: 10px;
-        }
-        .country-code input[type="text"] {
-            width: 30%;
-            margin: 0;
-            display: inline-block;
-            text-align: center;
-        }
-        .phone-input {
-            width: 100%;
-            margin-top: 10px;
-        }
-        .inquiry-textarea {
-            resize: none;
-        }
-        .language-toggle {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            font-size: 18px;
-        }
-        .language-toggle img {
-            width: 25px;
-            height: 25px;
-            margin-right: 5px;
-        }
+        /* يمكنك إضافة تنسيق CSS هنا لتنسيق النموذج */
         #phone-error {
-            color: #282827;
             display: none;
+            color: #282827;
+        }
+        #submit-btn:disabled {
+            background-color: #282827;
+            cursor: not-allowed;
         }
     </style>
 </head>
 <body>
-    <div class="language-toggle" onclick="toggleLanguage()">
-        <img id="flag" src="https://flagcdn.com/w320/eg.png" alt="EG Flag">
-        <span id="language-label">عربي</span>
+
+    <div>
+        <h1 id="form-title">Real Estate Inquiry</h1>
+        <label id="language-label" for="language-toggle">English</label>
+        <img id="flag" src="https://flagcdn.com/w320/us.png" alt="Language Flag" width="30">
+        <button id="language-toggle" onclick="toggleLanguage()">Toggle Language</button>
     </div>
 
-    <div class="form-container">
-        <img src="https://github.com/InvestWellCo/InvestWellCo/blob/main/logo%20inveddssssst%20well.png?raw=true" alt="Company Logo" class="logo">
-        <h2 id="form-title">Real Estate Inquiry</h2>
-        <form action="https://formspree.io/f/manyeqbn" method="POST" onsubmit="return validateForm()">
-            <input type="text" id="name" name="name" placeholder="Name" required>
-            <input type="email" id="email" name="email" placeholder="Email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}" oninvalid="this.setCustomValidity('Invalid email format')" oninput="this.setCustomValidity('')">
-            <span class="error-message" style="color: #282827; display: none;">Invalid email format</span>
-            <div class="country-code">
-                <select id="country" name="country" onchange="updatePhoneCode()" required>
-                    <option value="EG" data-code="+20">🇪🇬</option>
-                    <option value="SA" data-code="+966">🇸🇦</option>
-                    <option value="AE" data-code="+971">🇦🇪</option>
-                    <option value="KW" data-code="+965">🇰🇼</option>
-                    <option value="QA" data-code="+974">🇶🇦</option>
-                    <option value="OM" data-code="+968">🇴🇲</option>
-                    <option value="BH" data-code="+973">🇧🇭</option>
-                    <option value="JO" data-code="+962">🇯🇴</option>
-                    <option value="LY" data-code="+218">🇱🇾</option>
-                    <option value="DZ" data-code="+213">🇩🇿</option>
-                    <option value="MA" data-code="+212">🇲🇦</option>
-                    <option value="TN" data-code="+216">🇹🇳</option>
-                    <option value="SY" data-code="+963">🇸🇾</option>
-                    <option value="LB" data-code="+961">🇱🇧</option>
-                    <option value="US" data-code="+1">🇺🇸</option>
-                    <option value="GB" data-code="+44">🇬🇧</option>
-                    <option value="DE" data-code="+49">🇩🇪</option>
-                    <option value="FR" data-code="+33">🇫🇷</option>
-                    <option value="IT" data-code="+39">🇮🇹</option>
-                    <option value="ES" data-code="+34">🇪🇸</option>
-                    <option value="CA" data-code="+1">🇨🇦</option>
-                    <option value="AU" data-code="+61">🇦🇺</option>
-                    <option value="OTHER" data-code="">🌍 بلد آخر</option>
-                </select>
-                <input type="text" id="country-code" name="country_code" value="+20" readonly>
-            </div>
-            <input type="tel" id="phone" name="phone" class="phone-input" placeholder="Phone Number" required pattern="[0-9]*" oninput="validatePhone()" onblur="validatePhone()">
-            <span id="phone-error" style="color: #282827; display: none;">Invalid phone number format</span>
+    <form id="inquiry-form">
+        <label for="name" id="name">Name</label>
+        <input type="text" id="name" placeholder="Name" required>
 
-            <select id="contact-method" name="contact_method" required>
-                <option value="default" disabled selected>Select Contact Method</option>
-                <option value="phone">By Phone</option>
-                <option value="whatsapp">By WhatsApp</option>
-            </select>
-            <textarea class="inquiry-textarea" id="inquiry" name="inquiry" placeholder="Your Inquiry" rows="4" required></textarea>
-            <button type="submit" id="submit-btn" disabled>Submit</button>
-        </form>
-    </div>
+        <label for="email" id="email">Email</label>
+        <input type="email" id="email" placeholder="Email" required>
+
+        <label for="phone" id="phone">Phone Number</label>
+        <input type="text" id="phone" placeholder="Phone Number" required>
+        <div id="phone-error">Invalid phone number format</div>
+
+        <label for="contact-method" id="contact-method">Select Contact Method</label>
+        <select id="contact-method">
+            <option value="">Select Contact Method</option>
+            <option value="phone">By Phone</option>
+            <option value="whatsapp">By WhatsApp</option>
+        </select>
+
+        <label for="country">Country</label>
+        <select id="country" onchange="updatePhoneCode()">
+            <option data-code="+20" value="EG">Egypt</option>
+            <option data-code="+966" value="SA">Saudi Arabia</option>
+            <option data-code="+971" value="AE">UAE</option>
+            <option data-code="+965" value="KW">Kuwait</option>
+            <option data-code="+974" value="QA">Qatar</option>
+            <option data-code="+968" value="OM">Oman</option>
+            <option data-code="+973" value="BH">Bahrain</option>
+            <option data-code="+962" value="JO">Jordan</option>
+            <option data-code="+218" value="LY">Libya</option>
+            <option data-code="+213" value="DZ">Algeria</option>
+            <option data-code="+212" value="MA">Morocco</option>
+            <option data-code="+216" value="TN">Tunisia</option>
+            <option data-code="+963" value="SY">Syria</option>
+            <option data-code="+961" value="LB">Lebanon</option>
+            <option data-code="+1" value="US">United States</option>
+            <option data-code="+44" value="GB">United Kingdom</option>
+            <option data-code="OTHER" value="OTHER">🌍 Other</option>
+        </select>
+        <input type="text" id="country-code" readonly>
+
+        <label for="inquiry" id="inquiry">Your Inquiry</label>
+        <textarea id="inquiry" placeholder="Your Inquiry" required></textarea>
+
+        <button type="submit" id="submit-btn" disabled>Submit</button>
+    </form>
 
     <script>
         let isEnglish = false;
@@ -176,34 +82,28 @@
                 "email": ["Email", "البريد الإلكتروني"],
                 "phone": ["Phone Number", "رقم الهاتف"],
                 "inquiry": ["Your Inquiry", "استفسارك"],
-                "submit-btn": ["Submit", "إرسال"]
+                "submit-btn": ["Submit", "إرسال"],
+                "contact-method": ["Select Contact Method", "اختر طريقة التواصل"],
+                "by-phone": ["By Phone", "بالهاتف"],
+                "by-whatsapp": ["By WhatsApp", "واتساب"],
+                "country": ["Country", "البلد"]
             };
-for (let key in langElements) {
+
+            for (let key in langElements) {
                 if (key === "inquiry") {
                     document.getElementById(key).placeholder = isEnglish ? langElements[key][0] : langElements[key][1];
                 } else {
-                    document.getElementById(key).textContent = isEnglish ? langElements[key][0] : langElements[key][1];
+                    const element = document.getElementById(key) || document.querySelector(`select#${key}`);
+                    if (element) {
+                        element.textContent = isEnglish ? langElements[key][0] : langElements[key][1];
+                    }
                 }
             }
-            document.getElementById("form-title").textContent = isEnglish ? langElements["form-title"][0] : langElements["form-title"][1];
-            document.getElementById("name").placeholder = isEnglish ? langElements["name"][0] : langElements["name"][1];
-            document.getElementById("email").placeholder = isEnglish ? langElements["email"][0] : langElements["email"][1];
-            document.getElementById("phone").placeholder = isEnglish ? langElements["phone"][0] : langElements["phone"][1];
-            document.getElementById("inquiry").placeholder = isEnglish ? langElements["inquiry"][0] : langElements["inquiry"][1];
-            document.getElementById("submit-btn").textContent = isEnglish ? langElements["submit-btn"][0] : langElements["submit-btn"][1];
 
-                      document.getElementById("flag").src = isEnglish
+            document.getElementById("flag").src = isEnglish
                 ? "https://flagcdn.com/w320/eg.png"
                 : "https://flagcdn.com/w320/us.png";
             document.getElementById("language-label").innerText = isEnglish ? "عربي" : "English";
-
-            const contactMethod = document.getElementById("contact-method");
-            contactMethod.options[0].text = isEnglish ? "Select Contact Method" : "اختر طريقة التواصل";
-            contactMethod.options[1].text = isEnglish ? "By Phone" : "بالهاتف";
-            contactMethod.options[2].text = isEnglish ? "By WhatsApp" : "واتساب";
-
-            const countrySelect = document.getElementById("country");
-            countrySelect.options[countrySelect.options.length - 1].text = isEnglish ? "🌍 Other" : "🌍 بلد آخر"; 
         }
 
         function updatePhoneCode() {
@@ -273,20 +173,27 @@ for (let key in langElements) {
             }
         }
 
+        const submitBtn = document.getElementById("submit-btn");
+
         document.getElementById("name").addEventListener("input", validateSubmitButton);
         document.getElementById("email").addEventListener("input", validateSubmitButton);
-        document.getElementById("phone").addEventListener("input", validateSubmitButton);
-// إضافة حدث لتغيير اللون عند الوقوف على الزر
-submitBtn.addEventListener("mouseenter", function() {
-    if (!submitBtn.disabled) {
-        submitBtn.style.backgroundColor = "#004b7a"; // لون جديد عند الوقوف عليه
-    }
-});
+        document.getElementById("phone").addEventListener("input", function() {
+            validatePhone();
+            validateSubmitButton();
+        });
 
-submitBtn.addEventListener("mouseleave", function() {
-    if (!submitBtn.disabled) {
-        submitBtn.style.backgroundColor = "#005d9e"; // العودة للون الطبيعي
-    }
+        // Adding event listeners for hover effect on the submit button
+        submitBtn.addEventListener("mouseenter", function() {
+            if (!submitBtn.disabled) {
+                submitBtn.style.backgroundColor = "#004b7a"; // Color change on hover
+            }
+        });
+
+        submitBtn.addEventListener("mouseleave", function() {
+            if (!submitBtn.disabled) {
+                submitBtn.style.backgroundColor = "#005d9e"; // Return to original color
+            }
+        });
     </script>
 </body>
 </html>
