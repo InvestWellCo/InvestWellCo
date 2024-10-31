@@ -234,14 +234,14 @@ function validatePhone() {
         // إضافة المزيد من الدول حسب الحاجة
     };
 
-   // تحقق من الرقم حسب قواعد الدولة المحددة
-if (phoneRules[selectedCountry] && !phoneRules[selectedCountry].test(phoneValue)) {
-  phoneError.style.display = "block";
-  // لا تستخدم setCustomValidity هنا
-} else {
-  phoneError.style.display = "none";
-  // إذا كانت القيمة صحيحة، يمكنك تعطيل setCustomValidity
-  phoneInput.setCustomValidity(""); // تعيينها إلى فراغ لتعطيل الخطأ
+  // تحقق من الرقم حسب قواعد الدولة المحددة
+    if (phoneRules[selectedCountry] && !phoneRules[selectedCountry].test(phoneValue)) {
+      phoneError.style.display = "block";
+    phoneInput.setCustomValidity("Invalid phone number format");
+    } else {
+        phoneError.style.display = "none";
+        phoneInput.setCustomValidity("");
+    }
 }
 
     </script>
