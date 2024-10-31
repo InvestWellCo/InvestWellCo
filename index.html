@@ -48,7 +48,7 @@
         .form-container button {
             width: 100%;
             padding: 12px;
-            background-color: #005d9e;
+            background-color: #282827; /* لون الزر الغير مفعل */
             color: white;
             border: none;
             border-radius: 5px;
@@ -70,19 +70,19 @@
             justify-content: space-between;
         }
         .country-code select {
-            width: 70%; /* Increased width for select */
+            width: 70%;
             border-radius: 5px;
             margin-right: 10px;
         }
         .country-code input[type="text"] {
-            width: 30%; /* Adjusted width for country code */
+            width: 30%;
             margin: 0;
             display: inline-block;
             text-align: center;
         }
         .phone-input {
-            width: 100%; /* Full width for phone input */
-            margin-top: 10px; /* Added margin for spacing */
+            width: 100%;
+            margin-top: 10px;
         }
         .inquiry-textarea {
             resize: none;
@@ -101,17 +101,16 @@
             height: 25px;
             margin-right: 5px;
         }
-#phone-error {
-    color: #282827; 
-    display: none; /* ستبقى الرسالة مخفية دائمًا */
-}
-
+        #phone-error {
+            color: #282827; 
+            display: none;
+        }
     </style>
 </head>
 <body>
     <div class="language-toggle" onclick="toggleLanguage()">
-        <img id="flag" src="https://flagcdn.com/w320/eg.png" alt="EG Flag"> <!-- Default flag for Arabic -->
-        <span id="language-label">عربي</span> <!-- Default label for Arabic -->
+        <img id="flag" src="https://flagcdn.com/w320/eg.png" alt="EG Flag">
+        <span id="language-label">عربي</span>
     </div>
 
     <div class="form-container">
@@ -119,8 +118,7 @@
         <h2 id="form-title">Real Estate Inquiry</h2>
         <form action="https://formspree.io/f/manyeqbn" method="POST">
             <input type="text" id="name" name="name" placeholder="Name" required>
-<input type="email" id="email" name="email" placeholder="Email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}" oninvalid="this.setCustomValidity('Invalid email format')" oninput="this.setCustomValidity('')">
-<span class="error-message" style="color: #282827; display: none;">Invalid email format</span>
+            <input type="email" id="email" name="email" placeholder="Email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}" oninvalid="this.setCustomValidity('Invalid email format')" oninput="this.setCustomValidity('')">
             <div class="country-code">
                 <select id="country" name="country" onchange="updatePhoneCode()" required>
                     <option value="EG" data-code="+20">🇪🇬</option>
@@ -145,129 +143,45 @@
                     <option value="ES" data-code="+34">🇪🇸</option>
                     <option value="CA" data-code="+1">🇨🇦</option>
                     <option value="AU" data-code="+61">🇦🇺</option>
-                    <option value="OTHER" data-code="">🌍 بلد آخر</option> <!-- Fixed translation -->
+                    <option value="OTHER" data-code="">🌍 بلد آخر</option>
                 </select>
                 <input type="text" id="country-code" name="country_code" value="+20" readonly>
             </div>
-<input type="tel" id="phone" name="phone" class="phone-input" placeholder="Phone Number" required pattern="[0-9]*" oninput="validatePhone()" onblur="validatePhone()">
-<span id="phone-error" style="color: #282827; display: none;">Invalid phone number format</span>
+            <input type="tel" id="phone" name="phone" class="phone-input" placeholder="Phone Number" required pattern="[0-9]*" oninput="validatePhone(); validateForm();" onblur="validatePhone(); validateForm();">
+            <span id="phone-error" style="color: #282827; display: none;">Invalid phone number format</span>
 
-            <select id="contact-method" name="contact_method" required>
+            <select id="contact-method" name="contact_method" required oninput="validateForm();">
                 <option value="default" disabled selected>Select Contact Method</option>
                 <option value="phone">By Phone</option>
                 <option value="whatsapp">By WhatsApp</option>
             </select>
-            <textarea class="inquiry-textarea" id="inquiry" name="inquiry" placeholder="Your Inquiry" rows="4" required></textarea>
-<button type="submit" id="submit-btn" disabled style="background-color: #282827; color: white;">Submit</button>
+            <textarea class="inquiry-textarea" id="inquiry" name="inquiry" placeholder="Your Inquiry" rows="4" required oninput="validateForm();"></textarea>
+            <button type="submit" id="submit-btn" disabled>Submit</button>
         </form>
     </div>
 
     <script>
-function toggleLanguage() {
-    isEnglish = !isEnglish;
-    const langElements = {
-        "form-title": ["Real Estate Inquiry", "استفسار عقاري"],
-        "name": ["Name", "الاسم"],
-        "email": ["Email", "البريد الإلكتروني"],
-        "phone": ["Phone Number", "رقم الهاتف"], // إضافة الترجمة
-        "inquiry": ["Your Inquiry", "استفسارك"],
-        "submit-btn": ["Submit", "إرسال"]
-    };
+        let isEnglish = false;
 
-    document.getElementById("form-title").textContent = isEnglish ? langElements["form-title"][0] : langElements["form-title"][1];
-    document.getElementById("name").placeholder = isEnglish ? langElements["name"][0] : langElements["name"][1];
-    document.getElementById("email").placeholder = isEnglish ? langElements["email"][0] : langElements["email"][1];
-    document.getElementById("phone").placeholder = isEnglish ? langElements["phone"][0] : langElements["phone"][1];
-    document.getElementById("inquiry").placeholder = isEnglish ? langElements["inquiry"][0] : langElements["inquiry"][1];
-    document.getElementById("submit-btn").textContent = isEnglish ? langElements["submit-btn"][0] : langElements["submit-btn"][1];
+        function toggleLanguage() {
+            isEnglish = !isEnglish;
+            const langElements = {
+                "form-title": ["Real Estate Inquiry", "استفسار عقاري"],
+                "name": ["Name", "الاسم"],
+                "email": ["Email", "البريد الإلكتروني"],
+                "inquiry": ["Your Inquiry", "استفسارك"],
+                "submit-btn": ["Submit", "إرسال"]
+            };
 
-    document.getElementById("flag").src = isEnglish
-        ? "https://flagcdn.com/w320/eg.png"
-        : "https://flagcdn.com/w320/us.png";
-    document.getElementById("language-label").innerText = isEnglish ? "عربي" : "English";
+            for (let key in langElements) {
+                if (key === "inquiry") {
+                    document.getElementById(key).placeholder = isEnglish ? langElements[key][0] : langElements[key][1];
+                } else {
+                    document.getElementById(key).textContent = isEnglish ? langElements[key][0] : langElements[key][1];
+                }
+            }
 
-    const contactMethod = document.getElementById("contact-method");
-    contactMethod.options[0].text = isEnglish ? "Select Contact Method" : "اختر طريقة التواصل";
-    contactMethod.options[1].text = isEnglish ? "By Phone" : "بالهاتف";
-    contactMethod.options[2].text = isEnglish ? "By WhatsApp" : "واتساب";
-
-    const countrySelect = document.getElementById("country");
-    countrySelect.options[countrySelect.options.length - 1].text = isEnglish ? "🌍 Other" : "🌍 بلد آخر"; // Fixed translation
-}
-
-
-        function updatePhoneCode() {
-            const countrySelect = document.getElementById('country');
-            const countryCodeInput = document.getElementById('country-code');
-            const selectedCode = countrySelect.options[countrySelect.selectedIndex].dataset.code;
-            countryCodeInput.value = selectedCode;
-
-            countryCodeInput.style.display = countrySelect.value === "OTHER" ? "none" : "inline-block";
-        }
-
-        window.onload = function() {
-            updatePhoneCode();
-            toggleLanguage(); // Call to set the correct language on load
-        };
-function validatePhone() {
-    const phoneInput = document.getElementById("phone");
-    const phoneError = document.getElementById("phone-error");
-    const countrySelect = document.getElementById("country");
-    const selectedCountry = countrySelect.value;
-    const phoneValue = phoneInput.value;
-
-    // قواعد التحقق لكل دولة
-    const phoneRules = {
-        "EG": /^01[0-9]{9}$/,  // مصر - يبدأ بـ 01 ويتكون من 11 رقم
-        "SA": /^05[0-9]{8}$/,  // السعودية - يبدأ بـ 05 ويتكون من 10 أرقام
-        "AE": /^05[0-9]{8}$/,  // الإمارات - يبدأ بـ 05 ويتكون من 10 أرقام
-        "KW": /^5[0-9]{7}$/,   // الكويت - يبدأ بـ 5 ويتكون من 8 أرقام
-        "QA": /^3[0-9]{7}$/,   // قطر - يبدأ بـ 3 ويتكون من 8 أرقام
-        "OM": /^9[0-9]{7}$/,   // عمان - يبدأ بـ 9 ويتكون من 8 أرقام
-        "BH": /^3[0-9]{7}$/,   // البحرين - يبدأ بـ 3 ويتكون من 8 أرقام
-        "JO": /^07[0-9]{8}$/,  // الأردن - يبدأ بـ 07 ويتكون من 10 أرقام
-        "LY": /^09[1-9][0-9]{7}$/,  // ليبيا - يبدأ بـ 09 ويتكون من 10 أرقام
-        "DZ": /^0[56][0-9]{8}$/,  // الجزائر - يبدأ بـ 05 أو 06 ويتكون من 10 أرقام
-        "MA": /^06[0-9]{8}$/,  // المغرب - يبدأ بـ 06 ويتكون من 10 أرقام
-        "TN": /^2[0-9]{7}$/,   // تونس - يتكون من 8 أرقام
-        "SY": /^09[1-9][0-9]{7}$/,  // سوريا - يبدأ بـ 09 ويتكون من 9 أرقام
-        "LB": /^03|71[0-9]{6}$/,  // لبنان - يبدأ بـ 03 أو 71 ويتكون من 8 أرقام
-        "US": /^[2-9][0-9]{9}$/,  // الولايات المتحدة - 10 أرقام بدون بادئة معينة
-        "GB": /^07[0-9]{9}$/,  // المملكة المتحدة - يبدأ بـ 07 ويتكون من 11 رقم
-        // إضافة المزيد من الدول حسب الحاجة
-    };
-
-   // تحقق من الرقم حسب قواعد الدولة المحددة
-    if (phoneRules[selectedCountry] && !phoneRules[selectedCountry].test(phoneValue)) {
-        // لا تظهر الرسالة، لكن يمكنك استخدام setCustomValidity إذا كنت بحاجة لذلك
-        phoneInput.setCustomValidity("Invalid phone number format");
-    } else {
-        phoneError.style.display = "none"; // تأكد من إخفاء الرسالة
-        phoneInput.setCustomValidity("");
-    }
-}
-function validateForm() {
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const phone = document.getElementById("phone").value.trim();
-    const inquiry = document.getElementById("inquiry").value.trim();
-    const submitBtn = document.getElementById("submit-btn");
-
-    if (name && email && phone && inquiry) {
-        submitBtn.disabled = false;
-        submitBtn.style.backgroundColor = "#005d9e"; // اللون الأصلي
-    } else {
-        submitBtn.disabled = true;
-        submitBtn.style.backgroundColor = "#282827"; // اللون الرمادي
-    }
-}
-
-// أضف مستمعي الأحداث للحقول للتحقق في الوقت الحقيقي
-document.getElementById("name").addEventListener("input", validateForm);
-document.getElementById("email").addEventListener("input", validateForm);
-document.getElementById("phone").addEventListener("input", validateForm);
-document.getElementById("inquiry").addEventListener("input", validateForm);
-
-    </script>
-</body>
-</html>
+            document.getElementById("flag").src = isEnglish
+                ? "https://flagcdn.com/w320/eg.png"
+                : "https://flagcdn.com/w320/us.png";
+            document.getElementById("language-label").innerText = isEnglish ? "ع
