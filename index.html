@@ -70,19 +70,19 @@
             justify-content: space-between;
         }
         .country-code select {
-            width: 70%; /* Increased width for select */
+            width: 70%;
             border-radius: 5px;
             margin-right: 10px;
         }
         .country-code input[type="text"] {
-            width: 30%; /* Adjusted width for country code */
+            width: 30%;
             margin: 0;
             display: inline-block;
             text-align: center;
         }
         .phone-input {
-            width: 100%; /* Full width for phone input */
-            margin-top: 10px; /* Added margin for spacing */
+            width: 100%;
+            margin-top: 10px;
         }
         .inquiry-textarea {
             resize: none;
@@ -105,14 +105,14 @@
 </head>
 <body>
     <div class="language-toggle" onclick="toggleLanguage()">
-        <img id="flag" src="https://flagcdn.com/w320/eg.png" alt="EG Flag"> <!-- Default flag for Arabic -->
-        <span id="language-label">عربي</span> <!-- Default label for Arabic -->
+        <img id="flag" src="https://flagcdn.com/w320/eg.png" alt="EG Flag">
+        <span id="language-label">عربي</span>
     </div>
 
     <div class="form-container">
         <img src="https://github.com/InvestWellCo/InvestWellCo/blob/main/logo%20inveddssssst%20well.png?raw=true" alt="Company Logo" class="logo">
         <h2 id="form-title">Real Estate Inquiry</h2>
-        <form action="https://formspree.io/f/manyeqbn" method="POST">
+        <form id="inquiry-form" action="https://formspree.io/f/manyeqbn" method="POST" onsubmit="return validateForm()">
             <input type="text" id="name" name="name" placeholder="Name" required>
             <input type="email" id="email" name="email" placeholder="Email" required>
             <div class="country-code">
@@ -139,11 +139,11 @@
                     <option value="ES" data-code="+34">🇪🇸</option>
                     <option value="CA" data-code="+1">🇨🇦</option>
                     <option value="AU" data-code="+61">🇦🇺</option>
-                    <option value="OTHER" data-code="">🌍 بلد آخر</option> <!-- Fixed translation -->
+                    <option value="OTHER" data-code="">🌍 بلد آخر</option>
                 </select>
                 <input type="text" id="country-code" name="country_code" value="+20" readonly>
             </div>
-            <input type="tel" id="phone" name="phone" class="phone-input" placeholder="Phone Number" required> <!-- Moved phone input down -->
+            <input type="tel" id="phone" name="phone" class="phone-input" placeholder="Phone Number" required pattern="[0-9]*" maxlength="15"> <!-- Added pattern for numbers only -->
             <select id="contact-method" name="contact_method" required>
                 <option value="default" disabled selected>Select Contact Method</option>
                 <option value="phone">By Phone</option>
@@ -155,7 +155,7 @@
     </div>
 
     <script>
-        let isEnglish = false; // Set default to false for Arabic
+        let isEnglish = false;
 
         function toggleLanguage() {
             isEnglish = !isEnglish;
@@ -176,19 +176,17 @@
             }
 
             document.getElementById("flag").src = isEnglish
-                ? "https://flagcdn.com/w320/eg.png"
-                : "https://flagcdn.com/w320/us.png";
+                ? "https://flagcdn.com/w320/us.png"
+                : "https://flagcdn.com/w320/eg.png";
             document.getElementById("language-label").innerText = isEnglish ? "عربي" : "English";
 
-            // Update contact method options
             const contactMethod = document.getElementById("contact-method");
             contactMethod.options[0].text = isEnglish ? "Select Contact Method" : "اختر طريقة التواصل";
             contactMethod.options[1].text = isEnglish ? "By Phone" : "بالهاتف";
             contactMethod.options[2].text = isEnglish ? "By WhatsApp" : "واتساب";
 
-            // Update country select options
             const countrySelect = document.getElementById("country");
-            countrySelect.options[countrySelect.options.length - 1].text = isEnglish ? "🌍 Other" : "🌍 بلد آخر"; // Fixed translation
+            countrySelect.options[countrySelect.options.length - 1].text = isEnglish ? "🌍 Other" : "🌍 بلد آخر";
         }
 
         function updatePhoneCode() {
@@ -196,15 +194,45 @@
             const countryCodeInput = document.getElementById('country-code');
             const selectedCode = countrySelect.options[countrySelect.selectedIndex].dataset.code;
             countryCodeInput.value = selectedCode;
+        }
 
-            countryCodeInput.style.display = countrySelect.value === "OTHER" ? "none" : "inline-block";
+        function validateForm() {
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const countryCode = document.getElementById('country-code').value;
+
+            // Regex for validating email
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                alert("Please enter a valid email address.");
+                return false;
+            }
+
+            // Validate phone number based on country code
+            let phoneLength = 0;
+            if (countryCode === "+20") phoneLength = 10; // Egypt
+            else if (countryCode === "+966") phoneLength = 9; // Saudi Arabia
+            // Add more countries as needed...
+
+            if (phone.length !== phoneLength) {
+                alert(`Please enter a valid phone number with ${phoneLength} digits for the selected country.`);
+                return false;
+            }
+
+            // Check if a contact method is selected
+            const contactMethod = document.getElementById("contact-method").value;
+            if (contactMethod === "default") {
+                alert("Please select a contact method.");
+                return false;
+            }
+
+            return true; // All validations passed
         }
 
         window.onload = function() {
             updatePhoneCode();
-            toggleLanguage(); // Call to set the correct language on load
+            toggleLanguage();
         };
     </script>
 </body>
 </html>
-
