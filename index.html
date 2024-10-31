@@ -178,7 +178,13 @@
                 "inquiry": ["Your Inquiry", "استفسارك"],
                 "submit-btn": ["Submit", "إرسال"]
             };
-
+for (let key in langElements) {
+                if (key === "inquiry") {
+                    document.getElementById(key).placeholder = isEnglish ? langElements[key][0] : langElements[key][1];
+                } else {
+                    document.getElementById(key).textContent = isEnglish ? langElements[key][0] : langElements[key][1];
+                }
+            }
             document.getElementById("form-title").textContent = isEnglish ? langElements["form-title"][0] : langElements["form-title"][1];
             document.getElementById("name").placeholder = isEnglish ? langElements["name"][0] : langElements["name"][1];
             document.getElementById("email").placeholder = isEnglish ? langElements["email"][0] : langElements["email"][1];
@@ -186,10 +192,10 @@
             document.getElementById("inquiry").placeholder = isEnglish ? langElements["inquiry"][0] : langElements["inquiry"][1];
             document.getElementById("submit-btn").textContent = isEnglish ? langElements["submit-btn"][0] : langElements["submit-btn"][1];
 
-            document.getElementById("flag").src = isEnglish
-                ? "https://flagcdn.com/w320/us.png"
-                : "https://flagcdn.com/w320/eg.png";
-            document.getElementById("language-label").innerText = isEnglish ? "English" : "عربي";
+                      document.getElementById("flag").src = isEnglish
+                ? "https://flagcdn.com/w320/eg.png"
+                : "https://flagcdn.com/w320/us.png";
+            document.getElementById("language-label").innerText = isEnglish ? "عربي" : "English";
 
             const contactMethod = document.getElementById("contact-method");
             contactMethod.options[0].text = isEnglish ? "Select Contact Method" : "اختر طريقة التواصل";
