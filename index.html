@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real Estate Inquiry</title>
+    <title>Inquiry Form</title>
     <link rel="icon" href="https://github.com/InvestWellCo/InvestWellCo/blob/main/logo%20inveddssssst%20well.png?raw=true" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -19,7 +19,6 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            position: relative;
         }
         .form-container {
             background: rgba(255, 255, 255, 0.9);
@@ -74,108 +73,163 @@
             border-radius: 5px;
             margin-right: 10px;
         }
-        .country-code input[type="text"] {
-            width: 20%;
-            margin: 0;
-            display: inline-block;
-            text-align: center;
-        }
         .phone-input {
-            width: 48%;
+            width: 58%;
             margin-left: 10px;
         }
-        .inquiry-textarea {
-            resize: none;
-        }
-        /* زر تغيير اللغة */
         .language-toggle {
             position: absolute;
-            top: 10px;
-            left: 10px;
+            top: 20px;
+            left: 20px;
             display: flex;
             align-items: center;
-            cursor: pointer;
-            font-size: 18px;
         }
         .language-toggle img {
-            width: 25px;
-            height: 25px;
-            margin-right: 5px;
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <!-- زر تغيير اللغة -->
-    <div class="language-toggle" onclick="toggleLanguage()">
-        <img id="flag" src="https://flagcdn.com/w320/us.png" alt="US Flag">
-        <span id="language-label">English</span>
+    <div class="language-toggle">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" alt="English" onclick="updateLanguage('en')">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fe/Flag_of_Egypt.svg" alt="Arabic" onclick="updateLanguage('ar')">
     </div>
-
     <div class="form-container">
         <img src="https://github.com/InvestWellCo/InvestWellCo/blob/main/logo%20inveddssssst%20well.png?raw=true" alt="Company Logo" class="logo">
-        <h2 id="form-title">Real Estate Inquiry</h2>
+        <h2 id="form-title">Contact Us</h2>
         <form action="https://formspree.io/f/manyeqbn" method="POST">
-            <input type="text" id="name" name="name" placeholder="Name" required>
-            <input type="email" id="email" name="email" placeholder="Email" required>
+            <input type="text" name="name" id="name-placeholder" placeholder="Name" required>
+            <input type="email" name="email" id="email-placeholder" placeholder="Email" required>
             <div class="country-code">
                 <select id="country" name="country" onchange="updatePhoneCode()" required>
-                    <option value="EG" data-code="+20" selected>Egypt 🇪🇬</option>
-                    <option value="SA" data-code="+966">Saudi Arabia 🇸🇦</option>
-                    <option value="OTHER" data-code="">Other</option>
+    <option value="EG" data-code="+20" selected>Egypt 🇪🇬</option>
+    <option value="SA" data-code="+966">Saudi Arabia 🇸🇦</option>
+    <option value="AE" data-code="+971">United Arab Emirates 🇦🇪</option>
+    <option value="KW" data-code="+965">Kuwait 🇰🇼</option>
+    <option value="US" data-code="+1">United States 🇺🇸</option>
+    <option value="FR" data-code="+33">France 🇫🇷</option>
+    <option value="DE" data-code="+49">Germany 🇩🇪</option>
+    <option value="IT" data-code="+39">Italy 🇮🇹</option>
+    <option value="GB" data-code="+44">United Kingdom 🇬🇧</option>
+    <option value="IN" data-code="+91">India 🇮🇳</option>
+    <option value="BR" data-code="+55">Brazil 🇧🇷</option>
+    <option value="CA" data-code="+1">Canada 🇨🇦</option>
+    <option value="AU" data-code="+61">Australia 🇦🇺</option>
+    <option value="JP" data-code="+81">Japan 🇯🇵</option>
+    <option value="KR" data-code="+82">South Korea 🇰🇷</option>
+    <option value="ZA" data-code="+27">South Africa 🇿🇦</option>
+    <option value="MX" data-code="+52">Mexico 🇲🇽</option>
+    <option value="RU" data-code="+7">Russia 🇷🇺</option>
+    <option value="SG" data-code="+65">Singapore 🇸🇬</option>
+    <option value="NL" data-code="+31">Netherlands 🇳🇱</option>
+    <option value="NO" data-code="+47">Norway 🇳🇴</option>
+    <option value="SE" data-code="+46">Sweden 🇸🇪</option>
+    <option value="ES" data-code="+34">Spain 🇪🇸</option>
+    <option value="CH" data-code="+41">Switzerland 🇨🇭</option>
+    <option value="CN" data-code="+86">China 🇨🇳</option>
+    <option value="BE" data-code="+32">Belgium 🇧🇪</option>
+    <option value="AT" data-code="+43">Austria 🇦🇹</option>
+    <option value="DK" data-code="+45">Denmark 🇩🇰</option>
+    <option value="PL" data-code="+48">Poland 🇵🇱</option>
+    <option value="PH" data-code="+63">Philippines 🇵🇭</option>
+    <option value="AR" data-code="+54">Argentina 🇦🇷</option>
+    <option value="NG" data-code="+234">Nigeria 🇳🇬</option>
+    <option value="PK" data-code="+92">Pakistan 🇵🇰</option>
+    <option value="IR" data-code="+98">Iran 🇮🇷</option>
+    <option value="TR" data-code="+90">Turkey 🇹🇷</option>
+    <option value="TH" data-code="+66">Thailand 🇹🇭</option>
+    <option value="MY" data-code="+60">Malaysia 🇲🇾</option>
+    <option value="VN" data-code="+84">Vietnam 🇻🇳</option>
+    <option value="GR" data-code="+30">Greece 🇬🇷</option>
+    <option value="FI" data-code="+358">Finland 🇫🇮</option>
+    <option value="NZ" data-code="+64">New Zealand 🇳🇿</option>
+    <option value="IE" data-code="+353">Ireland 🇮🇪</option>
+    <option value="OTHER" data-code="">بلد آخر</option>
                 </select>
                 <input type="text" id="country-code" name="country_code" value="+20" readonly>
-                <input type="tel" id="phone" name="phone" class="phone-input" placeholder="Phone Number" required>
+                <input type="tel" id="phone" name="phone" class="phone-input" placeholder="Phone" required>
             </div>
-            <select id="contact-method" name="contact_method" required>
-                <option value="">Select Contact Method</option>
-                <option value="phone">By Phone</option>
-                <option value="whatsapp">By WhatsApp</option>
+            <select name="contact_method" id="contact-method" required>
+                <!-- سيتم تعبئة الخيارات بواسطة JavaScript -->
             </select>
-            <textarea class="inquiry-textarea" id="inquiry" name="inquiry" placeholder="Your Inquiry" rows="4" required></textarea>
-            <button type="submit" id="submit-btn">Submit</button>
+            <textarea id="inquiry-placeholder" name="inquiry" placeholder="Your Inquiry" rows="4" required></textarea>
+            <button type="submit" id="submit-button">Send</button>
         </form>
     </div>
 
     <script>
-        let isEnglish = true;
-
-        function toggleLanguage() {
-            isEnglish = !isEnglish;
-            const langElements = {
-                "form-title": ["Real Estate Inquiry", "استفسار عقاري"],
-                "name": ["Name", "الاسم"],
-                "email": ["Email", "البريد الإلكتروني"],
-                "phone": ["Phone Number", "رقم الهاتف"],
-                "contact-method": ["Select Contact Method", "اختر طريقة التواصل"],
-                "submit-btn": ["Submit", "إرسال"],
-                "inquiry": ["Your Inquiry", "استفسارك"]
-            };
-
-            for (let key in langElements) {
-                if (key === "inquiry") {
-                    document.getElementById(key).placeholder = isEnglish ? langElements[key][0] : langElements[key][1];
-                } else {
-                    document.getElementById(key).textContent = isEnglish ? langElements[key][0] : langElements[key][1];
-                }
-            }
-
-            document.getElementById("flag").src = isEnglish
-                ? "https://flagcdn.com/w320/eg.png"
-                : "https://flagcdn.com/w320/us.png";
-            document.getElementById("language-label").innerText = isEnglish ? "عربي" : "English";
-        }
-
         function updatePhoneCode() {
             const countrySelect = document.getElementById('country');
             const countryCodeInput = document.getElementById('country-code');
             const selectedCode = countrySelect.options[countrySelect.selectedIndex].dataset.code;
             countryCodeInput.value = selectedCode;
 
-            countryCodeInput.style.display = countrySelect.value === "OTHER" ? "none" : "inline-block";
+            if (countrySelect.value === "OTHER") {
+                countryCodeInput.style.display = "none";
+            } else {
+                countryCodeInput.style.display = "inline";
+            }
+        }
+
+        function updateLanguage(language) {
+            document.documentElement.lang = language;
+            const texts = {
+                en: {
+                    title: "Contact Us",
+                    namePlaceholder: "Name",
+                    emailPlaceholder: "Email",
+                    phonePlaceholder: "Phone",
+                    contactMethodPlaceholder: "Select contact method",
+                    inquiryPlaceholder: "Your Inquiry",
+                    submitButton: "Send",
+                    contactOptions: [
+                        { value: "", text: "Select contact method" },
+                        { value: "phone", text: "By Phone" },
+                        { value: "whatsapp", text: "WhatsApp" }
+                    ]
+                },
+                ar: {
+                    title: "للتواصل",
+                    namePlaceholder: "الاسم",
+                    emailPlaceholder: "البريد الإلكتروني",
+                    phonePlaceholder: "رقم الهاتف",
+                    contactMethodPlaceholder: "اختر طريقة التواصل",
+                    inquiryPlaceholder: "استفسارك",
+                    submitButton: "إرسال",
+                    contactOptions: [
+                        { value: "", text: "اختر طريقة التواصل" },
+                        { value: "phone", text: "هاتفياً" },
+                        { value: "whatsapp", text: "واتساب" }
+                    ]
+                }
+            };
+
+            document.getElementById("form-title").textContent = texts[language].title;
+            document.getElementById("name-placeholder").placeholder = texts[language].namePlaceholder;
+            document.getElementById("email-placeholder").placeholder = texts[language].emailPlaceholder;
+            document.getElementById("phone").placeholder = texts[language].phonePlaceholder;
+            document.getElementById("inquiry-placeholder").placeholder = texts[language].inquiryPlaceholder;
+            document.getElementById("submit-button").textContent = texts[language].submitButton;
+
+            updateContactOptions(texts[language].contactOptions);
+        }
+
+        function updateContactOptions(options) {
+            const contactMethodSelect = document.getElementById("contact-method");
+            contactMethodSelect.innerHTML = "";
+            options.forEach(option => {
+                const newOption = document.createElement("option");
+                newOption.value = option.value;
+                newOption.textContent = option.text;
+                contactMethodSelect.appendChild(newOption);
+            });
         }
 
         window.onload = function() {
-            updatePhoneCode();
+            updateLanguage("en");
         };
     </script>
 </body>
