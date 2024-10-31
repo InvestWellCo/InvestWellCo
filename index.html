@@ -11,7 +11,7 @@
             background-image: url('https://your-background-image-url.com'); /* رابط صورة الخلفية */
             background-size: cover;
             background-repeat: no-repeat;
-            color: #333; /* لون النص */
+            color: #282827; /* لون النص */
             margin: 0;
             padding: 20px;
             display: flex;
@@ -24,35 +24,37 @@
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-            max-width: 400px;
+            max-width: 450px; /* تعديل عرض النموذج */
             width: 100%;
         }
         .form-container h2 {
             text-align: center;
             margin-bottom: 20px;
-            color: #5cb85c; /* لون العنوان */
+            color: #005d9e; /* لون العنوان */
+            font-size: 24px; /* حجم الخط */
         }
         .form-container input, .form-container select, .form-container textarea {
             width: 100%;
             padding: 12px;
             margin: 10px 0;
-            border: 2px solid #5cb85c; /* لون الحدود */
+            border: 2px solid #005d9e; /* لون الحدود */
             border-radius: 5px;
-            font-size: 16px; /* حجم الخط */
+            font-size: 18px; /* حجم الخط */
+            box-sizing: border-box; /* تحسين التوافق */
         }
         .form-container button {
             width: 100%;
             padding: 12px;
-            background-color: #5cb85c;
+            background-color: #005d9e; /* لون الخلفية */
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 18px; /* حجم الخط */
             transition: background-color 0.3s; /* تأثير التغير */
         }
         .form-container button:hover {
-            background-color: #4cae4c;
+            background-color: #004b7a; /* لون الخلفية عند التحويم */
         }
         .logo {
             max-width: 150px; /* حجم اللوجو */
@@ -93,7 +95,17 @@
                     <option value="GB" data-code="+44">المملكة المتحدة 🇬🇧</option>
                     <option value="IN" data-code="+91">الهند 🇮🇳</option>
                     <option value="BR" data-code="+55">البرازيل 🇧🇷</option>
-                    <!-- يمكنك إضافة المزيد من الخيارات هنا -->
+                    <option value="CA" data-code="+1">كندا 🇨🇦</option>
+                    <option value="AU" data-code="+61">أستراليا 🇦🇺</option>
+                    <option value="JP" data-code="+81">اليابان 🇯🇵</option>
+                    <option value="KR" data-code="+82">كوريا الجنوبية 🇰🇷</option>
+                    <option value="ZA" data-code="+27">جنوب أفريقيا 🇿🇦</option>
+                    <option value="MX" data-code="+52">المكسيك 🇲🇽</option>
+                    <option value="RU" data-code="+7">روسيا 🇷🇺</option>
+                    <option value="SG" data-code="+65">سنغافورة 🇸🇬</option>
+                    <option value="NL" data-code="+31">هولندا 🇳🇱</option>
+                    <option value="NO" data-code="+47">النرويج 🇳🇴</option>
+                    <option value="SE" data-code="+46">السويد 🇸🇪</option>
                     <option value="OTHER" data-code="">بلد آخر</option>
                 </select>
                 <input type="tel" id="phone" name="phone" placeholder="رقم الهاتف" required>
