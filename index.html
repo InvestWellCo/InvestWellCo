@@ -104,7 +104,6 @@
     </style>
 </head>
 <body>
-    <!-- زر تغيير اللغة -->
     <div class="language-toggle" onclick="toggleLanguage()">
         <img id="flag" src="https://flagcdn.com/w320/us.png" alt="US Flag">
         <span id="language-label">English</span>
@@ -126,7 +125,7 @@
                 <input type="tel" id="phone" name="phone" class="phone-input" placeholder="Phone Number" required>
             </div>
             <select id="contact-method" name="contact_method" required>
-                <option value="">Select Contact Method</option>
+                <option value="default" disabled selected>Select Contact Method</option>
                 <option value="phone">By Phone</option>
                 <option value="whatsapp">By WhatsApp</option>
             </select>
@@ -144,10 +143,8 @@
                 "form-title": ["Real Estate Inquiry", "استفسار عقاري"],
                 "name": ["Name", "الاسم"],
                 "email": ["Email", "البريد الإلكتروني"],
-                "phone": ["Phone Number", "رقم الهاتف"],
-                "contact-method": ["Select Contact Method", "اختر طريقة التواصل"],
-                "submit-btn": ["Submit", "إرسال"],
-                "inquiry": ["Your Inquiry", "استفسارك"]
+                "inquiry": ["Your Inquiry", "استفسارك"],
+                "submit-btn": ["Submit", "إرسال"]
             };
 
             for (let key in langElements) {
@@ -162,6 +159,12 @@
                 ? "https://flagcdn.com/w320/eg.png"
                 : "https://flagcdn.com/w320/us.png";
             document.getElementById("language-label").innerText = isEnglish ? "عربي" : "English";
+
+            // Update contact method options
+            const contactMethod = document.getElementById("contact-method");
+            contactMethod.options[0].text = isEnglish ? "Select Contact Method" : "اختر طريقة التواصل";
+            contactMethod.options[1].text = isEnglish ? "By Phone" : "بالهاتف";
+            contactMethod.options[2].text = isEnglish ? "By WhatsApp" : "واتساب";
         }
 
         function updatePhoneCode() {
