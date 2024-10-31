@@ -143,11 +143,10 @@
                     <option value="AU" data-code="+61">🇦🇺</option>
                     <option value="OTHER" data-code="">🌍 بلد آخر</option> <!-- Fixed translation -->
                 </select>
-<input type="tel" id="phone" name="phone" class="phone-input" placeholder="Phone Number" required oninvalid="this.setCustomValidity('Invalid phone number')" oninput="this.setCustomValidity('')">
-<span class="error-message" style="color: #282827; display: none;">Invalid phone number format</span>
+
                 <input type="text" id="country-code" name="country_code" value="+20" readonly>
             </div>
-<input type="tel" id="phone" name="phone" class="phone-input" placeholder="Phone Number" required oninvalid="this.setCustomValidity('Invalid phone number')" oninput="this.setCustomValidity('')" pattern="^[0-9]{10,15}$">
+<input type="tel" id="phone" name="phone" class="phone-input" placeholder="Phone Number" required onkeypress="return isNumber(event)">
 <span class="error-message" style="color: #282827; display: none;">Invalid phone number format</span>
             <select id="contact-method" name="contact_method" required>
                 <option value="default" disabled selected>Select Contact Method</option>
@@ -264,6 +263,17 @@ function updatePhoneCode() {
 
 
 ////
+function isNumber(event) {
+    const char = String.fromCharCode(event.which);
+    // السماح فقط بالأرقام (0-9) والرجوع للخلف (Backspace)
+    if (!char.match(/[0-9]/) && event.which !== 8) {
+        event.preventDefault();
+        return false;
+    }
+    return true;
+}
+
+////////
 document.getElementById("email").addEventListener("invalid", function () {
     document.querySelector(".error-message").style.display = "block";
 });
