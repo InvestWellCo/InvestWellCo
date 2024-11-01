@@ -221,42 +221,40 @@ for (let key in langElements) {
             validateSubmitButton();
         };
 
-        function validatePhone() {
-            const phoneInput = document.getElementById("phone");
-            const phoneError = document.getElementById("phone-error");
-            const countrySelect = document.getElementById("country");
-            const selectedCountry = countrySelect.value;
-            const phoneValue = phoneInput.value;
+function validatePhone() {
+    const phoneInput = document.getElementById("phone");
+    const countrySelect = document.getElementById("country");
+    const selectedCountry = countrySelect.value;
+    const phoneValue = phoneInput.value;
 
-            const phoneRules = {
-                "EG": /^01[0-9]{9}$/,
-                "SA": /^05[0-9]{8}$/,
-                "AE": /^05[0-9]{8}$/,
-                "KW": /^5[0-9]{7}$/,
-                "QA": /^3[0-9]{7}$/,
-                "OM": /^9[0-9]{7}$/,
-                "BH": /^3[0-9]{7}$/,
-                "JO": /^07[0-9]{8}$/,
-                "LY": /^09[1-9][0-9]{7}$/,
-                "DZ": /^0[56][0-9]{8}$/,
-                "MA": /^06[0-9]{8}$/,
-                "TN": /^2[0-9]{7}$/,
-                "SY": /^09[1-9][0-9]{7}$/,
-                "LB": /^03|71[0-9]{6}$/,
-                "US": /^[2-9][0-9]{9}$/,
-                "GB": /^07[0-9]{9}$/
-            };
+    const phoneRules = {
+        "EG": /^01[0-9]{9}$/,
+        "SA": /^05[0-9]{8}$/,
+        "AE": /^05[0-9]{8}$/,
+        "KW": /^5[0-9]{7}$/,
+        "QA": /^3[0-9]{7}$/,
+        "OM": /^9[0-9]{7}$/,
+        "BH": /^3[0-9]{7}$/,
+        "JO": /^07[0-9]{8}$/,
+        "LY": /^09[1-9][0-9]{7}$/,
+        "DZ": /^0[56][0-9]{8}$/,
+        "MA": /^06[0-9]{8}$/,
+        "TN": /^2[0-9]{7}$/,
+        "SY": /^09[1-9][0-9]{7}$/,
+        "LB": /^03|71[0-9]{6}$/,
+        "US": /^[2-9][0-9]{9}$/,
+        "GB": /^07[0-9]{9}$/
+    };
 
-            if (phoneRules[selectedCountry] && !phoneRules[selectedCountry].test(phoneValue)) {
-                phoneError.style.display = "block";
-                phoneInput.setCustomValidity("Invalid phone number format");
-            } else {
-                phoneError.style.display = "none";
-                phoneInput.setCustomValidity("");
-            }
+    // التحقق من صحة الرقم دون عرض أي رسالة
+    if (phoneRules[selectedCountry] && !phoneRules[selectedCountry].test(phoneValue)) {
+        phoneInput.setCustomValidity("Invalid phone number format");
+    } else {
+        phoneInput.setCustomValidity("");
+    }
 
-            validateSubmitButton();
-        }
+    validateSubmitButton();
+}
 
 function validateSubmitButton() {
     const nameInput = document.getElementById("name");
