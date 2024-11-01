@@ -258,11 +258,13 @@ for (let key in langElements) {
             validateSubmitButton();
         }
 
-        function validateSubmitButton() {
-            const nameInput = document.getElementById("name");
-            const emailInput = document.getElementById("email");
-            const phoneInput = document.getElementById("phone");
-            const submitBtn = document.getElementById("submit-btn");
+function validateSubmitButton() {
+    const nameInput = document.getElementById("name");
+    const emailInput = document.getElementById("email");
+    const phoneInput = document.getElementById("phone");
+    const contactMethod = document.getElementById("contact-method");
+    const inquiryInput = document.getElementById("inquiry");
+    const submitBtn = document.getElementById("submit-btn");
 
             if (nameInput.value && emailInput.value && phoneInput.value) {
                 submitBtn.disabled = false;
