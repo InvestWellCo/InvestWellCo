@@ -266,18 +266,29 @@ function validateSubmitButton() {
     const inquiryInput = document.getElementById("inquiry");
     const submitBtn = document.getElementById("submit-btn");
 
-            if (nameInput.value && emailInput.value && phoneInput.value) {
-                submitBtn.disabled = false;
-                submitBtn.style.backgroundColor = "#005d9e"; // العودة للون الطبيعي
-            } else {
-                submitBtn.disabled = true;
-                submitBtn.style.backgroundColor = "#282827"; // اللون عند التعطيل
-            }
-        }
+    // تحقق من ملء جميع الحقول المطلوبة
+    if (
+        nameInput.value &&
+        emailInput.value &&
+        phoneInput.value &&
+        inquiryInput.value &&
+        contactMethod.value !== "default"
+    ) {
+        submitBtn.disabled = false;
+        submitBtn.style.backgroundColor = "#005d9e"; // العودة للون الطبيعي
+    } else {
+        submitBtn.disabled = true;
+        submitBtn.style.backgroundColor = "#282827"; // اللون عند التعطيل
+    }
+}
 
-        document.getElementById("name").addEventListener("input", validateSubmitButton);
-        document.getElementById("email").addEventListener("input", validateSubmitButton);
-        document.getElementById("phone").addEventListener("input", validateSubmitButton);
+// استدعاء الدالة عند أي تغيير في الحقول المطلوبة
+document.getElementById("name").addEventListener("input", validateSubmitButton);
+document.getElementById("email").addEventListener("input", validateSubmitButton);
+document.getElementById("phone").addEventListener("input", validateSubmitButton);
+document.getElementById("inquiry").addEventListener("input", validateSubmitButton);
+document.getElementById("contact-method").addEventListener("change", validateSubmitButton);
+
     </script>
 </body>
 </html>
