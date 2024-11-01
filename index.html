@@ -245,13 +245,6 @@ for (let key in langElements) {
                 "LB": /^03|71[0-9]{6}$/,
                 "US": /^[2-9][0-9]{9}$/,
                 "GB": /^07[0-9]{9}$/
-                "DE": /^01[5][0-9]{7,9}$/,  // ألمانيا
-                "FR": /^0[6-7][0-9]{8}$/,   // فرنسا
-                "IT": /^3[0-3][0-9]{8}$/,   // إيطاليا
-                "ES": /^6[0-9]{8}$/,        // إسبانيا
-                "CA": /^[2-9][0-9]{2}-?[0-9]{3}-?[0-9]{4}$/,  // كندا
-                "AU": /^04[0-9]{8}$/,      // أستراليا
-                "OTHER": /^[0-9]+$/        // بلد آخر (يسمح بأي رقم)
             };
 
             if (phoneRules[selectedCountry] && !phoneRules[selectedCountry].test(phoneValue)) {
@@ -266,11 +259,10 @@ for (let key in langElements) {
         }
 
         function validateSubmitButton() {
-    const nameInput = document.getElementById("name");
-    const emailInput = document.getElementById("email");
-    const phoneInput = document.getElementById("phone");
-    const contactMethod = document.getElementById("contact-method");
-    const inquiryInput = document.getElementById("inquiry");
+            const nameInput = document.getElementById("name");
+            const emailInput = document.getElementById("email");
+            const phoneInput = document.getElementById("phone");
+            const submitBtn = document.getElementById("submit-btn");
 
             if (nameInput.value && emailInput.value && phoneInput.value) {
                 submitBtn.disabled = false;
@@ -284,9 +276,6 @@ for (let key in langElements) {
         document.getElementById("name").addEventListener("input", validateSubmitButton);
         document.getElementById("email").addEventListener("input", validateSubmitButton);
         document.getElementById("phone").addEventListener("input", validateSubmitButton);
-        document.getElementById("contact-method").addEventListener("input", validateSubmitButton);
-        document.getElementById("inquiry").addEventListener("input", validateSubmitButton);
-
     </script>
 </body>
 </html>
