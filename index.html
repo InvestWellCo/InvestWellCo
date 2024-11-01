@@ -66,6 +66,7 @@
     background-color: #004b7a; /* اللون عند الوقوف عليه */
 }
 
+
         .logo {
             max-width: 150px;
             margin: 0 auto 20px auto;
@@ -289,6 +290,20 @@ function validateSubmitButton() {
         submitBtn.style.backgroundColor = "#282827"; // اللون عند التعطيل
     }
 }
+//////////////
+const submitButton = document.getElementById("submit-btn");
+
+submitButton.addEventListener("mouseover", () => {
+    if (!submitButton.disabled) {
+        submitButton.style.backgroundColor = "#004b7a";
+    }
+});
+
+submitButton.addEventListener("mouseout", () => {
+    if (!submitButton.disabled) {
+        submitButton.style.backgroundColor = "#005d9e";
+    }
+});
 
 // استدعاء الدالة عند أي تغيير في الحقول المطلوبة
 document.getElementById("name").addEventListener("input", validateSubmitButton);
@@ -296,6 +311,25 @@ document.getElementById("email").addEventListener("input", validateSubmitButton)
 document.getElementById("phone").addEventListener("input", validateSubmitButton);
 document.getElementById("inquiry").addEventListener("input", validateSubmitButton);
 document.getElementById("contact-method").addEventListener("change", validateSubmitButton);
+window.onload = function() {
+    updatePhoneCode();
+    toggleLanguage();
+    validateSubmitButton();
+    
+    const submitButton = document.getElementById("submit-btn");
+
+    submitButton.addEventListener("mouseover", () => {
+        if (!submitButton.disabled) {
+            submitButton.style.backgroundColor = "#004b7a";
+        }
+    });
+
+    submitButton.addEventListener("mouseout", () => {
+        if (!submitButton.disabled) {
+            submitButton.style.backgroundColor = "#005d9e";
+        }
+    });
+};
 
     </script>
 </body>
