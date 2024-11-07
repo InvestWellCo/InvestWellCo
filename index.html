@@ -32,7 +32,7 @@
         .form-container h2 {
             text-align: center;
             margin-bottom: 20px;
-            color: #005d9e;
+            color: #800020;
             font-size: 28px;
             font-weight: bold;
         }
@@ -40,7 +40,7 @@
             width: 100%;
             padding: 12px;
             margin: 10px 0;
-            border: 2px solid #005d9e;
+            border: 2px solid #800020;
             border-radius: 5px;
             font-size: 18px;
             box-sizing: border-box;
@@ -284,7 +284,7 @@ function validateSubmitButton() {
         contactMethod.value !== "default"
     ) {
         submitBtn.disabled = false;
-        submitBtn.style.backgroundColor = "#005d9e"; // العودة للون الطبيعي
+        submitBtn.style.backgroundColor = "#800020"; // العودة للون الطبيعي
     } else {
         submitBtn.disabled = true;
         submitBtn.style.backgroundColor = "#282827"; // اللون عند التعطيل
@@ -301,7 +301,7 @@ submitButton.addEventListener("mouseover", () => {
 
 submitButton.addEventListener("mouseout", () => {
     if (!submitButton.disabled) {
-        submitButton.style.backgroundColor = "#005d9e";
+        submitButton.style.backgroundColor = "#800020";
     }
 });
 
@@ -326,7 +326,7 @@ window.onload = function() {
 
     submitButton.addEventListener("mouseout", () => {
         if (!submitButton.disabled) {
-            submitButton.style.backgroundColor = "#005d9e";
+            submitButton.style.backgroundColor = "#800020";
         }
     });
 };
