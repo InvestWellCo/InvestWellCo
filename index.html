@@ -182,13 +182,13 @@
                 "inquiry": ["Your Inquiry", "استفسارك"],
                 "submit-btn": ["Submit", "إرسال"]
             };
-for (let key in langElements) {
-                if (key === "inquiry") {
-                    document.getElementById(key).placeholder = isEnglish ? langElements[key][0] : langElements[key][1];
-                } else {
-                    document.getElementById(key).textContent = isEnglish ? langElements[key][0] : langElements[key][1];
-                }
-            }
+//for (let key in langElements) {
+  //              if (key === "inquiry") {
+    //                document.getElementById(key).placeholder = isEnglish ? langElements[key][0] : langElements[key][1];
+      //          } else {
+        //            document.getElementById(key).textContent = isEnglish ? langElements[key][0] : langElements[key][1];
+          //      }
+            //}
         //    document.getElementById("form-title").textContent = isEnglish ? langElements["form-title"][0] : langElements["form-title"][1];
           //  document.getElementById("name").placeholder = isEnglish ? langElements["name"][0] : langElements["name"][1];
             //document.getElementById("email").placeholder = isEnglish ? langElements["email"][0] : langElements["email"][1];
@@ -196,35 +196,83 @@ for (let key in langElements) {
             //document.getElementById("inquiry").placeholder = isEnglish ? langElements["inquiry"][0] : langElements["inquiry"][1];
             //document.getElementById("submit-btn").textContent = isEnglish ? langElements["submit-btn"][0] : langElements["submit-btn"][1];
 
-                      document.getElementById("flag").src = isEnglish
-                ? "https://flagcdn.com/w320/eg.png"
-                : "https://flagcdn.com/w320/us.png";
-            document.getElementById("language-label").innerText = isEnglish ? "عربي" : "English";
+              //        document.getElementById("flag").src = isEnglish
+                //? "https://flagcdn.com/w320/eg.png"
+              //  : "https://flagcdn.com/w320/us.png";
+            //document.getElementById("language-label").innerText = isEnglish ? "عربي" : "English";
 
-            const contactMethod = document.getElementById("contact-method");
-            contactMethod.options[0].text = isEnglish ? "Select Contact Method" : "اختر طريقة التواصل";
-            contactMethod.options[1].text = isEnglish ? "By Phone" : "بالهاتف";
-            contactMethod.options[2].text = isEnglish ? "By WhatsApp" : "واتساب";
+//            const contactMethod = document.getElementById("contact-method");
+            //contactMethod.options[0].text = isEnglish ? "Select Contact Method" : "اختر طريقة التواصل";
+           // contactMethod.options[1].text = isEnglish ? "By Phone" : "بالهاتف";
+           // contactMethod.options[2].text = isEnglish ? "By WhatsApp" : "واتساب";
 
-            const countrySelect = document.getElementById("country");
-            countrySelect.options[countrySelect.options.length - 1].text = isEnglish ? "🌍 Other" : "🌍 بلد آخر"; 
-        }
+    //        const countrySelect = document.getElementById("country");
+         //   countrySelect.options[countrySelect.options.length - 1].text = isEnglish ? "🌍 Other" : "🌍 بلد آخر"; 
+     //   }
 
-        function updatePhoneCode() {
-            const countrySelect = document.getElementById('country');
-            const countryCodeInput = document.getElementById('country-code');
-            const selectedCode = countrySelect.options[countrySelect.selectedIndex].dataset.code;
-            countryCodeInput.value = selectedCode;
+  //      function updatePhoneCode() {
+      //      const countrySelect = document.getElementById('country');
+      //      const countryCodeInput = document.getElementById('country-code');
+        //    const selectedCode = countrySelect.options[countrySelect.selectedIndex].dataset.code;
+       //     countryCodeInput.value = selectedCode;
 
-            countryCodeInput.style.display = countrySelect.value === "OTHER" ? "none" : "inline-block";
-        }
+        //    countryCodeInput.style.display = countrySelect.value === "OTHER" ? "none" : "inline-block";
+     //   }
 
-        window.onload = function() {
-            updatePhoneCode();
-            toggleLanguage();
-            validateSubmitButton();
+    //    window.onload = function() {
+      //      updatePhoneCode();
+      //      toggleLanguage();
+     //       validateSubmitButton();
+     //   };
+    let isEnglish = false;
+
+    function toggleLanguage() {
+        isEnglish = !isEnglish;
+        const langElements = {
+            "form-title": ["Real Estate Inquiry", "استفسار عقاري"],
+            "name": ["Name", "الاسم"],
+            "email": ["Email", "البريد الإلكتروني"],
+            "phone": ["Phone Number", "رقم الهاتف"],
+            "inquiry": ["Your Inquiry", "استفسارك"],
+            "submit-btn": ["Submit", "إرسال"]
         };
+        
+        for (let key in langElements) {
+            if (key === "inquiry") {
+                document.getElementById(key).placeholder = isEnglish ? langElements[key][0] : langElements[key][1];
+            } else {
+                document.getElementById(key).textContent = isEnglish ? langElements[key][0] : langElements[key][1];
+            }
+        }
+        
+        document.getElementById("flag").src = isEnglish
+            ? "https://flagcdn.com/w320/eg.png"
+            : "https://flagcdn.com/w320/us.png";
+        document.getElementById("language-label").innerText = isEnglish ? "عربي" : "English";
 
+        const contactMethod = document.getElementById("contact-method");
+        contactMethod.options[0].text = isEnglish ? "Select Contact Method" : "اختر طريقة التواصل";
+        contactMethod.options[1].text = isEnglish ? "By Phone" : "بالهاتف";
+        contactMethod.options[2].text = isEnglish ? "By WhatsApp" : "واتساب";
+
+        const countrySelect = document.getElementById("country");
+        countrySelect.options[countrySelect.options.length - 1].text = isEnglish ? "🌍 Other" : "🌍 بلد آخر";
+    }
+
+    function updatePhoneCode() {
+        const countrySelect = document.getElementById('country');
+        const countryCodeInput = document.getElementById('country-code');
+        const selectedCode = countrySelect.options[countrySelect.selectedIndex].dataset.code;
+        countryCodeInput.value = selectedCode;
+
+        countryCodeInput.style.display = countrySelect.value === "OTHER" ? "none" : "inline-block";
+    }
+
+    window.onload = function() {
+        updatePhoneCode();
+        validateSubmitButton();
+    };
+////////////////
 function validatePhone() {
     const phoneInput = document.getElementById("phone");
     const countrySelect = document.getElementById("country");
