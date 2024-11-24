@@ -126,8 +126,6 @@
         <h2 id="form-title">Real Estate Inquiry</h2>
 <form action="https://formspree.io/f/manyeqbn" method="POST" onsubmit="return validateForm()">
     <input type="text" id="name" name="name" placeholder="Name" required>
-            <input type="email" id="email" name="email" placeholder="Email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}" oninvalid="this.setCustomValidity('Invalid email format')" oninput="this.setCustomValidity('')">
-            <span class="error-message" style="color: #282827; display: none;">Invalid email format</span>
             <div class="country-code">
                 <select id="country" name="country" onchange="updatePhoneCode()" required>
                     <option value="EG" data-code="+20">🇪🇬</option>
@@ -159,11 +157,7 @@
             <input type="tel" id="phone" name="phone" class="phone-input" placeholder="Phone Number" required pattern="[0-9]*" oninput="validatePhone()" onblur="validatePhone()">
             <span id="phone-error" style="color: #282827; display: none;">Invalid phone number format</span>
 
-            <select id="contact-method" name="contact_method" required>
-                <option value="default" disabled selected>Select Contact Method</option>
-                <option value="phone">By Phone</option>
-                <option value="whatsapp">By WhatsApp</option>
-            </select>
+            
             <textarea class="inquiry-textarea" id="inquiry" name="inquiry" placeholder="Your Inquiry" rows="4" required></textarea>
             <button type="submit" id="submit-btn" disabled>Submit</button>
         </form>
@@ -273,7 +267,7 @@ function validateSubmitButton() {
 //    const emailInput = document.getElementById("email");
     const phoneInput = document.getElementById("phone");
     const contactMethod = document.getElementById("contact-method");
-    const inquiryInput = document.getElementById("inquiry");
+  //  const inquiryInput = document.getElementById("inquiry");
     const submitBtn = document.getElementById("submit-btn");
 
     // تحقق من ملء جميع الحقول المطلوبة
@@ -281,7 +275,7 @@ function validateSubmitButton() {
         nameInput.value &&
        // emailInput.value &&
         phoneInput.value &&
-        inquiryInput.value &&
+    //    inquiryInput.value &&
         contactMethod.value !== "default"
     ) {
         submitBtn.disabled = false;
