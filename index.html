@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invest Well</title>
-    <link rel="icon" href="https://github.com/InvestWellCo/InvestWellCo/blob/main/profdile.png?raw=true" type="image/png">
+    <link rel="icon" href="https://github.com/InvestWellCo/InvestWellCo/blob/main/png.png?raw=true" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -32,7 +32,7 @@
         .form-container h2 {
             text-align: center;
             margin-bottom: 20px;
-            color: #800020;
+            color: #003a60;
             font-size: 28px;
             font-weight: bold;
         }
@@ -40,7 +40,7 @@
             width: 100%;
             padding: 12px;
             margin: 10px 0;
-            border: 2px solid #800020;
+            border: 2px solid #003a60;
             border-radius: 5px;
             font-size: 18px;
             box-sizing: border-box;
@@ -63,7 +63,7 @@
 }
 
 .form-container button:hover:not(:disabled) {
-    background-color: #800020; /* اللون عند الوقوف عليه */
+    background-color: #003a60; /* اللون عند الوقوف عليه */
 }
 
 
@@ -285,7 +285,7 @@ function validateSubmitButton() {
         contactMethod.value !== "default"
     ) {
         submitBtn.disabled = false;
-        submitBtn.style.backgroundColor = "#800020"; // العودة للون الطبيعي
+        submitBtn.style.backgroundColor = "#003a60"; // العودة للون الطبيعي
     } else {
         submitBtn.disabled = true;
         submitBtn.style.backgroundColor = "#282827"; // اللون عند التعطيل
@@ -296,13 +296,13 @@ const submitButton = document.getElementById("submit-btn");
 
 submitButton.addEventListener("mouseover", () => {
     if (!submitButton.disabled) {
-        submitButton.style.backgroundColor = "#560e16";
+        submitButton.style.backgroundColor = "#012b46";
     }
 });
 
 submitButton.addEventListener("mouseout", () => {
     if (!submitButton.disabled) {
-        submitButton.style.backgroundColor = "#800020";
+        submitButton.style.backgroundColor = "#003a60";
     }
 });
 
@@ -321,7 +321,7 @@ window.onload = function() {
 
     submitButton.addEventListener("mouseover", () => {
         if (!submitButton.disabled) {
-            submitButton.style.backgroundColor = "#800020";
+            submitButton.style.backgroundColor = "#003a60";
         }
     });
 
