@@ -195,10 +195,10 @@ for (let key in langElements) {
                 : "https://flagcdn.com/w320/us.png";
             document.getElementById("language-label").innerText = isEnglish ? "عربي" : "English";
 
-      //  const contactMethod = document.getElementById("contact-method");
-    //    contactMethod.options[0].text = isEnglish ? "Select Contact Method" : "اختر طريقة التواصل";
-      //     contactMe thod.options[1].text = isEnglish ? "By Phone" : "بالهاتف";
-       //    contactMethod.options[2].text = isEnglish ? "By WhatsApp" : "واتساب";
+      const contactMethod = document.getElementById("contact-method");
+       contactMethod.options[0].text = isEnglish ? "Select Contact Method" : "اختر طريقة التواصل";
+          contactMe thod.options[1].text = isEnglish ? "By Phone" : "بالهاتف";
+          contactMethod.options[2].text = isEnglish ? "By WhatsApp" : "واتساب";
 
            const countrySelect = document.getElementById("country");
             countrySelect.options[countrySelect.options.length - 1].text = isEnglish ? "🌍 Other" : "🌍 بلد آخر"; 
@@ -266,7 +266,7 @@ function validateSubmitButton() {
     const nameInput = document.getElementById("name");
   //  const emailInput = document.getElementById("email");
     const phoneInput = document.getElementById("phone");
-//   const contactMethod = document.getElementById("contact-method");
+  const contactMethod = document.getElementById("contact-method");
     const inquiryInput = document.getElementById("inquiry");
     const submitBtn = document.getElementById("submit-btn");
 
@@ -276,7 +276,8 @@ function validateSubmitButton() {
     //    emailInput.value &&
         phoneInput.value &&
     //    inquiryInput.value &&
-    //   contactMethod.value !== "default"
+    
+    contactMethod.value !== "default"
     ) {
         submitBtn.disabled = false;
         submitBtn.style.backgroundColor = "#003a60"; // العودة للون الطبيعي
@@ -305,7 +306,7 @@ document.getElementById("name").addEventListener("input", validateSubmitButton);
 //document.getElementById("email").addEventListener("input", validateSubmitButton);
 document.getElementById("phone").addEventListener("input", validateSubmitButton);
 //document.getElementById("inquiry").addEventListener("input", validateSubmitButton);
-//document.getElementById("contact-method").addEventListener("change", validateSubmitButton);
+document.getElementById("contact-method").addEventListener("change", validateSubmitButton);
 window.onload = function() {
     updatePhoneCode();
     toggleLanguage();
