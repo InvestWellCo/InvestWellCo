@@ -205,7 +205,7 @@ for (let key in langElements) {
            contactMethod.options[2].text = isEnglish ? "By WhatsApp" : "واتساب";
 
            const countrySelect = document.getElementById("country");
-            countrySelect.options[countrySelect.options.length - 1].text = isEnglish ? "🌍 Other" : "🌍 بلد آخر"; 
+            countrySelect.options[countrySelect.options.length - 1].text = isEnglish ? "🌍 Other Country" : "🌍 بلد آخر"; 
         }
 
         function updatePhoneCode() {
