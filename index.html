@@ -126,6 +126,8 @@
         <h2 id="form-title">Real Estate Inquiry</h2>
 <form action="https://formspree.io/f/manyeqbn" method="POST" onsubmit="return validateForm()">
     <input type="text" id="name" name="name" placeholder="Name" required>
+            <input type="email" id="email" name="email" placeholder="Email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}" oninvalid="this.setCustomValidity('Invalid email format')" oninput="this.setCustomValidity('')">
+            <span class="error-message" style="color: #282827; display: none;">Invalid email format</span>
             <div class="country-code">
                 <select id="country" name="country" onchange="updatePhoneCode()" required>
                     <option value="EG" data-code="+20">🇪🇬</option>
@@ -157,8 +159,14 @@
             <input type="tel" id="phone" name="phone" class="phone-input" placeholder="Phone Number" required pattern="[0-9]*" oninput="validatePhone()" onblur="validatePhone()">
             <span id="phone-error" style="color: #282827; display: none;">Invalid phone number format</span>
 
-            <textarea class="inquiry-textarea" id="inquiry" name="inquiry" placeholder="Your Inquiry" rows="4"></textarea>
-            <button type="submit" id="submit-btn" disabled>Submit</button>        </form>
+            <select id="contact-method" name="contact_method" required>
+                <option value="default" disabled selected>Select Contact Method</option>
+                <option value="phone">By Phone</option>
+                <option value="whatsapp">By WhatsApp</option>
+            </select>
+            <textarea class="inquiry-textarea" id="inquiry" name="inquiry" placeholder="Your Inquiry" rows="4" required></textarea>
+            <button type="submit" id="submit-btn" disabled>Submit</button>
+        </form>
     </div>
 
     <script>
@@ -169,7 +177,7 @@
             const langElements = {
                 "form-title": ["Real Estate Inquiry", "استفسار عقاري"],
                 "name": ["Name", "الاسم"],
-                //"email": ["Email", "البريد الإلكتروني"],
+                "email": ["Email", "البريد الإلكتروني"],
                 "phone": ["Phone Number", "رقم الهاتف"],
                 "inquiry": ["Your Inquiry", "استفسارك"],
                 "submit-btn": ["Submit", "إرسال"]
@@ -183,7 +191,7 @@ for (let key in langElements) {
             }
             document.getElementById("form-title").textContent = isEnglish ? langElements["form-title"][0] : langElements["form-title"][1];
            document.getElementById("name").placeholder = isEnglish ? langElements["name"][0] : langElements["name"][1];
-         //   document.getElementById("email").placeholder = isEnglish ? langElements["email"][0] : langElements["email"][1];
+            document.getElementById("email").placeholder = isEnglish ? langElements["email"][0] : langElements["email"][1];
             document.getElementById("phone").placeholder = isEnglish ? langElements["phone"][0] : langElements["phone"][1];
             document.getElementById("inquiry").placeholder = isEnglish ? langElements["inquiry"][0] : langElements["inquiry"][1];
             document.getElementById("submit-btn").textContent = isEnglish ? langElements["submit-btn"][0] : langElements["submit-btn"][1];
@@ -193,10 +201,10 @@ for (let key in langElements) {
                 : "https://flagcdn.com/w320/us.png";
             document.getElementById("language-label").innerText = isEnglish ? "عربي" : "English";
 
-         // const contactMethod = document.getElementById("contact-method");
-         //  contactMethod.options[0].text = isEnglish ? "Select Contact Method" : "اختر طريقة التواصل";
-         //   contactMethod.options[1].text = isEnglish ? "By Phone" : "بالهاتف";
-      //      contactMethod.options[2].text = isEnglish ? "By WhatsApp" : "واتساب";
+          const contactMethod = document.getElementById("contact-method");
+           contactMethod.options[0].text = isEnglish ? "Select Contact Method" : "اختر طريقة التواصل";
+            contactMethod.options[1].text = isEnglish ? "By Phone" : "بالهاتف";
+            contactMethod.options[2].text = isEnglish ? "By WhatsApp" : "واتساب";
 
            const countrySelect = document.getElementById("country");
             countrySelect.options[countrySelect.options.length - 1].text = isEnglish ? "🌍 Other" : "🌍 بلد آخر"; 
@@ -262,19 +270,19 @@ function validatePhone() {
 
 function validateSubmitButton() {
     const nameInput = document.getElementById("name");
-  //  const emailInput = document.getElementById("email");
+    const emailInput = document.getElementById("email");
     const phoneInput = document.getElementById("phone");
-   // const contactMethod = document.getElementById("contact-method");
+    const contactMethod = document.getElementById("contact-method");
     const inquiryInput = document.getElementById("inquiry");
     const submitBtn = document.getElementById("submit-btn");
 
     // تحقق من ملء جميع الحقول المطلوبة
     if (
         nameInput.value &&
-     //   emailInput.value &&
+        emailInput.value &&
         phoneInput.value &&
-    //    inquiryInput.value &&
-     //   contactMethod.value !== "default"
+        inquiryInput.value &&
+        contactMethod.value !== "default"
     ) {
         submitBtn.disabled = false;
         submitBtn.style.backgroundColor = "#003a60"; // العودة للون الطبيعي
@@ -300,10 +308,10 @@ submitButton.addEventListener("mouseout", () => {
 
 // استدعاء الدالة عند أي تغيير في الحقول المطلوبة
 document.getElementById("name").addEventListener("input", validateSubmitButton);
-//document.getElementById("email").addEventListener("input", validateSubmitButton);
+document.getElementById("email").addEventListener("input", validateSubmitButton);
 document.getElementById("phone").addEventListener("input", validateSubmitButton);
-//document.getElementById("inquiry").addEventListener("input", validateSubmitButton);
-//document.getElementById("contact-method").addEventListener("change", validateSubmitButton);
+document.getElementById("inquiry").addEventListener("input", validateSubmitButton);
+document.getElementById("contact-method").addEventListener("change", validateSubmitButton);
 window.onload = function() {
     updatePhoneCode();
     toggleLanguage();
