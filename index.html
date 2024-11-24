@@ -273,7 +273,7 @@ function validateSubmitButton() {
     const emailInput = document.getElementById("email");
     const phoneInput = document.getElementById("phone");
     const contactMethod = document.getElementById("contact-method");
-    const inquiryInput = document.getElementById("inquiry");
+  //  const inquiryInput = document.getElementById("inquiry");
     const submitBtn = document.getElementById("submit-btn");
 
     // تحقق من ملء جميع الحقول المطلوبة
@@ -281,7 +281,7 @@ function validateSubmitButton() {
         nameInput.value &&
         emailInput.value &&
         phoneInput.value &&
-        inquiryInput.value &&
+     //   inquiryInput.value &&
         contactMethod.value !== "default"
     ) {
         submitBtn.disabled = false;
@@ -310,7 +310,7 @@ submitButton.addEventListener("mouseout", () => {
 document.getElementById("name").addEventListener("input", validateSubmitButton);
 document.getElementById("email").addEventListener("input", validateSubmitButton);
 document.getElementById("phone").addEventListener("input", validateSubmitButton);
-document.getElementById("inquiry").addEventListener("input", validateSubmitButton);
+//document.getElementById("inquiry").addEventListener("input", validateSubmitButton);
 document.getElementById("contact-method").addEventListener("change", validateSubmitButton);
 window.onload = function() {
     updatePhoneCode();
