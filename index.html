@@ -185,7 +185,7 @@ for (let key in langElements) {
             }
             document.getElementById("form-title").textContent = isEnglish ? langElements["form-title"][0] : langElements["form-title"][1];
            document.getElementById("name").placeholder = isEnglish ? langElements["name"][0] : langElements["name"][1];
-            document.getElementById("email").placeholder = isEnglish ? langElements["email"][0] : langElements["email"][1];
+          //  document.getElementById("email").placeholder = isEnglish ? langElements["email"][0] : langElements["email"][1];
             document.getElementById("phone").placeholder = isEnglish ? langElements["phone"][0] : langElements["phone"][1];
             document.getElementById("inquiry").placeholder = isEnglish ? langElements["inquiry"][0] : langElements["inquiry"][1];
             document.getElementById("submit-btn").textContent = isEnglish ? langElements["submit-btn"][0] : langElements["submit-btn"][1];
@@ -195,10 +195,10 @@ for (let key in langElements) {
                 : "https://flagcdn.com/w320/us.png";
             document.getElementById("language-label").innerText = isEnglish ? "عربي" : "English";
 
-          const contactMethod = document.getElementById("contact-method");
-           contactMethod.options[0].text = isEnglish ? "Select Contact Method" : "اختر طريقة التواصل";
-            contactMethod.options[1].text = isEnglish ? "By Phone" : "بالهاتف";
-            contactMethod.options[2].text = isEnglish ? "By WhatsApp" : "واتساب";
+         // const contactMethod = document.getElementById("contact-method");
+           //contactMethod.options[0].text = isEnglish ? "Select Contact Method" : "اختر طريقة التواصل";
+            //contactMethod.options[1].text = isEnglish ? "By Phone" : "بالهاتف";
+            //contactMethod.options[2].text = isEnglish ? "By WhatsApp" : "واتساب";
 
            const countrySelect = document.getElementById("country");
             countrySelect.options[countrySelect.options.length - 1].text = isEnglish ? "🌍 Other" : "🌍 بلد آخر"; 
@@ -264,19 +264,19 @@ function validatePhone() {
 
 function validateSubmitButton() {
     const nameInput = document.getElementById("name");
-    const emailInput = document.getElementById("email");
+   // const emailInput = document.getElementById("email");
     const phoneInput = document.getElementById("phone");
-    const contactMethod = document.getElementById("contact-method");
+   // const contactMethod = document.getElementById("contact-method");
   //  const inquiryInput = document.getElementById("inquiry");
     const submitBtn = document.getElementById("submit-btn");
 
     // تحقق من ملء جميع الحقول المطلوبة
     if (
         nameInput.value &&
-        emailInput.value &&
+     //   emailInput.value &&
         phoneInput.value &&
      //   inquiryInput.value &&
-        contactMethod.value !== "default"
+     //   contactMethod.value !== "default"
     ) {
         submitBtn.disabled = false;
         submitBtn.style.backgroundColor = "#003a60"; // العودة للون الطبيعي
@@ -302,10 +302,10 @@ submitButton.addEventListener("mouseout", () => {
 
 // استدعاء الدالة عند أي تغيير في الحقول المطلوبة
 document.getElementById("name").addEventListener("input", validateSubmitButton);
-document.getElementById("email").addEventListener("input", validateSubmitButton);
+//document.getElementById("email").addEventListener("input", validateSubmitButton);
 document.getElementById("phone").addEventListener("input", validateSubmitButton);
 //document.getElementById("inquiry").addEventListener("input", validateSubmitButton);
-document.getElementById("contact-method").addEventListener("change", validateSubmitButton);
+//document.getElementById("contact-method").addEventListener("change", validateSubmitButton);
 window.onload = function() {
     updatePhoneCode();
     toggleLanguage();
