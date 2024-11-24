@@ -268,7 +268,7 @@ function validatePhone() {
 
 function validateSubmitButton() {
     const nameInput = document.getElementById("name");
-    const emailInput = document.getElementById("email");
+  //  const emailInput = document.getElementById("email");
     const phoneInput = document.getElementById("phone");
     const contactMethod = document.getElementById("contact-method");
     const inquiryInput = document.getElementById("inquiry");
@@ -277,7 +277,7 @@ function validateSubmitButton() {
     // تحقق من ملء جميع الحقول المطلوبة
     if (
         nameInput.value &&
-        emailInput.value &&
+    //    emailInput.value &&
         phoneInput.value &&
         inquiryInput.value &&
         contactMethod.value !== "default"
@@ -306,7 +306,7 @@ submitButton.addEventListener("mouseout", () => {
 
 // استدعاء الدالة عند أي تغيير في الحقول المطلوبة
 document.getElementById("name").addEventListener("input", validateSubmitButton);
-document.getElementById("email").addEventListener("input", validateSubmitButton);
+//document.getElementById("email").addEventListener("input", validateSubmitButton);
 document.getElementById("phone").addEventListener("input", validateSubmitButton);
 document.getElementById("inquiry").addEventListener("input", validateSubmitButton);
 document.getElementById("contact-method").addEventListener("change", validateSubmitButton);
