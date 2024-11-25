@@ -161,7 +161,7 @@
     </div>
 
     <script>
-            let isEnglish = false;
+        let isEnglish = false;
 
         function toggleLanguage() {
             isEnglish = !isEnglish;
@@ -192,12 +192,11 @@ for (let key in langElements) {
                 : "https://flagcdn.com/w320/us.png";
             document.getElementById("language-label").innerText = isEnglish ? "عربي" : "English";
 
-  
+    
 
            const countrySelect = document.getElementById("country");
             countrySelect.options[countrySelect.options.length - 1].text = isEnglish ? "🌍 Other Country" : "🌍 بلد آخر"; 
         }
-
   
 
 
