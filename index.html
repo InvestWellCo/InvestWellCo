@@ -161,38 +161,38 @@
     </div>
 
     <script>
-let isEnglish = false;
+            let isEnglish = false;
 
-function toggleLanguage() {
-    isEnglish = !isEnglish;
-    const langElements = {
-        "form-title": ["Real Estate Inquiry", "استفسار عقاري"],
-        "name": ["Name", "الاسم"],
-        "phone": ["Phone Number", "رقم الهاتف"],
-        "inquiry": ["Your Inquiry", "استفسارك"],
-        "submit-btn": ["Submit", "إرسال"],
-        "language-label": ["عربي", "English"],
-        "country": ["🌍 Other Country", "🌍 بلد آخر"],
-    };
+        function toggleLanguage() {
+            isEnglish = !isEnglish;
+            const langElements = {
+                "form-title": ["Real Estate Inquiry", "استفسار عقاري"],
+                "name": ["Name", "الاسم"],
+              //  "email": ["Email", "البريد الإلكتروني"],
+                "phone": ["Phone Number", "رقم الهاتف"],
+                "inquiry": ["Your Inquiry", "استفسارك"],
+                "submit-btn": ["Submit", "إرسال"]
+            };
+for (let key in langElements) {
+                if (key === "inquiry") {
+                   document.getElementById(key).placeholder = isEnglish ? langElements[key][0] : langElements[key][1];
+                } else {
+                   document.getElementById(key).textContent = isEnglish ? langElements[key][0] : langElements[key][1];
+               }
+            }
+            document.getElementById("form-title").textContent = isEnglish ? langElements["form-title"][0] : langElements["form-title"][1];
+           document.getElementById("name").placeholder = isEnglish ? langElements["name"][0] : langElements["name"][1];
+          //  document.getElementById("email").placeholder = isEnglish ? langElements["email"][0] : langElements["email"][1];
+            document.getElementById("phone").placeholder = isEnglish ? langElements["phone"][0] : langElements["phone"][1];
+            document.getElementById("inquiry").placeholder = isEnglish ? langElements["inquiry"][0] : langElements["inquiry"][1];
+            document.getElementById("submit-btn").textContent = isEnglish ? langElements["submit-btn"][0] : langElements["submit-btn"][1];
 
-    // تحديث النصوص في جميع العناصر
-    for (let key in langElements) {
-        if (key === "inquiry") {
-            // تغيير النص في placeholder للحقل "استفسارك"
-            document.getElementById(key).placeholder = isEnglish ? langElements[key][0] : langElements[key][1];
-        } else if (key === "submit-btn" || key === "language-label" || key === "country") {
-            // تغيير النصوص في الأزرار والعناصر
-            document.getElementById(key).textContent = isEnglish ? langElements[key][0] : langElements[key][1];
-        } else {
-            // تغيير النصوص في الحقول الأخرى
-            document.getElementById(key).textContent = isEnglish ? langElements[key][0] : langElements[key][1];
-        }
-    }
+                      document.getElementById("flag").src = isEnglish
+                ? "https://flagcdn.com/w320/eg.png"
+                : "https://flagcdn.com/w320/us.png";
+            document.getElementById("language-label").innerText = isEnglish ? "عربي" : "English";
 
-    // تغيير العلم بناءً على اللغة
-    document.getElementById("flag").src = isEnglish ? "https://flagcdn.com/w320/eg.png" : "https://flagcdn.com/w320/us.png";
-}
-
+  
 
 
 
