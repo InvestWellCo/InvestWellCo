@@ -197,7 +197,20 @@ for (let key in langElements) {
            const countrySelect = document.getElementById("country");
             countrySelect.options[countrySelect.options.length - 1].text = isEnglish ? "🌍 Other Country" : "🌍 بلد آخر"; 
         }
-  
+          function updatePhoneCode() {
+            const countrySelect = document.getElementById('country');
+            const countryCodeInput = document.getElementById('country-code');
+            const selectedCode = countrySelect.options[countrySelect.selectedIndex].dataset.code;
+           countryCodeInput.value = selectedCode;
+
+          countryCodeInput.style.display = countrySelect.value === "OTHER" ? "none" : "inline-block";
+       }
+
+      window.onload = function() {
+          updatePhoneCode();
+          toggleLanguage();
+            validateSubmitButton();
+        };
 
 
 
