@@ -203,7 +203,7 @@ for (let key in langElements) {
             const selectedCode = countrySelect.options[countrySelect.selectedIndex].dataset.code;
            countryCodeInput.value = selectedCode;
 
-          countryCodeInput.style.display = countrySelect.value === "OTHER" ? "none" : "inline-block";
+          countryCodeInput.style.display = countrySelect.value === "Other Country" ? "none" : "inline-block";
        }
 
       window.onload = function() {
