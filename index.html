@@ -194,6 +194,12 @@ for (let key in langElements) {
 
   
 
+           const countrySelect = document.getElementById("country");
+            countrySelect.options[countrySelect.options.length - 1].text = isEnglish ? "🌍 Other Country" : "🌍 بلد آخر"; 
+        }
+
+  
+
 
 
         function updatePhoneCode() {
