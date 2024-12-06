@@ -10,44 +10,19 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
-            font-family: 'Montserrat', sans-serif;
-            background-color: #f5f5f5;
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+        .message {
             text-align: center;
-            color: #282827;
-        }
-        .thank-you-container {
-            max-width: 400px;
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .thank-you-logo {
-            max-width: 100px;
-            margin-bottom: 20px;
-        }
-        h1 {
-            font-size: 24px;
-            color: #005d9e;
-        }
-        p {
-            font-size: 18px;
+            color: #048754;
         }
     </style>
 </head>
 <body>
-    <div class="thank-you-container">
-        <img src="https://github.com/InvestWellCo/InvestWellCo/blob/main/logo%20inveddssssst%20well.png?raw=true" alt="Company Logo" class="thank-you-logo">
-        <h1 id="thank-you-message">You will be contacted soon</h1>
-        <p id="thank-you-submessage">Thank you</p>
+    <div class="message">
+        <h1>Thank You!</h1>
+        <p>You will be contacted soon.</p>
     </div>
-    <script>
-        let isEnglish = document.documentElement.lang === 'en';
-        if (!isEnglish) {
-            document.getElementById("thank-you-message").textContent = "سوف يتم التواصل بك في أقرب وقت";
-            document.getElementById("thank-you-submessage").textContent = "شكرا لك";
-        }
-    </script>
 </body>
 </html>
